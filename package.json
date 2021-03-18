@@ -1,0 +1,36 @@
+{
+  "name": "template-nextjs-vertex",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx --ignore-path ./.gitignore .",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@vertexvis/frame-streaming-protos": "^0.4",
+    "@vertexvis/vertex-api-client": "^0.10",
+    "@vertexvis/viewer": "^0.9.25-canary.1",
+    "@vertexvis/viewer-react": "^0.9.25-canary.1",
+    "next": "^10.0",
+    "react": "^17",
+    "react-dom": "^17",
+    "tailwindcss": "^2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.2",
+    "@types/node": "^14.14",
+    "@types/react": "^17.0",
+    "@vertexvis/eslint-config-vertexvis-typescript": "^0.4",
+    "@vertexvis/typescript-config-vertexvis": "^1.1",
+    "autoprefixer": "^10.2",
+    "eslint": "^7.22",
+    "postcss": "^8.2",
+    "postcss-import": "^14.0",
+    "prettier": "^2.2",
+    "tslib": "^2.1",
+    "typescript": "^4.2"
+  }
+}
