@@ -1,5 +1,5 @@
-import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
+import React from 'react';
 import { Icon } from './Icon';
 
 interface Props {
@@ -26,9 +26,9 @@ export function Collapsible({ title, children }: Props): JSX.Element {
         className="flex items-center cursor-pointer hover:text-blue-700 py-3"
         onClick={() => setOpen(!open)}
       >
-        <span className="text-sm text-neutral-600 pl-2">{title}</span>
+        <span className="text-sm text-gray-600 pl-2">{title}</span>
         <div
-          className={classNames(
+          className={cn(
             'flex-center transition-transform duration-200 ml-auto',
             {
               'transform rotate-90': open,

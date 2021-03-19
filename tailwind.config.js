@@ -1,10 +1,5 @@
 module.exports = {
-  purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    mode: 'layers',
-    layers: ['base', 'components', 'utilities'],
-    content: ['./src/**/*.tsx'],
-  },
+  purge: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       gridTemplateColumns: {

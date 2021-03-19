@@ -1,8 +1,8 @@
+import { vertexvis } from '@vertexvis/frame-streaming-protos';
 import { VertexViewer, JSX as ViewerJSX } from '@vertexvis/viewer-react';
 import { Environment } from '@vertexvis/viewer/dist/types/config/environment';
 import { TapEventDetails } from '@vertexvis/viewer/dist/types/interactions/tapEventDetails';
 import React, { RefAttributes } from 'react';
-import { vertexvis } from '@vertexvis/frame-streaming-protos';
 
 export interface ViewerProps extends ViewerJSX.VertexViewer {
   clientId: string;

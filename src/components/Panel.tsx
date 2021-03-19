@@ -1,5 +1,5 @@
+import cn from 'classnames';
 import React from 'react';
-import classNames from 'classnames';
 
 interface Props {
   position?: 'left' | 'right';
@@ -14,22 +14,19 @@ export function Panel({
 }: Props): JSX.Element {
   return (
     <div
-      className={classNames('relative', {
+      className={cn('relative', {
         ['ml-auto']: position === 'right',
         ['w-0 flex-shrink-0 overflow-visible']: !!overlay,
       })}
     >
       <div
-        className={classNames(
-          'w-80 h-full overflow-visible z-overlay bg-white',
-          {
-            ['right-0']: position === 'right',
-            ['absolute']: !!overlay,
-          }
-        )}
+        className={cn('w-80 h-full overflow-visible z-overlay bg-white', {
+          ['right-0']: position === 'right',
+          ['absolute']: !!overlay,
+        })}
       >
         <div
-          className={classNames('w-full h-full border-neutral-300 shadow', {
+          className={cn('w-full h-full border-gray-300 shadow', {
             ['border-r']: position === 'left',
             ['border-l']: position === 'right',
           })}
