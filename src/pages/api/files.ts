@@ -13,14 +13,12 @@ let client: VertexClient | undefined;
 async function getClient(): Promise<VertexClient> {
   if (client != null) return client;
 
-  const basePath =
-    process.env.NEXT_PUBLIC_VERTEX_ENV === 'platprod' ||
-    process.env.NEXT_PUBLIC_VERTEX_ENV === ''
-      ? 'https://platform.vertexvis.com'
-      : `https://platform.${process.env.NEXT_PUBLIC_VERTEX_ENV}.vertexvis.io`;
-  console.log(basePath);
+  const env = process.env.NEXT_PUBLIC_VERTEX_ENV;
   client = await VertexClient.build({
-    basePath,
+    basePath:
+      env === 'platprod' || env === ''
+        ? 'https://platform.vertexvis.com'
+        : `https://platform.${env}.vertexvis.io`,
     client: {
       id: process.env.NEXT_PUBLIC_VERTEX_CLIENT_ID ?? '',
       secret: process.env.VERTEX_CLIENT_SECRET ?? '',
