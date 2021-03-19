@@ -14,11 +14,9 @@
     "@vertexvis/vertex-api-client": "^0.10",
     "@vertexvis/viewer": "^0.9.25-canary.1",
     "@vertexvis/viewer-react": "^0.9.25-canary.1",
-    "classnames": "^2.2.6",
     "next": "^10.0",
     "react": "^17",
-    "react-dom": "^17",
-    "tailwindcss": "^2.0"
+    "react-dom": "^17"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.2",
@@ -28,9 +26,11 @@
     "@vertexvis/eslint-config-vertexvis-typescript": "^0.4",
     "@vertexvis/typescript-config-vertexvis": "^1.1",
     "autoprefixer": "^10.2",
+    "classnames": "^2.2.6",
     "eslint": "^7.22",
     "postcss": "^8.2",
     "prettier": "^2.2",
+    "tailwindcss": "^2.0",
     "tslib": "^2.1",
     "typescript": "^4.2"
   }

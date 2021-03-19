@@ -2,7 +2,7 @@ import { FileList, VertexClient } from '@vertexvis/vertex-api-client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function getFiles(
-  req: NextApiRequest,
+  _req: NextApiRequest,
   res: NextApiResponse<FileList>
 ): Promise<void> {
   const c = await getClient();
