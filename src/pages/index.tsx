@@ -1,8 +1,9 @@
 import { vertexvis } from '@vertexvis/frame-streaming-protos';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
-import { Layout } from '../components/Layout';
+import { Props as LayoutProps } from '../components/Layout';
 import { LoadStreamKeyDialog } from '../components/LoadStreamKeyDialog';
 import { Sidebar } from '../components/Sidebar';
 import { VertexLogo } from '../components/VertexLogo';
@@ -14,6 +15,10 @@ import { getClientId, getStreamKey, setItem, StorageKey } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
 
 const MonoscopicViewer = onTap(Viewer);
+const Layout = dynamic<LayoutProps>(
+  () => import('../components/Layout').then((m) => m.Layout),
+  { ssr: false }
+);
 
 function Home(): JSX.Element {
   const router = useRouter();
