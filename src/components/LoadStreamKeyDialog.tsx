@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Dialog } from './Dialog';
 
 interface Props {
-  clientId?: string;
-  streamKey?: string;
-  open: boolean;
-  onClose: VoidFunction;
-  onLoad: (clientId: string, streamKey: string) => void;
+  readonly clientId?: string;
+  readonly streamKey?: string;
+  readonly open: boolean;
+  readonly onClose: VoidFunction;
+  readonly onConfirm: (clientId: string, streamKey: string) => void;
 }
 
 export function LoadStreamKeyDialog({
@@ -14,35 +14,29 @@ export function LoadStreamKeyDialog({
   streamKey,
   open,
   onClose,
-  onLoad,
+  onConfirm,
 }: Props): JSX.Element {
-  const [inputClientId, setInputClientId] = React.useState(clientId || '');
-  const [inputStreamKey, setInputStreamKey] = React.useState(streamKey || '');
+  const [inputClientId, setInputClientId] = useState(clientId ?? '');
+  const [inputStreamKey, setInputStreamKey] = useState(streamKey ?? '');
 
-  const handleDialogClose = (): void => {
-    onClose();
-  };
+  const handleDialogClose = (): void => onClose();
 
-  React.useEffect(() => {
-    if (clientId != null) {
-      setInputClientId(clientId);
-    }
-    if (streamKey != null) {
-      setInputStreamKey(streamKey);
-    }
+  useEffect(() => {
+    if (clientId) setInputClientId(clientId);
+    if (streamKey) setInputStreamKey(streamKey);
   }, [clientId, streamKey, setInputClientId, setInputStreamKey]);
 
   return (
     <Dialog
       header="Open Scene"
       footer={
-        <React.Fragment>
+        <>
           <button
             className="btn btn-primary"
             disabled={inputClientId === '' || inputStreamKey === ''}
             onClick={() => {
-              if (inputClientId != null && inputStreamKey != null) {
-                onLoad(inputClientId, inputStreamKey);
+              if (inputClientId && inputStreamKey) {
+                onConfirm(inputClientId, inputStreamKey);
               }
             }}
           >
@@ -51,7 +45,7 @@ export function LoadStreamKeyDialog({
           <button className="btn btn-secondary" onClick={handleDialogClose}>
             Cancel
           </button>
-        </React.Fragment>
+        </>
       }
       open={open}
       onClose={handleDialogClose}
@@ -66,7 +60,7 @@ export function LoadStreamKeyDialog({
                 className="txt-input"
                 type="text"
                 value={inputClientId}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   setInputClientId(event.target.value);
                 }}
               />
@@ -77,7 +71,7 @@ export function LoadStreamKeyDialog({
                 className="txt-input"
                 type="text"
                 value={inputStreamKey}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   setInputStreamKey(event.target.value);
                 }}
               />

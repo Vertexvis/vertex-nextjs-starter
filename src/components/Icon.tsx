@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 type IconType = 'caret-right' | 'close';
 
 interface Props {
-  icon: IconType;
+  readonly icon: IconType;
 }
 
 export function Icon({ icon }: Props): JSX.Element {
@@ -21,7 +21,7 @@ function getIcon(type: string): JSX.Element {
   }
 }
 
-const baseIcon = (icon: React.ReactNode, testId?: string): JSX.Element => (
+const baseIcon = (icon: ReactNode, testId?: string): JSX.Element => (
   <svg
     data-testid={`icon-${testId}`}
     className="fill-current"

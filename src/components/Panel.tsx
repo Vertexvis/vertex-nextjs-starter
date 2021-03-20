@@ -1,10 +1,10 @@
 import cn from 'classnames';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface Props {
-  position?: 'left' | 'right';
-  overlay?: boolean;
-  children: React.ReactNode;
+  readonly position?: 'left' | 'right';
+  readonly overlay?: boolean;
+  readonly children: ReactNode;
 }
 
 export function Panel({

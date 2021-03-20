@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface Props {
-  logo?: React.ReactNode;
-  children?: React.ReactNode;
+  readonly logo?: ReactNode;
+  readonly children?: ReactNode;
 }
 
 export function Header({ logo, children }: Props): JSX.Element {

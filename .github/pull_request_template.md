@@ -1,8 +1,8 @@
 ## Summary
-<!-- Implementation and architectural changes you're introducing. -->
+<!-- Implementation and architectural changes introduced. -->
 
 ## Test Plan
-<!-- How your changes should be tested. -->
+<!-- How the changes should be tested. -->
 
 ## Possible Regressions
 <!-- Features that may be impacted. -->

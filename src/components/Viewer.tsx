@@ -2,16 +2,21 @@ import { vertexvis } from '@vertexvis/frame-streaming-protos';
 import { VertexViewer, JSX as ViewerJSX } from '@vertexvis/viewer-react';
 import { Environment } from '@vertexvis/viewer/dist/types/config/environment';
 import { TapEventDetails } from '@vertexvis/viewer/dist/types/interactions/tapEventDetails';
-import React, { RefAttributes } from 'react';
+import React, {
+  ComponentType,
+  FunctionComponent,
+  MutableRefObject,
+  RefAttributes,
+} from 'react';
 
 export interface ViewerProps extends ViewerJSX.VertexViewer {
-  clientId: string;
-  streamKey: string;
-  configEnv: Environment;
-  viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
+  readonly clientId: string;
+  readonly streamKey: string;
+  readonly configEnv: Environment;
+  readonly viewer: MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
-export type ViewerComponentType = React.ComponentType<
+export type ViewerComponentType = ComponentType<
   ViewerProps & RefAttributes<HTMLVertexViewerElement>
 >;
 
@@ -33,12 +38,12 @@ export function Viewer({
 }
 
 export interface OnSelectProps extends HOCViewerProps {
-  onSelect: (hit?: vertexvis.protobuf.stream.IHit) => Promise<void>;
+  readonly onSelect: (hit?: vertexvis.protobuf.stream.IHit) => Promise<void>;
 }
 
 export function onTap<P extends ViewerProps>(
   WrappedViewer: ViewerComponentType
-): React.FunctionComponent<P & OnSelectProps> {
+): FunctionComponent<P & OnSelectProps> {
   return function Component({ viewer, onSelect, ...props }) {
     return (
       <WrappedViewer
@@ -51,12 +56,11 @@ export function onTap<P extends ViewerProps>(
 
           if (!event.defaultPrevented) {
             const scene = await viewer.current?.scene();
-            const viewId = scene?.sceneViewId;
             const raycaster = scene?.raycaster();
 
-            if (raycaster != null && viewId != null) {
+            if (raycaster != null) {
               const res = await raycaster.hitItems(event.detail.position);
-              const hit = (res?.hits || [])[0];
+              const hit = (res?.hits ?? [])[0];
               onSelect(hit);
             }
           }

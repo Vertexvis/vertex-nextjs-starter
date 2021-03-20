@@ -1,19 +1,18 @@
 import cn from 'classnames';
-import React from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Icon } from './Icon';
 
 interface Props {
-  title: string;
-
-  children: React.ReactNode;
+  readonly title: string;
+  readonly children: ReactNode;
 }
 
 export function Collapsible({ title, children }: Props): JSX.Element {
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const [open, setOpen] = React.useState(false);
-  const [maxHeight, setMaxHeight] = React.useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
+  const [maxHeight, setMaxHeight] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (contentRef.current != null) {
       setMaxHeight(contentRef.current.scrollHeight);
     }

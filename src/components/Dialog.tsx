@@ -1,39 +1,44 @@
-import React from 'react';
+import React, {
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useCallback,
+} from 'react';
 import { Icon } from './Icon';
 
 interface Props {
   /**
    * A React element or string that this dialog will render.
    */
-  children: React.ReactNode;
+  readonly children: ReactNode;
 
   /**
    * A React element or string that this dialog will render as a header.
    */
-  header: React.ReactNode;
+  readonly header: ReactNode;
 
   /**
    * A React element or string that this dialog will render as a footer.
    */
-  footer: React.ReactNode;
+  readonly footer: ReactNode;
 
   /**
    * A boolean value indicating that the dialog is opened
    */
-  open: boolean;
+  readonly open: boolean;
 
   /**
    * A function to close the dialog
    */
-  onClose: VoidFunction;
+  readonly onClose: VoidFunction;
 
   /**
    * A function to close the dialog
    */
-  onBackdropClick?: VoidFunction;
+  readonly onBackdropClick?: VoidFunction;
 }
 
-export const Dialog: React.FunctionComponent<Props> = ({
+export const Dialog: FunctionComponent<Props> = ({
   children,
   footer,
   header,
@@ -53,13 +58,13 @@ export const Dialog: React.FunctionComponent<Props> = ({
     return <div data-testid="empty-common-dialog" />;
   }
 
-  const escFunction = React.useCallback((event) => {
+  const escFunction = useCallback((event) => {
     if (event.keyCode === 27) {
       onClose();
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.document.addEventListener('keydown', escFunction, false);
 
     return () => {
