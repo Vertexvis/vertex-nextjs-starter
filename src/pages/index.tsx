@@ -3,13 +3,14 @@ import { Environment } from '@vertexvis/viewer';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import { LoadStreamKeyDialog } from '../components/LoadStreamKeyDialog';
 import { Sidebar } from '../components/Sidebar';
 import { onTap, Viewer } from '../components/Viewer';
 import { selectById } from '../lib/alterations';
 import { waitForHydrate } from '../lib/nextjs';
+import { getItem, setItem, StorageKey } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
 
 const MonoscopicViewer = onTap(Viewer);
@@ -17,17 +18,30 @@ const MonoscopicViewer = onTap(Viewer);
 function Home(): JSX.Element {
   const router = useRouter();
   const [clientId, setClientId] = useState(
-    router.query.clientId?.toString() ??
-      process.env.NEXT_PUBLIC_VERTEX_CLIENT_ID ??
-      ''
+    router.query.clientId?.toString() ?? getItem(StorageKey.ClientId) ?? ''
   );
   const [streamKey, setStreamKey] = useState(
-    router.query.streamKey?.toString() ??
-      process.env.NEXT_PUBLIC_VERTEX_STREAM_KEY ??
-      ''
+    router.query.streamKey?.toString() ?? getItem(StorageKey.StreamKey) ?? ''
   );
   const [dialogOpen, setDialogOpen] = useState(false);
   const viewerCtx = useViewer();
+
+  useEffect(() => {
+    if (router.query.clientId == null && router.query.streamKey == null) {
+      const id = getItem(StorageKey.ClientId) ?? '';
+      const key = getItem(StorageKey.StreamKey) ?? '';
+      router.push(
+        `/?clientId=${encodeURIComponent(id)}&streamKey=${encodeURIComponent(
+          key
+        )}`
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    setItem(StorageKey.ClientId, clientId);
+    setItem(StorageKey.StreamKey, streamKey);
+  }, [clientId, streamKey]);
 
   async function handleModelSelect(
     hit?: vertexvis.protobuf.stream.IHit
@@ -47,7 +61,6 @@ function Home(): JSX.Element {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/favicon-512x512.png" />
       </Head>
-
       <main className="h-screen w-screen">
         <div className="h-full w-full grid grid-cols-sidebar-16 grid-rows-header-6">
           <div className="col-span-full">

@@ -2,6 +2,16 @@ module.exports = {
   purge: ['./src/**/*.tsx'],
   theme: {
     extend: {
+      fontSize: {
+        xxs: '0.625rem',
+        xs: '0.75rem',
+        sm: '0.8125rem',
+        base: '0.875rem',
+        md: '0.9375rem',
+        lg: '1rem',
+        xl: '1.125rem',
+        xxl: '1.25rem',
+      },
       gridTemplateColumns: {
         16: 'repeat(16, minmax(0, 1fr))',
         20: 'repeat(20, minmax(0, 1fr))',

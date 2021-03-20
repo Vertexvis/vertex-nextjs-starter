@@ -7,7 +7,7 @@ interface Props {
 
 export function Header({ logo, children }: Props): JSX.Element {
   return (
-    <div className="flex-center h-full w-full px-4 bg-neutral-100 shadow-sm	 z-overlay relative border-b border-neutral-400">
+    <div className="flex-center h-full w-full px-4 bg-gray-100 shadow-sm z-overlay relative border-b border-gray-400">
       {logo}
       <div className="flex-center w-full">{children}</div>
     </div>
