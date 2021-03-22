@@ -1,5 +1,5 @@
 {
-  "name": "template-nextjs-vertex",
+  "name": "vertex-nextjs-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "@vertexvis/vertex-api-client": "^0.10",
     "@vertexvis/viewer": "^0.9.25-canary.1",
     "@vertexvis/viewer-react": "^0.9.25-canary.1",
-    "next": "10.0.7",
+    "next": "10.0.10-canary.7",
     "react": "^17",
     "react-dom": "^17"
   },

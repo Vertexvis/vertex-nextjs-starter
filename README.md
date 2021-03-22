@@ -1,4 +1,4 @@
-# Vertex NextJS Template
+# Vertex NextJS Starter
 
 ## Run locally in Docker
 

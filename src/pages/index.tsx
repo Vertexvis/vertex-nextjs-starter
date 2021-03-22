@@ -41,7 +41,7 @@ function Home(): JSX.Element {
   }, [clientId, streamKey]);
 
   return (
-    <Layout title="Vertex Template">
+    <Layout title="Vertex Starter">
       <div className="col-span-full">
         <Header logo={<VertexLogo />}>
           <div className="ml-4 mr-auto">
