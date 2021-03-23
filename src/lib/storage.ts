@@ -1,8 +1,8 @@
 import { Env } from './env';
 
 export enum StorageKey {
-  ClientId = 'vertexvis:client-id',
-  StreamKey = 'vertexvis:stream-key',
+  ClientId,
+  StreamKey,
 }
 
 export function getClientId(): string {
@@ -26,5 +26,5 @@ function getItem(key: StorageKey): string | undefined {
 }
 
 function envKey(key: StorageKey): string {
-  return `${key}:${Env}`;
+  return `vertexvis:${Env}:${StorageKey[key]}`;
 }
