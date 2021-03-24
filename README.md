@@ -15,7 +15,7 @@ If you pull down changes, you'll need to run `docker-compose build app` to build
 1. Run `yarn dev` to start the local development server
 1. Browse to http://localhost:3000
 
-## Project organization
+### Project organization
 
 ```text
 public/       // Static assets
@@ -25,3 +25,11 @@ src/
   pages/      // Pages served by NextJS
     api/      // API endpoints served by NextJS
 ```
+
+### Deployment
+
+A few options for deployment,
+
+- [Vercel](https://nextjs.org/docs/deployment)
+- [Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
+- [AWS CDK](https://github.com/serverless-nextjs/serverless-next.js#readme)
