@@ -3,10 +3,10 @@
 ## Run locally in Docker
 
 1. Copy `.env.local.template` to `.env.local` and optionally edit values
-1. Run `docker-compose up app` to start the app locally
+1. Run `docker-compose up` to start the app locally
 1. Browse to http://localhost:3000
 
-If you pull down changes, you'll need to run `docker-compose build app` to build them and then `docker-compose up app` again.
+If you pull down changes, you'll need to run `docker-compose build` to build them and then `docker-compose up` again.
 
 ## Local development
 
