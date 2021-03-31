@@ -3,20 +3,15 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import { Props as LayoutProps } from '../components/Layout';
-import { LoadStreamKeyDialog } from '../components/LoadStreamKeyDialog';
+import { StreamCredsDialog } from '../components/StreamCredsDialog';
 import { Sidebar } from '../components/Sidebar';
 import { VertexLogo } from '../components/VertexLogo';
 import { onTap, Viewer } from '../components/Viewer';
 import { selectById } from '../lib/alterations';
 import { Env } from '../lib/env';
 import { waitForHydrate } from '../lib/nextjs';
-import {
-  ClientId,
-  getClientId,
-  getStreamKey,
-  setItem,
-  StreamKey,
-} from '../lib/storage';
+import { getStoredCreds, setStoredCreds } from '../lib/storage';
+import { StreamCreds } from '../lib/types';
 import { useViewer } from '../lib/viewer';
 
 const MonoscopicViewer = onTap(Viewer);
@@ -28,22 +23,25 @@ const Layout = dynamic<LayoutProps>(
 function Home(): JSX.Element {
   const router = useRouter();
   const { clientId: queryId, streamKey: queryKey } = router.query;
-  const [storedId, storedKey] = [getClientId(), getStreamKey()];
-
-  const [clientId, setClientId] = useState(queryId?.toString() || storedId);
-  const [streamKey, setStreamKey] = useState(queryKey?.toString() || storedKey);
-  const [dialogOpen, setDialogOpen] = useState(!clientId || !streamKey);
+  const storedCreds = getStoredCreds();
   const viewerCtx = useViewer();
+
+  const [creds, setCreds] = useState<StreamCreds>({
+    clientId: queryId?.toString() || storedCreds.clientId,
+    streamKey: queryKey?.toString() || storedCreds.streamKey,
+  });
+  const [dialogOpen, setDialogOpen] = useState(
+    !creds.clientId || !creds.streamKey
+  );
 
   useEffect(() => {
     router.push(
       `/?clientId=${encodeURIComponent(
-        clientId
-      )}&streamKey=${encodeURIComponent(streamKey)}`
+        creds.clientId
+      )}&streamKey=${encodeURIComponent(creds.streamKey)}`
     );
-    setItem(ClientId, clientId);
-    setItem(StreamKey, streamKey);
-  }, [clientId, streamKey]);
+    setStoredCreds(creds);
+  }, [creds]);
 
   return (
     <Layout title="Vertex Starter">
@@ -60,25 +58,11 @@ function Home(): JSX.Element {
         </Header>
       </div>
       <div className="flex w-full row-start-2 row-span-full col-start-2 col-span-full">
-        {dialogOpen && (
-          <LoadStreamKeyDialog
-            clientId={clientId}
-            streamKey={streamKey}
-            open={dialogOpen}
-            onClose={() => setDialogOpen(false)}
-            onConfirm={(clientId, streamKey) => {
-              setClientId(clientId);
-              setStreamKey(streamKey);
-              setDialogOpen(false);
-            }}
-          />
-        )}
         {!dialogOpen && viewerCtx.viewerState.isReady && (
-          <div className="flex w-full row-start-2 row-span-full col-start-2 col-span-full">
+          <div className="w-0 flex-grow ml-auto relative">
             <MonoscopicViewer
               configEnv={Env}
-              clientId={clientId}
-              streamKey={streamKey}
+              creds={creds}
               viewer={viewerCtx.viewer}
               onSceneReady={viewerCtx.onSceneReady}
               onSelect={async (hit) => {
@@ -91,7 +75,18 @@ function Home(): JSX.Element {
           </div>
         )}
         <Sidebar />
-      </div>
+      </div>{' '}
+      {dialogOpen && (
+        <StreamCredsDialog
+          creds={creds}
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          onConfirm={(creds) => {
+            setCreds(creds);
+            setDialogOpen(false);
+          }}
+        />
+      )}
     </Layout>
   );
 }
