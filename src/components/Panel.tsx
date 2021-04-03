@@ -2,7 +2,7 @@ import cn from 'classnames';
 import React, { ReactNode } from 'react';
 
 interface Props {
-  readonly position?: 'left' | 'right';
+  readonly position?: 'left' | 'right' | 'bottom';
   readonly overlay?: boolean;
   readonly children: ReactNode;
 }
@@ -10,25 +10,35 @@ interface Props {
 export function Panel({
   children,
   position = 'left',
-  overlay = false,
+  overlay = true,
 }: Props): JSX.Element {
+  const isBottom = position === 'bottom';
+  const isLeft = position === 'left';
+  const isRight = position === 'right';
+  const commonInner = 'h-full w-80 overflow-visible';
+
   return (
     <div
-      className={cn('relative', {
-        ['ml-auto']: position === 'right',
+      className={cn({
+        ['flex']: isBottom,
+        ['relative']: isLeft,
+        ['relative ml-auto']: isRight,
         ['w-0 flex-shrink-0 overflow-visible']: overlay,
       })}
     >
       <div
-        className={cn('w-80 h-full overflow-visible z-overlay bg-white', {
-          ['right-0']: position === 'right',
+        className={cn('z-overlay bg-white', {
+          ['h-80 w-full overflow-scroll absolute inset-x-0 bottom-0']: isBottom,
+          [commonInner]: isLeft,
+          [`${commonInner} right-0`]: isRight,
           ['absolute']: overlay,
         })}
       >
         <div
-          className={cn('w-full h-full border-gray-300 shadow', {
-            ['border-r']: position === 'left',
-            ['border-l']: position === 'right',
+          className={cn('h-full w-full border-gray-300', {
+            ['border-t']: isBottom,
+            ['border-r shadow']: isLeft,
+            ['border-l shadow']: isRight,
           })}
         >
           {children}

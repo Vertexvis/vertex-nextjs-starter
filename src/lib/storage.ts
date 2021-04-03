@@ -1,5 +1,9 @@
 import { Env } from './env';
-import { StreamCreds } from './types';
+
+export interface StreamCreds {
+  clientId: string;
+  streamKey: string;
+}
 
 const CredsKey = 'creds';
 

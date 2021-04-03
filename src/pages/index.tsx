@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import { Props as LayoutProps } from '../components/Layout';
 import { StreamCredsDialog } from '../components/StreamCredsDialog';
-import { Sidebar } from '../components/Sidebar';
+import { RightSidebar } from '../components/RightSidebar';
 import { VertexLogo } from '../components/VertexLogo';
 import { onTap, Viewer } from '../components/Viewer';
-import { selectById } from '../lib/alterations';
+import { selectByHit } from '../lib/alterations';
 import { Env } from '../lib/env';
 import { waitForHydrate } from '../lib/nextjs';
-import { getStoredCreds, setStoredCreds } from '../lib/storage';
-import { StreamCreds } from '../lib/types';
+import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
+import { LeftSidebar } from '../components/LeftSidebar';
 
 const MonoscopicViewer = onTap(Viewer);
 const Layout = dynamic<LayoutProps>(
@@ -27,8 +27,14 @@ function Home(): JSX.Element {
   const viewerCtx = useViewer();
 
   const [creds, setCreds] = useState<StreamCreds>({
-    clientId: queryId?.toString() || storedCreds.clientId,
-    streamKey: queryKey?.toString() || storedCreds.streamKey,
+    clientId:
+      queryId?.toString() ||
+      storedCreds.clientId ||
+      '08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA',
+    streamKey:
+      queryKey?.toString() ||
+      storedCreds.streamKey ||
+      'U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU',
   });
   const [dialogOpen, setDialogOpen] = useState(
     !creds.clientId || !creds.streamKey
@@ -57,6 +63,9 @@ function Home(): JSX.Element {
           </div>
         </Header>
       </div>
+      <div className="row-start-2 row-span-full col-span-1">
+        <LeftSidebar />
+      </div>
       <div className="flex w-full row-start-2 row-span-full col-start-2 col-span-full">
         {!dialogOpen && viewerCtx.viewerState.isReady && (
           <div className="w-0 flex-grow ml-auto relative">
@@ -69,20 +78,20 @@ function Home(): JSX.Element {
                 const scene = await viewerCtx.viewer.current?.scene();
                 if (scene == null) return;
 
-                await selectById(scene, hit?.itemId?.hex ?? '');
+                await selectByHit({ hit, scene });
               }}
             />
           </div>
         )}
-        <Sidebar />
+        <RightSidebar />
       </div>{' '}
       {dialogOpen && (
         <StreamCredsDialog
           creds={creds}
           open={dialogOpen}
           onClose={() => setDialogOpen(false)}
-          onConfirm={(creds) => {
-            setCreds(creds);
+          onConfirm={(cs) => {
+            setCreds(cs);
             setDialogOpen(false);
           }}
         />

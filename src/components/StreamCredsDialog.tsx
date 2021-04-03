@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { StreamCreds } from '../lib/storage';
 import { Dialog } from './Dialog';
-import { StreamCreds } from '../lib/types';
 
 interface Props {
   readonly creds: StreamCreds;
@@ -16,7 +16,7 @@ export function StreamCredsDialog({
   onConfirm,
 }: Props): JSX.Element {
   const [inputCreds, setInputCreds] = useState<StreamCreds>(creds);
-  const handleDialogClose = (): void => onClose();
+  const handleClose = (): void => onClose();
 
   useEffect(() => {
     if (creds.clientId || creds.streamKey) setInputCreds(creds);
@@ -38,13 +38,13 @@ export function StreamCredsDialog({
           >
             Open Scene
           </button>
-          <button className="btn btn-secondary" onClick={handleDialogClose}>
+          <button className="btn btn-secondary" onClick={handleClose}>
             Cancel
           </button>
         </>
       }
       open={open}
-      onClose={handleDialogClose}
+      onClose={handleClose}
     >
       <div data-testid="dialog-content">
         {
@@ -56,12 +56,9 @@ export function StreamCredsDialog({
                 className="txt-input"
                 type="text"
                 value={inputCreds.clientId}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  setInputCreds({
-                    ...inputCreds,
-                    clientId: event.target.value,
-                  });
-                }}
+                onChange={(e) =>
+                  setInputCreds({ ...inputCreds, clientId: e.target.value })
+                }
               />
             </div>
             <div className="py-2">
@@ -70,12 +67,9 @@ export function StreamCredsDialog({
                 className="txt-input"
                 type="text"
                 value={inputCreds.streamKey}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  setInputCreds({
-                    ...inputCreds,
-                    streamKey: event.target.value,
-                  });
-                }}
+                onChange={(e) =>
+                  setInputCreds({ ...inputCreds, streamKey: e.target.value })
+                }
               />
             </div>
           </>

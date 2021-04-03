@@ -8,7 +8,7 @@ import React, {
   MutableRefObject,
   RefAttributes,
 } from 'react';
-import { StreamCreds } from '../lib/types';
+import { StreamCreds } from '../lib/storage';
 
 export interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly creds: StreamCreds;
@@ -46,9 +46,7 @@ export function onTap<P extends ViewerProps>(
         viewer={viewer}
         {...props}
         onTap={async (event: CustomEvent<TapEventDetails>) => {
-          if (props.onTap) {
-            props.onTap(event);
-          }
+          if (props.onTap) props.onTap(event);
 
           if (!event.defaultPrevented) {
             const scene = await viewer.current?.scene();

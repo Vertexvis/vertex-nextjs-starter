@@ -33,9 +33,7 @@ export function useViewer(): ViewerContext {
       setState({ ...(state ?? {}), isReady: true });
     }
 
-    if (!state.isReady) {
-      setup();
-    }
+    if (!state.isReady) setup();
   }, [state]);
 
   return { viewer: ref, viewerState: state, onSceneReady };

@@ -1,3 +1,4 @@
+import { vertexvis } from '@vertexvis/frame-streaming-protos';
 import { ColorMaterial, Scene } from '@vertexvis/viewer';
 
 const SelectColor = {
@@ -6,14 +7,24 @@ const SelectColor = {
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
 
-export async function selectById(scene: Scene, itemId: string): Promise<void> {
-  if (itemId) {
-    console.debug('Selected', itemId);
+interface SelectByHitReq {
+  readonly hit?: vertexvis.protobuf.stream.IHit;
+  readonly scene: Scene;
+}
+
+export async function selectByHit({
+  hit,
+  scene,
+}: SelectByHitReq): Promise<void> {
+  const id = hit?.itemId?.hex;
+  const suppliedId = hit?.itemSuppliedId?.value;
+  if (id) {
+    console.debug(`Selected ${id}${suppliedId ? `, ${suppliedId}` : ''}`);
 
     await scene
       .items((op) => [
         op.where((q) => q.all()).deselect(),
-        op.where((q) => q.withItemId(itemId)).select(SelectColor),
+        op.where((q) => q.withItemId(id)).select(SelectColor),
       ])
       .execute();
   } else {
