@@ -29,9 +29,7 @@ export function Collapsible({ title, children }: Props): JSX.Element {
         <div
           className={cn(
             'flex-center transition-transform duration-200 ml-auto',
-            {
-              'transform rotate-90': open,
-            }
+            { 'transform rotate-90': open }
           )}
         >
           <div className="w-4">
