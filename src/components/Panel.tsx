@@ -2,20 +2,23 @@ import cn from 'classnames';
 import React, { ReactNode } from 'react';
 
 interface Props {
-  readonly position?: 'left' | 'right' | 'bottom';
-  readonly overlay?: boolean;
   readonly children: ReactNode;
+  readonly position?: 'left' | 'right' | 'bottom';
+  readonly overflow?: 'scroll' | 'visible';
+  readonly overlay?: boolean;
 }
 
 export function Panel({
   children,
   position = 'left',
+  overflow: userOverflow,
   overlay = true,
 }: Props): JSX.Element {
   const isBottom = position === 'bottom';
   const isLeft = position === 'left';
   const isRight = position === 'right';
-  const commonInner = 'h-full w-80 overflow-visible';
+  const overflow = `overflow-${userOverflow ?? 'scroll'}`;
+  const commonInner = `h-full w-80 ${overflow}`;
 
   return (
     <div
@@ -23,12 +26,12 @@ export function Panel({
         ['flex']: isBottom,
         ['relative']: isLeft,
         ['relative ml-auto']: isRight,
-        ['w-0 flex-shrink-0 overflow-visible']: overlay,
+        ['w-0 flex-shrink-0']: overlay,
       })}
     >
       <div
         className={cn('z-overlay bg-white', {
-          ['h-80 w-full overflow-scroll absolute inset-x-0 bottom-0']: isBottom,
+          [`h-80 w-full absolute inset-x-0 bottom-0 ${overflow}`]: isBottom,
           [commonInner]: isLeft,
           [`${commonInner} right-0`]: isRight,
           ['absolute']: overlay,

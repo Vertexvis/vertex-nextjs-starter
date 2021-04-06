@@ -7,7 +7,7 @@ import { StreamCredsDialog } from '../components/StreamCredsDialog';
 import { RightSidebar } from '../components/RightSidebar';
 import { VertexLogo } from '../components/VertexLogo';
 import { onTap, Viewer } from '../components/Viewer';
-import { selectByHit } from '../lib/alterations';
+import { selectByHit } from '../lib/scene-items';
 import { Env } from '../lib/env';
 import { waitForHydrate } from '../lib/nextjs';
 import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
@@ -75,10 +75,10 @@ function Home(): JSX.Element {
               viewer={viewerCtx.viewer}
               onSceneReady={viewerCtx.onSceneReady}
               onSelect={async (hit) => {
-                const scene = await viewerCtx.viewer.current?.scene();
-                if (scene == null) return;
-
-                await selectByHit({ hit, scene });
+                await selectByHit({
+                  hit,
+                  scene: await viewerCtx.viewer.current?.scene(),
+                });
               }}
             />
           </div>

@@ -7,15 +7,24 @@ const SelectColor = {
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
 
-interface SelectByHitReq {
+export interface SceneReq {
+  readonly scene?: Scene;
+}
+
+interface SelectByHitReq extends SceneReq {
   readonly hit?: vertexvis.protobuf.stream.IHit;
-  readonly scene: Scene;
+}
+
+export async function hideAll({ scene }: SceneReq): Promise<void> {
+  return all({ show: false, scene });
 }
 
 export async function selectByHit({
   hit,
   scene,
 }: SelectByHitReq): Promise<void> {
+  if (scene == null) return;
+
   const id = hit?.itemId?.hex;
   const suppliedId = hit?.itemSuppliedId?.value;
   if (id) {
@@ -30,4 +39,22 @@ export async function selectByHit({
   } else {
     await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
   }
+}
+
+export async function showAll({ scene }: SceneReq): Promise<void> {
+  return all({ show: true, scene });
+}
+
+async function all({
+  show,
+  scene,
+}: SceneReq & { show: boolean }): Promise<void> {
+  if (scene == null) return;
+
+  await scene
+    .items((op) => {
+      const w = op.where((q) => q.all());
+      return [show ? w.show() : w.hide()];
+    })
+    .execute();
 }

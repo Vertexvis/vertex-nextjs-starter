@@ -7,11 +7,7 @@ interface Props {
 }
 
 export function Icon({ icon }: Props): JSX.Element {
-  return getIcon(icon);
-}
-
-function getIcon(type: string): JSX.Element {
-  switch (type) {
+  switch (icon) {
     case 'caret-right':
       return caretRight;
     case 'close':
