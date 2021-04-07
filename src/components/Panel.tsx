@@ -11,14 +11,13 @@ interface Props {
 export function Panel({
   children,
   position = 'left',
-  overflow: userOverflow,
+  overflow,
   overlay = true,
 }: Props): JSX.Element {
   const isBottom = position === 'bottom';
   const isLeft = position === 'left';
   const isRight = position === 'right';
-  const overflow = `overflow-${userOverflow ?? 'scroll'}`;
-  const commonInner = `h-full w-80 ${overflow}`;
+  const commonInner = `h-full w-80`;
 
   return (
     <div
@@ -31,18 +30,21 @@ export function Panel({
     >
       <div
         className={cn('z-overlay bg-white', {
-          [`h-80 w-full absolute inset-x-0 bottom-0 ${overflow}`]: isBottom,
+          [`h-80 w-full absolute inset-x-0 bottom-0`]: isBottom,
           [commonInner]: isLeft,
           [`${commonInner} right-0`]: isRight,
           ['absolute']: overlay,
         })}
       >
         <div
-          className={cn('h-full w-full border-gray-300', {
-            ['border-t']: isBottom,
-            ['border-r shadow']: isLeft,
-            ['border-l shadow']: isRight,
-          })}
+          className={cn(
+            `h-full w-full border-gray-300 overflow-${overflow ?? 'scroll'}`,
+            {
+              ['border-t']: isBottom,
+              ['border-r shadow']: isLeft,
+              ['border-l shadow']: isRight,
+            }
+          )}
         >
           {children}
         </div>

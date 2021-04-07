@@ -16,7 +16,9 @@ interface SelectByHitReq extends SceneReq {
 }
 
 export async function hideAll({ scene }: SceneReq): Promise<void> {
-  return all({ show: false, scene });
+  if (scene == null) return;
+
+  await scene.items((op) => [op.where((q) => q.all()).hide()]).execute();
 }
 
 export async function selectByHit({
@@ -42,19 +44,7 @@ export async function selectByHit({
 }
 
 export async function showAll({ scene }: SceneReq): Promise<void> {
-  return all({ show: true, scene });
-}
-
-async function all({
-  show,
-  scene,
-}: SceneReq & { show: boolean }): Promise<void> {
   if (scene == null) return;
 
-  await scene
-    .items((op) => {
-      const w = op.where((q) => q.all());
-      return [show ? w.show() : w.hide()];
-    })
-    .execute();
+  await scene.items((op) => [op.where((q) => q.all()).show()]).execute();
 }
