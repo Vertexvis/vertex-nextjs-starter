@@ -17,7 +17,8 @@ export function Panel({
   const isBottom = position === 'bottom';
   const isLeft = position === 'left';
   const isRight = position === 'right';
-  const commonInner = `h-full w-80`;
+  const common2 = `h-full w-80`;
+  const common3 = `shadow h-full`;
 
   return (
     <div
@@ -31,18 +32,18 @@ export function Panel({
       <div
         className={cn('z-overlay bg-white', {
           [`h-80 w-full absolute inset-x-0 bottom-0`]: isBottom,
-          [commonInner]: isLeft,
-          [`${commonInner} right-0`]: isRight,
+          [common2]: isLeft,
+          [`${common2} right-0`]: isRight,
           ['absolute']: overlay,
         })}
       >
         <div
           className={cn(
-            `h-full w-full border-gray-300 overflow-${overflow ?? 'scroll'}`,
+            `w-full border-gray-300 overflow-${overflow ?? 'scroll'}`,
             {
-              ['border-t']: isBottom,
-              ['border-r shadow']: isLeft,
-              ['border-l shadow']: isRight,
+              ['border-t h-full']: isBottom,
+              [`border-r ${common3}`]: isLeft,
+              [`border-l ${common3}`]: isRight,
             }
           )}
         >

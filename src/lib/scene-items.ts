@@ -15,12 +15,6 @@ interface SelectByHitReq extends SceneReq {
   readonly hit?: vertexvis.protobuf.stream.IHit;
 }
 
-export async function hideAll({ scene }: SceneReq): Promise<void> {
-  if (scene == null) return;
-
-  await scene.items((op) => [op.where((q) => q.all()).hide()]).execute();
-}
-
 export async function selectByHit({
   hit,
   scene,
@@ -41,10 +35,4 @@ export async function selectByHit({
   } else {
     await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
   }
-}
-
-export async function showAll({ scene }: SceneReq): Promise<void> {
-  if (scene == null) return;
-
-  await scene.items((op) => [op.where((q) => q.all()).show()]).execute();
 }

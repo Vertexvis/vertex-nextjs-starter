@@ -13,6 +13,7 @@ import { waitForHydrate } from '../lib/nextjs';
 import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
 import { LeftSidebar } from '../components/LeftSidebar';
+import { Properties, toProperties } from '../lib/metadata';
 
 const MonoscopicViewer = onTap(Viewer);
 const Layout = dynamic<LayoutProps>(
@@ -39,6 +40,7 @@ function Home(): JSX.Element {
   const [dialogOpen, setDialogOpen] = useState(
     !creds.clientId || !creds.streamKey
   );
+  const [properties, setProperties] = useState<Properties>({});
 
   useEffect(() => {
     router.push(
@@ -75,6 +77,7 @@ function Home(): JSX.Element {
               viewer={viewerCtx.viewer}
               onSceneReady={viewerCtx.onSceneReady}
               onSelect={async (hit) => {
+                setProperties(toProperties({ hit }));
                 await selectByHit({
                   hit,
                   scene: await viewerCtx.viewer.current?.scene(),
@@ -83,7 +86,7 @@ function Home(): JSX.Element {
             />
           </div>
         )}
-        <RightSidebar />
+        <RightSidebar properties={properties} />
       </div>{' '}
       {dialogOpen && (
         <StreamCredsDialog
