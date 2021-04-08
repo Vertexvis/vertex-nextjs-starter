@@ -10,7 +10,6 @@ const PartIdKey = 'VERTEX_PART_ID';
 const PartRevIdKey = 'VERTEX_PART_REVISION_ID';
 const PartRevSuppliedId = 'VERTEX_PART_REVISION_SUPPLIED_ID';
 const PartInstIdKey = 'VERTEX_PART_INSTANCE_ID';
-const PartNameKey = 'VERTEX_PART_NAME';
 
 export function toProperties({
   hit,
@@ -34,10 +33,10 @@ export function toProperties({
   if (partRevSuppliedId?.value) ps[PartRevSuppliedId] = partRevSuppliedId.value;
 
   const md = hit?.metadata;
+  console.log(md);
   if (md != null) {
-    const { partInstanceId, partName } = md;
+    const { partInstanceId } = md;
     if (partInstanceId?.hex) ps[PartInstIdKey] = partInstanceId.hex;
-    if (partName) ps[PartNameKey] = partName;
 
     if (md.properties != null) {
       md.properties

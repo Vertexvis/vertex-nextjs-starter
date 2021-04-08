@@ -22,10 +22,7 @@ export async function selectByHit({
   if (scene == null) return;
 
   const id = hit?.itemId?.hex;
-  const suppliedId = hit?.itemSuppliedId?.value;
   if (id) {
-    console.debug(`Selected ${id}${suppliedId ? `, ${suppliedId}` : ''}`);
-
     await scene
       .items((op) => [
         op.where((q) => q.all()).deselect(),

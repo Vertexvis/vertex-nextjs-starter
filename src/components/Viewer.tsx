@@ -71,7 +71,7 @@ export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
       src={`urn:vertexvis:stream-key:${creds.streamKey}`}
       {...props}
     >
-      <VertexViewerToolbar>
+      <VertexViewerToolbar className="mb-4">
         <VertexViewerToolbarGroup>
           <VertexViewerButton className="mr-4" onClick={() => iso()}>
             Iso
