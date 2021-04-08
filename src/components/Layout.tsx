@@ -14,7 +14,7 @@ export function Layout({ title, children }: Props): JSX.Element {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/favicon-512x512.png" />
       </Head>
-      <main className="h-screen w-screen">
+      <main className="h-screen w-screen overflow-x-hidden">
         <div className="h-full w-full grid grid-cols-sidebar-16 grid-rows-header-6">
           {children}
         </div>

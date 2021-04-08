@@ -18,7 +18,7 @@ export function Panel({
   const isLeft = position === 'left';
   const isRight = position === 'right';
   const common2 = `h-full w-80`;
-  const common3 = `shadow h-full`;
+  const common3 = `shadow min-h-full`;
 
   return (
     <div
