@@ -14,6 +14,7 @@ import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
 import { LeftSidebar } from '../components/LeftSidebar';
 import { Properties, toProperties } from '../lib/metadata';
+import { Scene } from '@vertexvis/viewer';
 
 const MonoscopicViewer = onTap(Viewer);
 const Layout = dynamic<LayoutProps>(
@@ -51,6 +52,10 @@ function Home(): JSX.Element {
     setStoredCreds(creds);
   }, [creds]);
 
+  async function scene(): Promise<Scene | undefined> {
+    return await viewerCtx.viewer.current?.scene();
+  }
+
   return (
     <Layout title="Vertex Starter">
       <div className="col-span-full">
@@ -78,10 +83,7 @@ function Home(): JSX.Element {
               onSceneReady={viewerCtx.onSceneReady}
               onSelect={async (hit) => {
                 setProperties(toProperties({ hit }));
-                await selectByHit({
-                  hit,
-                  scene: await viewerCtx.viewer.current?.scene(),
-                });
+                await selectByHit({ hit, scene: await scene() });
               }}
             />
           </div>
