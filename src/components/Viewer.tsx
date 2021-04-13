@@ -85,7 +85,7 @@ export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
           <VertexViewerButton className="mr-4" onClick={() => front()}>
             +Z
           </VertexViewerButton>
-          <VertexViewerButton className="" onClick={() => fitAll()}>
+          <VertexViewerButton onClick={() => fitAll()}>
             Fit all
           </VertexViewerButton>
         </VertexViewerToolbarGroup>

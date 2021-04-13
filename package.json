@@ -12,8 +12,8 @@
   "dependencies": {
     "@vertexvis/frame-streaming-protos": "^0.5",
     "@vertexvis/vertex-api-client": "^0.10",
-    "@vertexvis/viewer": "^0.9.26-canary.1",
-    "@vertexvis/viewer-react": "^0.9.26-canary.1",
+    "@vertexvis/viewer": "^0.9",
+    "@vertexvis/viewer-react": "^0.9",
     "classnames": "^2.3",
     "next": "10.1",
     "react": "^17",

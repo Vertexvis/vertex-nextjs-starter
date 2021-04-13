@@ -2,34 +2,11 @@ import React, { ReactNode, useEffect, useCallback } from 'react';
 import { Icon } from './Icon';
 
 interface Props {
-  /**
-   * A React element or string that this dialog will render.
-   */
   readonly children: ReactNode;
-
-  /**
-   * A React element or string that this dialog will render as a header.
-   */
   readonly header: ReactNode;
-
-  /**
-   * A React element or string that this dialog will render as a footer.
-   */
   readonly footer: ReactNode;
-
-  /**
-   * A boolean value indicating that the dialog is opened
-   */
   readonly open: boolean;
-
-  /**
-   * A function to close the dialog
-   */
   readonly onClose: VoidFunction;
-
-  /**
-   * A function to close the dialog
-   */
   readonly onBackdropClick?: VoidFunction;
 }
 

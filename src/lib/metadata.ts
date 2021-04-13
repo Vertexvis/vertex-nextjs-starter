@@ -33,7 +33,6 @@ export function toProperties({
   if (partRevSuppliedId?.value) ps[PartRevSuppliedId] = partRevSuppliedId.value;
 
   const md = hit?.metadata;
-  console.log(md);
   if (md != null) {
     const { partInstanceId } = md;
     if (partInstanceId?.hex) ps[PartInstIdKey] = partInstanceId.hex;

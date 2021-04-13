@@ -12,7 +12,6 @@ import { Env } from '../lib/env';
 import { waitForHydrate } from '../lib/nextjs';
 import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
-import { LeftSidebar } from '../components/LeftSidebar';
 import { Properties, toProperties } from '../lib/metadata';
 import { Scene } from '@vertexvis/viewer';
 
@@ -70,10 +69,7 @@ function Home(): JSX.Element {
           </div>
         </Header>
       </div>
-      <div className="row-start-2 row-span-full col-span-1">
-        <LeftSidebar />
-      </div>
-      <div className="flex w-full row-start-2 row-span-full col-start-2 col-span-full">
+      <div className="flex w-full row-start-2 row-span-full col-span-full">
         {!dialogOpen && viewerCtx.viewerState.isReady && (
           <div className="w-0 flex-grow ml-auto relative">
             <MonoscopicViewer
