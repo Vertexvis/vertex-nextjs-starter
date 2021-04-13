@@ -13,46 +13,36 @@ import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
 
 function Home(): JSX.Element {
+  // Vertex Viewer component context.
+  const viewer = useViewer();
+
+  // Prefer credentials in URL to enable easy scene sharing.
+  // If they don't exist, check local storage. If empty, use defaults.
   const router = useRouter();
   const { clientId: queryId, streamKey: queryKey } = router.query;
   const stored = getStoredCreds();
-  const viewerCtx = useViewer();
   const [creds, setCreds] = useState<StreamCreds>({
     clientId: queryId?.toString() || stored.clientId || DefaultClientId,
     streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
   });
+
+  // React state for dialog open/close and metadata properties.
   const [dialogOpen, setDialogOpen] = useState(false);
   const [properties, setProperties] = useState<Properties>({});
-  const { clientId, streamKey } = creds;
 
+  // On credentials changes, update URL and store in local storage.
   useEffect(() => {
     router.push(encode(creds));
     setStoredCreds(creds);
   }, [creds]);
 
+  // Ensure router is ready so if credentials exist in URL, we use them
   return router.isReady ? (
     <Layout title="Vertex Starter">
       <div className="col-span-full">
         <Header logo={<VertexLogo />}>
           <OpenButton onClick={() => setDialogOpen(true)} />
         </Header>
-      </div>
-      <div className="flex w-full row-start-2 row-span-full col-span-full">
-        {!dialogOpen && clientId && streamKey && viewerCtx.viewerState.isReady && (
-          <div className="w-0 flex-grow ml-auto relative">
-            <Viewer
-              configEnv={Env}
-              creds={creds}
-              viewer={viewerCtx.viewer}
-              onSceneReady={viewerCtx.onSceneReady}
-              onSelect={async (hit) => {
-                setProperties(toProperties({ hit }));
-                await selectByHit({ hit, viewer: viewerCtx.viewer.current });
-              }}
-            />
-          </div>
-        )}
-        <RightSidebar properties={properties} />
       </div>
       {dialogOpen && (
         <OpenDialog
@@ -65,6 +55,22 @@ function Home(): JSX.Element {
           }}
         />
       )}
+      <div className="flex w-full row-start-2 row-span-full col-span-full">
+        {creds.clientId && creds.streamKey && viewer.isReady && (
+          <div className="w-0 flex-grow ml-auto relative">
+            <Viewer
+              configEnv={Env}
+              creds={creds}
+              viewer={viewer.ref}
+              onSelect={async (hit) => {
+                setProperties(toProperties({ hit }));
+                await selectByHit({ hit, viewer: viewer.ref.current });
+              }}
+            />
+          </div>
+        )}
+        <RightSidebar properties={properties} />
+      </div>
     </Layout>
   ) : (
     <></>
