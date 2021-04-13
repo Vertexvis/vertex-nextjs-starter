@@ -9,12 +9,6 @@ interface Props {
   readonly onConfirm: (creds: StreamCreds) => void;
 }
 
-export function encode(cs: StreamCreds): string {
-  return `/?clientId=${encodeURIComponent(
-    cs.clientId
-  )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
-}
-
 export function OpenButton({ onClick }: { onClick: () => void }): JSX.Element {
   return (
     <div className="ml-4 mr-auto">
@@ -93,4 +87,10 @@ export function OpenDialog({
       </div>
     </Dialog>
   );
+}
+
+export function encode(cs: StreamCreds): string {
+  return `/?clientId=${encodeURIComponent(
+    cs.clientId
+  )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
 }
