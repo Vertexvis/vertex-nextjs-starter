@@ -15,11 +15,7 @@ export function encode(cs: StreamCreds): string {
   )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
 }
 
-export function OpenSceneButton({
-  onClick,
-}: {
-  onClick: () => void;
-}): JSX.Element {
+export function OpenButton({ onClick }: { onClick: () => void }): JSX.Element {
   return (
     <div className="ml-4 mr-auto">
       <button className="btn btn-primary text-sm" onClick={onClick}>
@@ -29,7 +25,7 @@ export function OpenSceneButton({
   );
 }
 
-export function OpenSceneDialog({
+export function OpenDialog({
   creds,
   open,
   onClose,
