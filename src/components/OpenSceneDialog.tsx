@@ -9,7 +9,27 @@ interface Props {
   readonly onConfirm: (creds: StreamCreds) => void;
 }
 
-export function StreamCredsDialog({
+export function encode(cs: StreamCreds): string {
+  return `/?clientId=${encodeURIComponent(
+    cs.clientId
+  )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
+}
+
+export function OpenSceneButton({
+  onClick,
+}: {
+  onClick: () => void;
+}): JSX.Element {
+  return (
+    <div className="ml-4 mr-auto">
+      <button className="btn btn-primary text-sm" onClick={onClick}>
+        Open Scene
+      </button>
+    </div>
+  );
+}
+
+export function OpenSceneDialog({
   creds,
   open,
   onClose,

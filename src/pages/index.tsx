@@ -1,93 +1,70 @@
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
-import { Props as LayoutProps } from '../components/Layout';
-import { StreamCredsDialog } from '../components/StreamCredsDialog';
+import { Layout } from '../components/Layout';
+import {
+  encode,
+  OpenSceneButton,
+  OpenSceneDialog,
+} from '../components/OpenSceneDialog';
 import { RightSidebar } from '../components/RightSidebar';
 import { VertexLogo } from '../components/VertexLogo';
-import { onTap, Viewer } from '../components/Viewer';
+import { Viewer } from '../components/Viewer';
 import { selectByHit } from '../lib/scene-items';
-import { Env } from '../lib/env';
+import { DefaultClientId, DefaultStreamKey, Env } from '../lib/env';
 import { waitForHydrate } from '../lib/nextjs';
 import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
 import { useViewer } from '../lib/viewer';
 import { Properties, toProperties } from '../lib/metadata';
-import { Scene } from '@vertexvis/viewer';
-
-const MonoscopicViewer = onTap(Viewer);
-const Layout = dynamic<LayoutProps>(
-  () => import('../components/Layout').then((m) => m.Layout),
-  { ssr: false }
-);
 
 function Home(): JSX.Element {
   const router = useRouter();
   const { clientId: queryId, streamKey: queryKey } = router.query;
-  const storedCreds = getStoredCreds();
+  const stored = getStoredCreds();
   const viewerCtx = useViewer();
-
   const [creds, setCreds] = useState<StreamCreds>({
-    clientId:
-      queryId?.toString() ||
-      storedCreds.clientId ||
-      '08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA',
-    streamKey:
-      queryKey?.toString() ||
-      storedCreds.streamKey ||
-      'U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU',
+    clientId: queryId?.toString() || stored.clientId || DefaultClientId,
+    streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
   });
-  const [dialogOpen, setDialogOpen] = useState(
-    !creds.clientId || !creds.streamKey
-  );
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [properties, setProperties] = useState<Properties>({});
 
   useEffect(() => {
-    router.push(
-      `/?clientId=${encodeURIComponent(
-        creds.clientId
-      )}&streamKey=${encodeURIComponent(creds.streamKey)}`
-    );
+    router.push(encode(creds));
     setStoredCreds(creds);
   }, [creds]);
 
-  async function scene(): Promise<Scene | undefined> {
-    return await viewerCtx.viewer.current?.scene();
+  function viewerReady(): boolean {
+    const validCreds = !!creds.clientId && !!creds.streamKey;
+    return validCreds && viewerCtx.viewerState.isReady;
   }
 
   return (
     <Layout title="Vertex Starter">
       <div className="col-span-full">
         <Header logo={<VertexLogo />}>
-          <div className="ml-4 mr-auto">
-            <button
-              className="btn btn-primary text-sm"
-              onClick={() => setDialogOpen(true)}
-            >
-              Open Scene
-            </button>
-          </div>
+          <OpenSceneButton onClick={() => setDialogOpen(true)} />
         </Header>
       </div>
       <div className="flex w-full row-start-2 row-span-full col-span-full">
-        {!dialogOpen && viewerCtx.viewerState.isReady && (
+        {!dialogOpen && viewerReady() && (
           <div className="w-0 flex-grow ml-auto relative">
-            <MonoscopicViewer
+            <Viewer
               configEnv={Env}
               creds={creds}
               viewer={viewerCtx.viewer}
               onSceneReady={viewerCtx.onSceneReady}
               onSelect={async (hit) => {
                 setProperties(toProperties({ hit }));
-                await selectByHit({ hit, scene: await scene() });
+                await selectByHit({ hit, viewer: viewerCtx.viewer.current });
               }}
             />
           </div>
         )}
         <RightSidebar properties={properties} />
-      </div>{' '}
+      </div>
       {dialogOpen && (
-        <StreamCredsDialog
+        <OpenSceneDialog
           creds={creds}
           open={dialogOpen}
           onClose={() => setDialogOpen(false)}

@@ -29,7 +29,11 @@ export type ViewerComponentType = ComponentType<
 
 export type HOCViewerProps = RefAttributes<HTMLVertexViewerElement>;
 
-export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
+function UnwrappedViewer({
+  creds,
+  viewer,
+  ...props
+}: ViewerProps): JSX.Element {
   const RenderOptions = { animation: { milliseconds: 1500 } };
   const Back = Vector3.back();
   const Origin = Vector3.origin();
@@ -66,8 +70,9 @@ export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
 
   return (
     <VertexViewer
-      ref={viewer}
       className="w-full h-full"
+      clientId={creds.clientId}
+      ref={viewer}
       src={`urn:vertexvis:stream-key:${creds.streamKey}`}
       {...props}
     >
@@ -126,3 +131,5 @@ export function onTap<P extends ViewerProps>(
     );
   };
 }
+
+export const Viewer = onTap(UnwrappedViewer);
