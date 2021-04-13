@@ -398,9 +398,9 @@
     uuid "^3.3.2"
 
 "@vertexvis/vertex-api-client@^0.10":
-  version "0.10.6"
-  resolved "https://registry.yarnpkg.com/@vertexvis/vertex-api-client/-/vertex-api-client-0.10.6.tgz#f91d5e4ff4e7c46444f4c8e7b8891dfab81232c8"
-  integrity sha512-pnhGBLwVvTD4axaD+DIeh/pVCulvtqbxRlHbj3l4G7uQDjJtIUfEKtebXg4RboBm9K9W46YuCbHUtkrUCXnlkA==
+  version "0.10.7"
+  resolved "https://registry.yarnpkg.com/@vertexvis/vertex-api-client/-/vertex-api-client-0.10.7.tgz#17dbee3a9fe2aae40231eaa56b14a5e0e53134b9"
+  integrity sha512-kr2muamI0mCAgmGazCx81EJ3txaoaPgevOxfu1QI0TSiB2N89qcRKKHoY8YA13Tc9SGqMycErblj5Mi8GxR+HQ==
   dependencies:
     axios "^0.21"
     p-limit "^3.1"
