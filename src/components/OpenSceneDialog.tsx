@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { StreamCreds } from '../lib/storage';
+import { StreamCredentials } from '../lib/storage';
 import { Dialog } from './Dialog';
 
 interface Props {
-  readonly creds: StreamCreds;
+  readonly credentials: StreamCredentials;
   readonly open: boolean;
   readonly onClose: VoidFunction;
-  readonly onConfirm: (creds: StreamCreds) => void;
+  readonly onConfirm: (credentials: StreamCredentials) => void;
 }
 
-export function StreamCredsDialog({
-  creds,
+export function OpenButton({ onClick }: { onClick: () => void }): JSX.Element {
+  return (
+    <div className="ml-4 mr-auto">
+      <button className="btn btn-primary text-sm" onClick={onClick}>
+        Open Scene
+      </button>
+    </div>
+  );
+}
+
+export function OpenDialog({
+  credentials,
   open,
   onClose,
   onConfirm,
 }: Props): JSX.Element {
-  const [inputCreds, setInputCreds] = useState<StreamCreds>(creds);
+  const [inputCreds, setInputCreds] = useState<StreamCredentials>(credentials);
   const handleClose = (): void => onClose();
 
   useEffect(() => {
-    if (creds.clientId || creds.streamKey) setInputCreds(creds);
-  }, [creds]);
+    if (credentials.clientId || credentials.streamKey)
+      setInputCreds(credentials);
+  }, [credentials]);
 
   return (
     <Dialog
@@ -77,4 +88,10 @@ export function StreamCredsDialog({
       </div>
     </Dialog>
   );
+}
+
+export function encode(cs: StreamCredentials): string {
+  return `/?clientId=${encodeURIComponent(
+    cs.clientId
+  )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
 }

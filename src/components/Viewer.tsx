@@ -15,10 +15,10 @@ import React, {
   MutableRefObject,
   RefAttributes,
 } from 'react';
-import { StreamCreds } from '../lib/storage';
+import { StreamCredentials } from '../lib/storage';
 
 export interface ViewerProps extends ViewerJSX.VertexViewer {
-  readonly creds: StreamCreds;
+  readonly credentials: StreamCredentials;
   readonly configEnv: Environment;
   readonly viewer: MutableRefObject<HTMLVertexViewerElement | null>;
 }
@@ -29,7 +29,11 @@ export type ViewerComponentType = ComponentType<
 
 export type HOCViewerProps = RefAttributes<HTMLVertexViewerElement>;
 
-export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
+function UnwrappedViewer({
+  credentials,
+  viewer,
+  ...props
+}: ViewerProps): JSX.Element {
   const RenderOptions = { animation: { milliseconds: 1500 } };
   const Back = Vector3.back();
   const Origin = Vector3.origin();
@@ -66,9 +70,10 @@ export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
 
   return (
     <VertexViewer
-      ref={viewer}
       className="w-full h-full"
-      src={`urn:vertexvis:stream-key:${creds.streamKey}`}
+      clientId={credentials.clientId}
+      ref={viewer}
+      src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
     >
       <VertexViewerToolbar className="mb-4">
@@ -85,7 +90,7 @@ export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
           <VertexViewerButton className="mr-4" onClick={() => front()}>
             +Z
           </VertexViewerButton>
-          <VertexViewerButton className="" onClick={() => fitAll()}>
+          <VertexViewerButton onClick={() => fitAll()}>
             Fit all
           </VertexViewerButton>
         </VertexViewerToolbarGroup>
@@ -93,6 +98,8 @@ export function Viewer({ creds, viewer, ...props }: ViewerProps): JSX.Element {
     </VertexViewer>
   );
 }
+
+export const Viewer = onTap(UnwrappedViewer);
 
 export interface OnSelectProps extends HOCViewerProps {
   readonly onSelect: (hit?: vertexvis.protobuf.stream.IHit) => Promise<void>;

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React, { ReactNode } from 'react';
 
-export interface Props {
+interface Props {
   readonly title: string;
   readonly children: ReactNode;
 }

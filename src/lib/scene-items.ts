@@ -1,5 +1,5 @@
 import { vertexvis } from '@vertexvis/frame-streaming-protos';
-import { ColorMaterial, Scene } from '@vertexvis/viewer';
+import { ColorMaterial, Components } from '@vertexvis/viewer';
 
 const SelectColor = {
   ...ColorMaterial.create(255, 255, 0),
@@ -7,18 +7,21 @@ const SelectColor = {
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
 
-export interface SceneReq {
-  readonly scene?: Scene;
+export interface Req {
+  readonly viewer: Components.VertexViewer | null;
 }
 
-interface SelectByHitReq extends SceneReq {
+interface SelectByHitReq extends Req {
   readonly hit?: vertexvis.protobuf.stream.IHit;
 }
 
 export async function selectByHit({
   hit,
-  scene,
+  viewer,
 }: SelectByHitReq): Promise<void> {
+  if (viewer == null) return;
+
+  const scene = await viewer.scene();
   if (scene == null) return;
 
   const id = hit?.itemId?.hex;

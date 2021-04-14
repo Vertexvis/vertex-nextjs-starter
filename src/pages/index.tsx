@@ -1,108 +1,82 @@
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
-import { Props as LayoutProps } from '../components/Layout';
-import { StreamCredsDialog } from '../components/StreamCredsDialog';
+import { Layout } from '../components/Layout';
+import { encode, OpenButton, OpenDialog } from '../components/OpenSceneDialog';
 import { RightSidebar } from '../components/RightSidebar';
 import { VertexLogo } from '../components/VertexLogo';
-import { onTap, Viewer } from '../components/Viewer';
-import { selectByHit } from '../lib/scene-items';
-import { Env } from '../lib/env';
-import { waitForHydrate } from '../lib/nextjs';
-import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
-import { useViewer } from '../lib/viewer';
-import { LeftSidebar } from '../components/LeftSidebar';
+import { Viewer } from '../components/Viewer';
+import { DefaultClientId, DefaultStreamKey, Env } from '../lib/env';
 import { Properties, toProperties } from '../lib/metadata';
-import { Scene } from '@vertexvis/viewer';
+import { selectByHit } from '../lib/scene-items';
+import {
+  getStoredCreds,
+  setStoredCreds,
+  StreamCredentials,
+} from '../lib/storage';
+import { useViewer } from '../lib/viewer';
 
-const MonoscopicViewer = onTap(Viewer);
-const Layout = dynamic<LayoutProps>(
-  () => import('../components/Layout').then((m) => m.Layout),
-  { ssr: false }
-);
+export default function Home(): JSX.Element {
+  // Vertex Viewer component.
+  const viewer = useViewer();
 
-function Home(): JSX.Element {
+  // Prefer credentials in URL to enable easy scene sharing.
+  // If they don't exist, check local storage. If empty, use defaults.
   const router = useRouter();
   const { clientId: queryId, streamKey: queryKey } = router.query;
-  const storedCreds = getStoredCreds();
-  const viewerCtx = useViewer();
-
-  const [creds, setCreds] = useState<StreamCreds>({
-    clientId:
-      queryId?.toString() ||
-      storedCreds.clientId ||
-      '08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA',
-    streamKey:
-      queryKey?.toString() ||
-      storedCreds.streamKey ||
-      'U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU',
+  const stored = getStoredCreds();
+  const [credentials, setCredentials] = useState<StreamCredentials>({
+    clientId: queryId?.toString() || stored.clientId || DefaultClientId,
+    streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
   });
-  const [dialogOpen, setDialogOpen] = useState(
-    !creds.clientId || !creds.streamKey
-  );
+
+  // React state for dialog open/close and metadata properties.
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [properties, setProperties] = useState<Properties>({});
 
+  // On credentials changes, update URL and store in local storage.
   useEffect(() => {
-    router.push(
-      `/?clientId=${encodeURIComponent(
-        creds.clientId
-      )}&streamKey=${encodeURIComponent(creds.streamKey)}`
-    );
-    setStoredCreds(creds);
-  }, [creds]);
+    router.push(encode(credentials));
+    setStoredCreds(credentials);
+  }, [credentials]);
 
-  async function scene(): Promise<Scene | undefined> {
-    return await viewerCtx.viewer.current?.scene();
-  }
-
-  return (
+  // Ensure router is ready so if credentials exist in URL, we use them
+  return router.isReady ? (
     <Layout title="Vertex Starter">
       <div className="col-span-full">
         <Header logo={<VertexLogo />}>
-          <div className="ml-4 mr-auto">
-            <button
-              className="btn btn-primary text-sm"
-              onClick={() => setDialogOpen(true)}
-            >
-              Open Scene
-            </button>
-          </div>
+          <OpenButton onClick={() => setDialogOpen(true)} />
         </Header>
       </div>
-      <div className="row-start-2 row-span-full col-span-1">
-        <LeftSidebar />
-      </div>
-      <div className="flex w-full row-start-2 row-span-full col-start-2 col-span-full">
-        {!dialogOpen && viewerCtx.viewerState.isReady && (
+      {dialogOpen && (
+        <OpenDialog
+          credentials={credentials}
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          onConfirm={(cs) => {
+            setCredentials(cs);
+            setDialogOpen(false);
+          }}
+        />
+      )}
+      <div className="flex w-full row-start-2 row-span-full col-span-full">
+        {credentials.clientId && credentials.streamKey && viewer.isReady && (
           <div className="w-0 flex-grow ml-auto relative">
-            <MonoscopicViewer
+            <Viewer
               configEnv={Env}
-              creds={creds}
-              viewer={viewerCtx.viewer}
-              onSceneReady={viewerCtx.onSceneReady}
+              credentials={credentials}
+              viewer={viewer.ref}
               onSelect={async (hit) => {
                 setProperties(toProperties({ hit }));
-                await selectByHit({ hit, scene: await scene() });
+                await selectByHit({ hit, viewer: viewer.ref.current });
               }}
             />
           </div>
         )}
         <RightSidebar properties={properties} />
-      </div>{' '}
-      {dialogOpen && (
-        <StreamCredsDialog
-          creds={creds}
-          open={dialogOpen}
-          onClose={() => setDialogOpen(false)}
-          onConfirm={(cs) => {
-            setCreds(cs);
-            setDialogOpen(false);
-          }}
-        />
-      )}
+      </div>
     </Layout>
+  ) : (
+    <></>
   );
 }
-
-export default waitForHydrate(Home);
