@@ -8,12 +8,13 @@ import { AxiosResponse } from 'axios';
 import type { NextApiResponse } from 'next';
 import { Env } from './env';
 
-export async function call<T>(
+export async function makeCall<T>(
   res: NextApiResponse<T | Failure>,
   apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>
 ): Promise<void> {
   try {
-    res.status(200).json((await apiCall(await getClient())).data);
+    const c = await getClient();
+    res.status(200).json((await apiCall(c)).data);
   } catch (error) {
     const failure = error.vertexError?.res;
     if (!failure) {
