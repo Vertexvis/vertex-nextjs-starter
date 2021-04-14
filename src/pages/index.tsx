@@ -9,11 +9,15 @@ import { Viewer } from '../components/Viewer';
 import { DefaultClientId, DefaultStreamKey, Env } from '../lib/env';
 import { Properties, toProperties } from '../lib/metadata';
 import { selectByHit } from '../lib/scene-items';
-import { getStoredCreds, setStoredCreds, StreamCreds } from '../lib/storage';
+import {
+  getStoredCreds,
+  setStoredCreds,
+  StreamCredentials,
+} from '../lib/storage';
 import { useViewer } from '../lib/viewer';
 
-function Home(): JSX.Element {
-  // Vertex Viewer component context.
+export default function Home(): JSX.Element {
+  // Vertex Viewer component.
   const viewer = useViewer();
 
   // Prefer credentials in URL to enable easy scene sharing.
@@ -21,7 +25,7 @@ function Home(): JSX.Element {
   const router = useRouter();
   const { clientId: queryId, streamKey: queryKey } = router.query;
   const stored = getStoredCreds();
-  const [creds, setCreds] = useState<StreamCreds>({
+  const [credentials, setCredentials] = useState<StreamCredentials>({
     clientId: queryId?.toString() || stored.clientId || DefaultClientId,
     streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
   });
@@ -32,9 +36,9 @@ function Home(): JSX.Element {
 
   // On credentials changes, update URL and store in local storage.
   useEffect(() => {
-    router.push(encode(creds));
-    setStoredCreds(creds);
-  }, [creds]);
+    router.push(encode(credentials));
+    setStoredCreds(credentials);
+  }, [credentials]);
 
   // Ensure router is ready so if credentials exist in URL, we use them
   return router.isReady ? (
@@ -46,21 +50,21 @@ function Home(): JSX.Element {
       </div>
       {dialogOpen && (
         <OpenDialog
-          creds={creds}
+          credentials={credentials}
           open={dialogOpen}
           onClose={() => setDialogOpen(false)}
           onConfirm={(cs) => {
-            setCreds(cs);
+            setCredentials(cs);
             setDialogOpen(false);
           }}
         />
       )}
       <div className="flex w-full row-start-2 row-span-full col-span-full">
-        {creds.clientId && creds.streamKey && viewer.isReady && (
+        {credentials.clientId && credentials.streamKey && viewer.isReady && (
           <div className="w-0 flex-grow ml-auto relative">
             <Viewer
               configEnv={Env}
-              creds={creds}
+              credentials={credentials}
               viewer={viewer.ref}
               onSelect={async (hit) => {
                 setProperties(toProperties({ hit }));
@@ -76,5 +80,3 @@ function Home(): JSX.Element {
     <></>
   );
 }
-
-export default Home;

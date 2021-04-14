@@ -15,10 +15,10 @@ import React, {
   MutableRefObject,
   RefAttributes,
 } from 'react';
-import { StreamCreds } from '../lib/storage';
+import { StreamCredentials } from '../lib/storage';
 
 export interface ViewerProps extends ViewerJSX.VertexViewer {
-  readonly creds: StreamCreds;
+  readonly credentials: StreamCredentials;
   readonly configEnv: Environment;
   readonly viewer: MutableRefObject<HTMLVertexViewerElement | null>;
 }
@@ -30,7 +30,7 @@ export type ViewerComponentType = ComponentType<
 export type HOCViewerProps = RefAttributes<HTMLVertexViewerElement>;
 
 function UnwrappedViewer({
-  creds,
+  credentials,
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
@@ -71,9 +71,9 @@ function UnwrappedViewer({
   return (
     <VertexViewer
       className="w-full h-full"
-      clientId={creds.clientId}
+      clientId={credentials.clientId}
       ref={viewer}
-      src={`urn:vertexvis:stream-key:${creds.streamKey}`}
+      src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
     >
       <VertexViewerToolbar className="mb-4">

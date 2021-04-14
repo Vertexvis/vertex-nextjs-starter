@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { StreamCreds } from '../lib/storage';
+import { StreamCredentials } from '../lib/storage';
 import { Dialog } from './Dialog';
 
 interface Props {
-  readonly creds: StreamCreds;
+  readonly credentials: StreamCredentials;
   readonly open: boolean;
   readonly onClose: VoidFunction;
-  readonly onConfirm: (creds: StreamCreds) => void;
+  readonly onConfirm: (credentials: StreamCredentials) => void;
 }
 
 export function OpenButton({ onClick }: { onClick: () => void }): JSX.Element {
@@ -20,17 +20,18 @@ export function OpenButton({ onClick }: { onClick: () => void }): JSX.Element {
 }
 
 export function OpenDialog({
-  creds,
+  credentials,
   open,
   onClose,
   onConfirm,
 }: Props): JSX.Element {
-  const [inputCreds, setInputCreds] = useState<StreamCreds>(creds);
+  const [inputCreds, setInputCreds] = useState<StreamCredentials>(credentials);
   const handleClose = (): void => onClose();
 
   useEffect(() => {
-    if (creds.clientId || creds.streamKey) setInputCreds(creds);
-  }, [creds]);
+    if (credentials.clientId || credentials.streamKey)
+      setInputCreds(credentials);
+  }, [credentials]);
 
   return (
     <Dialog
@@ -89,7 +90,7 @@ export function OpenDialog({
   );
 }
 
-export function encode(cs: StreamCreds): string {
+export function encode(cs: StreamCredentials): string {
   return `/?clientId=${encodeURIComponent(
     cs.clientId
   )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
