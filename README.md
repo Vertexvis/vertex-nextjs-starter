@@ -11,8 +11,8 @@ If you pull down changes, you'll need to run `docker-compose --file ./docker-com
 ## Local development
 
 1. Copy `.env.local.template` to `.env.local` and optionally edit values
-1. Install dependencies, `npm install` or `yarn install`
-1. Run `npm run dev` or `yarn dev` to start the local development server
+1. Install dependencies, `yarn install`
+1. Run `yarn dev` to start the local development server
 1. Browse to http://localhost:3000
 
 ### Project organization

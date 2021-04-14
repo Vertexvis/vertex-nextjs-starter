@@ -99,6 +99,8 @@ function UnwrappedViewer({
   );
 }
 
+export const Viewer = onTap(UnwrappedViewer);
+
 export interface OnSelectProps extends HOCViewerProps {
   readonly onSelect: (hit?: vertexvis.protobuf.stream.IHit) => Promise<void>;
 }
@@ -131,5 +133,3 @@ export function onTap<P extends ViewerProps>(
     );
   };
 }
-
-export const Viewer = onTap(UnwrappedViewer);
