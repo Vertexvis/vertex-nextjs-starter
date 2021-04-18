@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Keys {
-  o: boolean;
+  readonly o: boolean;
 }
 
 export function useKeyListener(): Keys {

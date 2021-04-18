@@ -1,8 +1,8 @@
 import { Env } from "./env";
 
 export interface StreamCredentials {
-  clientId: string;
-  streamKey: string;
+  readonly clientId: string;
+  readonly streamKey: string;
 }
 
 const CredsKey = "credentials";

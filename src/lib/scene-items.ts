@@ -7,7 +7,7 @@ const SelectColor = {
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
 
-export interface Req {
+interface Req {
   readonly viewer: Components.VertexViewer | null;
 }
 
