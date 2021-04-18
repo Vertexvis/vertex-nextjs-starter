@@ -1,5 +1,5 @@
-import { vertexvis } from '@vertexvis/frame-streaming-protos';
-import { ColorMaterial, Components } from '@vertexvis/viewer';
+import { vertexvis } from "@vertexvis/frame-streaming-protos";
+import { ColorMaterial, Components } from "@vertexvis/viewer";
 
 const SelectColor = {
   ...ColorMaterial.create(255, 255, 0),

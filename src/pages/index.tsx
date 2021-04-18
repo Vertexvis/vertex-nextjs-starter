@@ -1,53 +1,92 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { Header } from '../components/Header';
-import { Layout } from '../components/Layout';
-import { encode, OpenButton, OpenDialog } from '../components/OpenSceneDialog';
-import { RightSidebar } from '../components/RightSidebar';
-import { VertexLogo } from '../components/VertexLogo';
-import { Viewer } from '../components/Viewer';
-import { DefaultClientId, DefaultStreamKey, Env } from '../lib/env';
-import { Properties, toProperties } from '../lib/metadata';
-import { selectByHit } from '../lib/scene-items';
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import { useRouter } from "next/router";
+import React from "react";
+import { encodeCreds, OpenButton, OpenDialog } from "../components/OpenScene";
+import { RightDrawer, RightDrawerWidth } from "../components/RightDrawer";
+import { Viewer } from "../components/Viewer";
+import { DefaultClientId, DefaultStreamKey, Env } from "../lib/env";
+import { useKeyListener } from "../lib/key-listener";
+import { Properties, toProperties } from "../lib/metadata";
+import { selectByHit } from "../lib/scene-items";
 import {
   getStoredCreds,
   setStoredCreds,
   StreamCredentials,
-} from '../lib/storage';
-import { useViewer } from '../lib/viewer';
+} from "../lib/storage";
+import { useViewer } from "../lib/viewer";
 
-export default function Home(): JSX.Element {
-  // Vertex Viewer component.
-  const viewer = useViewer();
+const DenseToolbarHeight = 48;
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    marginRight: RightDrawerWidth,
+    width: `calc(100% - ${RightDrawerWidth}px)`,
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  content: {
+    height: `calc(100% - ${DenseToolbarHeight}px)`,
+    width: `calc(100% - ${RightDrawerWidth}px)`,
+  },
+  offset: {
+    minHeight: `${DenseToolbarHeight}px`,
+  },
+  root: {
+    height: `100vh`,
+    display: "flex",
+  },
+}));
 
+export default function Dashboard(): JSX.Element {
   // Prefer credentials in URL to enable easy scene sharing.
   // If they don't exist, check local storage. If empty, use defaults.
   const router = useRouter();
   const { clientId: queryId, streamKey: queryKey } = router.query;
   const stored = getStoredCreds();
-  const [credentials, setCredentials] = useState<StreamCredentials>({
+  const [credentials, setCredentials] = React.useState<StreamCredentials>({
     clientId: queryId?.toString() || stored.clientId || DefaultClientId,
     streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
   });
 
-  // React state for dialog open/close and metadata properties.
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [properties, setProperties] = useState<Properties>({});
-
   // On credentials changes, update URL and store in local storage.
-  useEffect(() => {
-    router.push(encode(credentials));
+  React.useEffect(() => {
+    router.push(encodeCreds(credentials));
     setStoredCreds(credentials);
   }, [credentials]);
 
-  // Ensure router is ready so if credentials exist in URL, we use them
-  return router.isReady ? (
-    <Layout title="Vertex Starter">
-      <div className="col-span-full">
-        <Header logo={<VertexLogo />}>
+  // Open dialog if 'o' key pressed
+  const keys = useKeyListener();
+  React.useEffect(() => {
+    if (!dialogOpen && keys.o) setDialogOpen(true);
+  }, [keys]);
+
+  const viewer = useViewer();
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [properties, setProperties] = React.useState<Properties>({});
+  const { appBar, content, offset, root } = useStyles();
+
+  return (
+    <div className={root}>
+      <AppBar position="fixed" elevation={1} color="default" className={appBar}>
+        <Toolbar variant="dense">
           <OpenButton onClick={() => setDialogOpen(true)} />
-        </Header>
-      </div>
+        </Toolbar>
+      </AppBar>
+      <main className={content}>
+        <div className={offset} />
+        {credentials.clientId && credentials.streamKey && viewer.isReady && (
+          <Viewer
+            configEnv={Env}
+            credentials={credentials}
+            viewer={viewer.ref}
+            onSelect={async (hit) => {
+              setProperties(toProperties({ hit }));
+              await selectByHit({ hit, viewer: viewer.ref.current });
+            }}
+          />
+        )}
+      </main>
+      <RightDrawer properties={properties} />
       {dialogOpen && (
         <OpenDialog
           credentials={credentials}
@@ -59,24 +98,6 @@ export default function Home(): JSX.Element {
           }}
         />
       )}
-      <div className="flex w-full row-start-2 row-span-full col-span-full">
-        {credentials.clientId && credentials.streamKey && viewer.isReady && (
-          <div className="w-0 flex-grow ml-auto relative">
-            <Viewer
-              configEnv={Env}
-              credentials={credentials}
-              viewer={viewer.ref}
-              onSelect={async (hit) => {
-                setProperties(toProperties({ hit }));
-                await selectByHit({ hit, viewer: viewer.ref.current });
-              }}
-            />
-          </div>
-        )}
-        <RightSidebar properties={properties} />
-      </div>
-    </Layout>
-  ) : (
-    <></>
+    </div>
   );
 }

@@ -1,17 +1,17 @@
-import { defineCustomElements } from '@vertexvis/viewer-react';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { defineCustomElements } from "@vertexvis/viewer-react";
+import React from "react";
 
-export interface ViewerContext {
-  readonly ref: MutableRefObject<HTMLVertexViewerElement | null>;
+interface Viewer {
+  readonly ref: React.MutableRefObject<HTMLVertexViewerElement | null>;
   readonly isReady: boolean;
 }
 
-export function useViewer(): ViewerContext {
-  const [isReady, setIsReady] = useState(false);
+export function useViewer(): Viewer {
+  const [isReady, setIsReady] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     defineCustomElements().then(() => setIsReady(true));
   }, []);
 
-  return { ref: useRef<HTMLVertexViewerElement>(null), isReady };
+  return { ref: React.useRef<HTMLVertexViewerElement>(null), isReady };
 }

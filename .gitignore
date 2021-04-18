@@ -3,7 +3,6 @@
 .env.local
 .env.production.local
 .env.test.local
-functional-test.ts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
