@@ -6,9 +6,8 @@ import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { Properties } from "../lib/metadata";
+import { RightDrawerWidth } from "./Layout";
 import { MetadataProperties } from "./MetadataProperties";
-
-export const RightDrawerWidth = 320;
 
 interface Props {
   readonly properties: Properties;

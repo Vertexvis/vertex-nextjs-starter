@@ -1,10 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import { useRouter } from "next/router";
 import React from "react";
+import { Layout } from "../components/Layout";
 import { encodeCreds, OpenButton, OpenDialog } from "../components/OpenScene";
-import { RightDrawer, RightDrawerWidth } from "../components/RightDrawer";
+import { RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
 import { DefaultClientId, DefaultStreamKey, Env } from "../lib/env";
 import { useKeyListener } from "../lib/key-listener";
@@ -17,27 +15,7 @@ import {
 } from "../lib/storage";
 import { useViewer } from "../lib/viewer";
 
-const DenseToolbarHeight = 48;
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    marginRight: RightDrawerWidth,
-    width: `calc(100% - ${RightDrawerWidth}px)`,
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  content: {
-    height: `calc(100% - ${DenseToolbarHeight}px)`,
-    width: `calc(100% - ${RightDrawerWidth}px)`,
-  },
-  offset: {
-    minHeight: `${DenseToolbarHeight}px`,
-  },
-  root: {
-    height: `100vh`,
-    display: "flex",
-  },
-}));
-
-export default function Dashboard(): JSX.Element {
+export default function Home(): JSX.Element {
   // Prefer credentials in URL to enable easy scene sharing.
   // If they don't exist, check local storage. If empty, use defaults.
   const router = useRouter();
@@ -63,41 +41,37 @@ export default function Dashboard(): JSX.Element {
   const viewer = useViewer();
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [properties, setProperties] = React.useState<Properties>({});
-  const { appBar, content, offset, root } = useStyles();
+  const ready = credentials.clientId && credentials.streamKey && viewer.isReady;
 
   return (
-    <div className={root}>
-      <AppBar position="fixed" elevation={1} color="default" className={appBar}>
-        <Toolbar variant="dense">
-          <OpenButton onClick={() => setDialogOpen(true)} />
-        </Toolbar>
-      </AppBar>
-      <main className={content}>
-        <div className={offset} />
-        {credentials.clientId && credentials.streamKey && viewer.isReady && (
+    <Layout
+      header={<OpenButton onClick={() => setDialogOpen(true)} />}
+      main={
+        ready && (
           <Viewer
             configEnv={Env}
             credentials={credentials}
-            viewer={viewer.ref}
             onSelect={async (hit) => {
               setProperties(toProperties({ hit }));
               await selectByHit({ hit, viewer: viewer.ref.current });
             }}
+            viewer={viewer.ref}
           />
-        )}
-      </main>
-      <RightDrawer properties={properties} />
+        )
+      }
+      rightDrawer={<RightDrawer properties={properties} />}
+    >
       {dialogOpen && (
         <OpenDialog
           credentials={credentials}
-          open={dialogOpen}
           onClose={() => setDialogOpen(false)}
           onConfirm={(cs) => {
             setCredentials(cs);
             setDialogOpen(false);
           }}
+          open={dialogOpen}
         />
       )}
-    </div>
+    </Layout>
   );
 }
