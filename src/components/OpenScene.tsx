@@ -33,6 +33,8 @@ export function OpenDialog({
     credentials
   );
   const emptyClientId = inputCreds.clientId === "";
+  const invalidClientId = inputCreds.clientId.length > 64;
+  const invalidStreamKey = inputCreds.streamKey.length > 36;
 
   return (
     <Dialog
@@ -49,7 +51,9 @@ export function OpenDialog({
         </DialogContentText>
         <TextField
           autoFocus={emptyClientId}
+          error={invalidClientId}
           fullWidth
+          helperText={invalidClientId ? "Client ID too long." : undefined}
           label="Client ID"
           margin="dense"
           value={inputCreds.clientId}
@@ -62,7 +66,9 @@ export function OpenDialog({
         />
         <TextField
           autoFocus={!emptyClientId}
+          error={invalidStreamKey}
           fullWidth
+          helperText={invalidStreamKey ? "Stream key too long." : undefined}
           label="Stream Key"
           margin="dense"
           value={inputCreds.streamKey}
