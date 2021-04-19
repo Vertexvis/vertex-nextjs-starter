@@ -3,10 +3,10 @@ import {
   Failure,
   head,
   VertexClient,
-} from '@vertexvis/vertex-api-client';
-import { AxiosResponse } from 'axios';
-import type { NextApiResponse } from 'next';
-import { Env } from './env';
+} from "@vertexvis/vertex-api-client";
+import { AxiosResponse } from "axios";
+import type { NextApiResponse } from "next";
+import { Env } from "./env";
 
 export async function makeCall<T>(
   res: NextApiResponse<T | Failure>,
@@ -19,7 +19,7 @@ export async function makeCall<T>(
     const failure = error.vertexError?.res;
     if (!failure) {
       const errors = new Set<ApiError>();
-      errors.add({ status: '500', title: 'Unknown error from Vertex API.' });
+      errors.add({ status: "500", title: "Unknown error from Vertex API." });
       failure.errors = errors;
     }
 
@@ -33,12 +33,12 @@ async function getClient(): Promise<VertexClient> {
 
   Client = await VertexClient.build({
     basePath:
-      Env === 'platprod'
-        ? 'https://platform.vertexvis.com'
+      Env === "platprod"
+        ? "https://platform.vertexvis.com"
         : `https://platform.${Env}.vertexvis.io`,
     client: {
-      id: process.env.VERTEX_CLIENT_ID ?? '',
-      secret: process.env.VERTEX_CLIENT_SECRET ?? '',
+      id: process.env.VERTEX_CLIENT_ID ?? "",
+      secret: process.env.VERTEX_CLIENT_SECRET ?? "",
     },
   });
 

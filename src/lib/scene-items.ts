@@ -1,5 +1,5 @@
-import { vertexvis } from '@vertexvis/frame-streaming-protos';
-import { ColorMaterial, Components } from '@vertexvis/viewer';
+import { vertexvis } from "@vertexvis/frame-streaming-protos";
+import { ColorMaterial, Components } from "@vertexvis/viewer";
 
 const SelectColor = {
   ...ColorMaterial.create(255, 255, 0),
@@ -7,7 +7,7 @@ const SelectColor = {
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
 
-export interface Req {
+interface Req {
   readonly viewer: Components.VertexViewer | null;
 }
 
