@@ -15,8 +15,6 @@ interface Props {
 
 const useStyles = makeStyles(() => ({
   paper: {
-    position: "relative",
-    whiteSpace: "nowrap",
     width: RightDrawerWidth,
   },
   title: {

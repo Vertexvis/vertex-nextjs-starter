@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
@@ -13,25 +14,22 @@ import { FrameCamera } from "@vertexvis/viewer/dist/types/types";
 import React from "react";
 import { StreamCredentials } from "../lib/storage";
 
-export interface ViewerProps extends ViewerJSX.VertexViewer {
+interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
   readonly configEnv: Environment;
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
-export type ViewerComponentType = React.ComponentType<
+type ViewerComponentType = React.ComponentType<
   ViewerProps & React.RefAttributes<HTMLVertexViewerElement>
 >;
 
-export type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
+type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "100%",
     width: "100%",
-  },
-  toolbar: {
-    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -40,7 +38,7 @@ function UnwrappedViewer({
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
-  const { root, toolbar } = useStyles();
+  const { root } = useStyles();
   const RenderOptions = { animation: { milliseconds: 1500 } };
   const Back = Vector3.back();
   const Origin = Vector3.origin();
@@ -83,22 +81,24 @@ function UnwrappedViewer({
       src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
     >
-      <VertexViewerToolbar className={toolbar}>
-        <ButtonGroup variant="contained">
-          <Button onClick={() => iso()}>Iso</Button>
-          <Button onClick={() => right()}>+X</Button>
-          <Button onClick={() => top()}>+Y</Button>
-          <Button onClick={() => front()}>+Z</Button>
-          <Button onClick={() => fitAll()}>Fit all</Button>
-        </ButtonGroup>
-      </VertexViewerToolbar>
+      <Box mb={2}>
+        <VertexViewerToolbar>
+          <ButtonGroup variant="contained">
+            <Button onClick={() => iso()}>Iso</Button>
+            <Button onClick={() => right()}>+X</Button>
+            <Button onClick={() => top()}>+Y</Button>
+            <Button onClick={() => front()}>+Z</Button>
+            <Button onClick={() => fitAll()}>Fit all</Button>
+          </ButtonGroup>
+        </VertexViewerToolbar>
+      </Box>
     </VertexViewer>
   );
 }
 
 export const Viewer = onTap(UnwrappedViewer);
 
-export interface OnSelectProps extends HOCViewerProps {
+interface OnSelectProps extends HOCViewerProps {
   readonly onSelect: (hit?: vertexvis.protobuf.stream.IHit) => Promise<void>;
 }
 
