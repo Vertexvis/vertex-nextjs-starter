@@ -33,6 +33,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+export const Viewer = onTap(UnwrappedViewer);
+
 function UnwrappedViewer({
   credentials,
   viewer,
@@ -96,13 +98,11 @@ function UnwrappedViewer({
   );
 }
 
-export const Viewer = onTap(UnwrappedViewer);
-
 interface OnSelectProps extends HOCViewerProps {
   readonly onSelect: (hit?: vertexvis.protobuf.stream.IHit) => Promise<void>;
 }
 
-export function onTap<P extends ViewerProps>(
+function onTap<P extends ViewerProps>(
   WrappedViewer: ViewerComponentType
 ): React.FunctionComponent<P & OnSelectProps> {
   return function Component({ viewer, onSelect, ...props }: P & OnSelectProps) {
