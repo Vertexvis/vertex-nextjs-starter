@@ -45,7 +45,7 @@ export function MetadataProperties({ properties }: Props): JSX.Element {
       </Table>
     </TableContainer>
   ) : (
-    <Box mx={2} mb={1}>
+    <Box mx={2} mb={2}>
       <Typography variant="body2">No data</Typography>
     </Box>
   );
