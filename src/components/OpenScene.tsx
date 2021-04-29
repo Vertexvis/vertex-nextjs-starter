@@ -15,14 +15,6 @@ interface Props {
   readonly onConfirm: (credentials: StreamCredentials) => void;
 }
 
-export function OpenButton({ onClick }: { onClick: () => void }): JSX.Element {
-  return (
-    <Button color="primary" onClick={() => onClick()} variant="contained">
-      Open Scene
-    </Button>
-  );
-}
-
 export function OpenDialog({
   credentials,
   open,

@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
-import { encodeCreds, OpenButton, OpenDialog } from "../components/OpenScene";
+import { encodeCreds, OpenDialog } from "../components/OpenScene";
 import { RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
 import { DefaultClientId, DefaultStreamKey, Env } from "../lib/env";
@@ -26,26 +27,28 @@ export default function Home(): JSX.Element {
     streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
   });
 
+  const viewer = useViewer();
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [properties, setProperties] = React.useState<Properties>({});
+
   // On credentials changes, update URL and store in local storage.
   React.useEffect(() => {
     router.push(encodeCreds(credentials));
     setStoredCreds(credentials);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
 
   // Open dialog if 'o' key pressed
   const keys = useKeyListener();
   React.useEffect(() => {
     if (!dialogOpen && keys.o) setDialogOpen(true);
-  }, [keys]);
+  }, [dialogOpen, keys]);
 
-  const viewer = useViewer();
-  const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [properties, setProperties] = React.useState<Properties>({});
   const ready = credentials.clientId && credentials.streamKey && viewer.isReady;
 
   return (
     <Layout
-      header={<OpenButton onClick={() => setDialogOpen(true)} />}
+      header={<Header onOpenSceneClick={() => setDialogOpen(true)} />}
       main={
         ready && (
           <Viewer
