@@ -10,6 +10,7 @@ import { StreamCredentials } from "../lib/storage";
 
 interface Props {
   readonly credentials: StreamCredentials;
+  readonly defaultCredentials: StreamCredentials;
   readonly open: boolean;
   readonly onClose: VoidFunction;
   readonly onConfirm: (credentials: StreamCredentials) => void;
@@ -17,6 +18,7 @@ interface Props {
 
 export function OpenDialog({
   credentials,
+  defaultCredentials,
   open,
   onClose,
   onConfirm,
@@ -74,6 +76,9 @@ export function OpenDialog({
         />
       </DialogContent>
       <DialogActions>
+        <Button onClick={() => setInputCreds(defaultCredentials)}>
+          Restore Defaults
+        </Button>
         <Button onClick={onClose}>Cancel</Button>
         <Button
           color="primary"

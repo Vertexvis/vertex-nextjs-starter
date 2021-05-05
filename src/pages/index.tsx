@@ -67,6 +67,10 @@ export default function Home(): JSX.Element {
       {dialogOpen && (
         <OpenDialog
           credentials={credentials}
+          defaultCredentials={{
+            clientId: DefaultClientId,
+            streamKey: DefaultStreamKey,
+          }}
           onClose={() => setDialogOpen(false)}
           onConfirm={(cs) => {
             setCredentials(cs);
