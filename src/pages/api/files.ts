@@ -1,4 +1,4 @@
-import { Failure, FileList } from "@vertexvis/vertex-api-client";
+import { Failure, FileList } from "@vertexvis/api-client-node";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { makeCall } from "../../lib/vertex-api";
 

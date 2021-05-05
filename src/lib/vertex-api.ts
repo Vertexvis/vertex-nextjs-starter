@@ -3,7 +3,7 @@ import {
   Failure,
   head,
   VertexClient,
-} from "@vertexvis/vertex-api-client";
+} from "@vertexvis/api-client-node";
 import { AxiosResponse } from "axios";
 import type { NextApiResponse } from "next";
 import { Env } from "./env";
