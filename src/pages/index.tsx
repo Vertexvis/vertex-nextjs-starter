@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { Header } from "../components/Header";
@@ -6,6 +7,7 @@ import { encodeCreds, OpenDialog } from "../components/OpenScene";
 import { RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
 import { DefaultClientId, DefaultStreamKey, Env } from "../lib/env";
+import { FileData, toFileData } from "../lib/files";
 import { useKeyListener } from "../lib/key-listener";
 import { Properties, toProperties } from "../lib/metadata";
 import { selectByHit } from "../lib/scene-items";
@@ -16,7 +18,11 @@ import {
 } from "../lib/storage";
 import { useViewer } from "../lib/viewer";
 
-export default function Home(): JSX.Element {
+interface Props {
+  readonly files: FileData[];
+}
+
+export default function Home({ files }: Props): JSX.Element {
   // Prefer credentials in URL to enable easy scene sharing.
   // If they don't exist, check local storage. If empty, use defaults.
   const router = useRouter();
@@ -62,7 +68,7 @@ export default function Home(): JSX.Element {
           />
         )
       }
-      rightDrawer={<RightDrawer properties={properties} />}
+      rightDrawer={<RightDrawer files={files} properties={properties} />}
     >
       {dialogOpen && (
         <OpenDialog
@@ -82,3 +88,13 @@ export default function Home(): JSX.Element {
     </Layout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const noFiles = { props: { files: [] } };
+  const host = context.req.headers.host;
+  if (!host) return noFiles;
+
+  const baseUrl = `http${host.startsWith("localhost") ? "" : "s"}://${host}`;
+  const res = await (await fetch(`${baseUrl}/api/files`)).json();
+  return res == null ? noFiles : { props: { files: toFileData(res) } };
+};
