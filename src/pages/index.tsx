@@ -13,6 +13,7 @@ import { Properties, toProperties } from "../lib/metadata";
 import { selectByHit } from "../lib/scene-items";
 import {
   getStoredCreds,
+  head,
   setStoredCreds,
   StreamCredentials,
 } from "../lib/storage";
@@ -23,22 +24,31 @@ interface Props {
 }
 
 export default function Home({ files }: Props): JSX.Element {
-  // Prefer credentials in URL to enable easy scene sharing.
-  // If they don't exist, check local storage. If empty, use defaults.
   const router = useRouter();
-  const { clientId: queryId, streamKey: queryKey } = router.query;
-  const stored = getStoredCreds();
-  const [credentials, setCredentials] = React.useState<StreamCredentials>({
-    clientId: queryId?.toString() || stored.clientId || DefaultClientId,
-    streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
-  });
-
   const viewer = useViewer();
+  const [credentials, setCredentials] =
+    React.useState<StreamCredentials | undefined>();
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [properties, setProperties] = React.useState<Properties>({});
 
+  // Prefer credentials in URL to enable easy scene sharing.
+  // If they don't exist, check local storage. If empty, use defaults.
+  React.useEffect(() => {
+    if (!router.isReady) return;
+
+    const { clientId, streamKey } = router.query;
+    const stored = getStoredCreds();
+    setCredentials({
+      clientId: head(clientId) || stored?.clientId || DefaultClientId,
+      streamKey: head(streamKey) || stored?.streamKey || DefaultStreamKey,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
+
   // On credentials changes, update URL and store in local storage.
   React.useEffect(() => {
+    if (!credentials) return;
+
     router.push(encodeCreds(credentials));
     setStoredCreds(credentials);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,13 +60,12 @@ export default function Home({ files }: Props): JSX.Element {
     if (!dialogOpen && keys.o) setDialogOpen(true);
   }, [dialogOpen, keys]);
 
-  const ready = credentials.clientId && credentials.streamKey && viewer.isReady;
-
   return (
     <Layout
       header={<Header onOpenSceneClick={() => setDialogOpen(true)} />}
       main={
-        ready && (
+        credentials != null &&
+        viewer.isReady && (
           <Viewer
             configEnv={Env}
             credentials={credentials}
@@ -70,7 +79,7 @@ export default function Home({ files }: Props): JSX.Element {
       }
       rightDrawer={<RightDrawer files={files} properties={properties} />}
     >
-      {dialogOpen && (
+      {credentials && dialogOpen && (
         <OpenDialog
           credentials={credentials}
           defaultCredentials={{
