@@ -27,7 +27,7 @@ export default function Home({ files }: Props): JSX.Element {
 
   // Prefer credentials in URL to enable easy scene sharing. If empty, use defaults.
   React.useEffect(() => {
-    if (router.isReady) return;
+    if (!router.isReady) return;
 
     setCredentials({
       clientId: head(router.query.clientId) || DefaultCredentials.clientId,
@@ -90,5 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const baseUrl = `http${host.startsWith("localhost") ? "" : "s"}://${host}`;
   const res = await (await fetch(`${baseUrl}/api/files`)).json();
-  return res == null ? noFiles : { props: { files: toFileData(res) } };
+  return res == null || res.errors
+    ? noFiles
+    : { props: { files: toFileData(res) } };
 };
