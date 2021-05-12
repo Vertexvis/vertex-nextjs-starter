@@ -12,7 +12,7 @@ import {
 import { Environment } from "@vertexvis/viewer/dist/types/config/environment";
 import { FrameCamera } from "@vertexvis/viewer/dist/types/types";
 import React from "react";
-import { StreamCredentials } from "../lib/storage";
+import { StreamCredentials } from "../lib/env";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;

@@ -6,11 +6,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import { StreamCredentials } from "../lib/storage";
+import { DefaultCredentials, StreamCredentials } from "../lib/env";
 
 interface Props {
   readonly credentials: StreamCredentials;
-  readonly defaultCredentials: StreamCredentials;
   readonly open: boolean;
   readonly onClose: VoidFunction;
   readonly onConfirm: (credentials: StreamCredentials) => void;
@@ -18,14 +17,12 @@ interface Props {
 
 export function OpenDialog({
   credentials,
-  defaultCredentials,
   open,
   onClose,
   onConfirm,
 }: Props): JSX.Element {
-  const [inputCreds, setInputCreds] = React.useState<StreamCredentials>(
-    credentials
-  );
+  const [inputCreds, setInputCreds] =
+    React.useState<StreamCredentials>(credentials);
   const emptyClientId = inputCreds.clientId === "";
   const invalidClientId = inputCreds.clientId.length > 64;
   const invalidStreamKey = inputCreds.streamKey.length > 36;
@@ -76,7 +73,7 @@ export function OpenDialog({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setInputCreds(defaultCredentials)}>
+        <Button onClick={() => setInputCreds(DefaultCredentials)}>
           Restore Defaults
         </Button>
         <Button onClick={onClose}>Cancel</Button>

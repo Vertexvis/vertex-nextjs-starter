@@ -6,17 +6,11 @@ import { Layout } from "../components/Layout";
 import { encodeCreds, OpenDialog } from "../components/OpenScene";
 import { RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
-import { DefaultClientId, DefaultStreamKey, Env } from "../lib/env";
+import { DefaultCredentials, Env, head, StreamCredentials } from "../lib/env";
 import { FileData, toFileData } from "../lib/files";
 import { useKeyListener } from "../lib/key-listener";
 import { Properties, toProperties } from "../lib/metadata";
 import { selectByHit } from "../lib/scene-items";
-import {
-  getStoredCreds,
-  head,
-  setStoredCreds,
-  StreamCredentials,
-} from "../lib/storage";
 import { useViewer } from "../lib/viewer";
 
 interface Props {
@@ -31,26 +25,20 @@ export default function Home({ files }: Props): JSX.Element {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [properties, setProperties] = React.useState<Properties>({});
 
-  // Prefer credentials in URL to enable easy scene sharing.
-  // If they don't exist, check local storage. If empty, use defaults.
+  // Prefer credentials in URL to enable easy scene sharing. If empty, use defaults.
   React.useEffect(() => {
-    if (!router.isReady) return;
+    if (router.isReady) return;
 
-    const { clientId, streamKey } = router.query;
-    const stored = getStoredCreds();
     setCredentials({
-      clientId: head(clientId) || stored?.clientId || DefaultClientId,
-      streamKey: head(streamKey) || stored?.streamKey || DefaultStreamKey,
+      clientId: head(router.query.clientId) || DefaultCredentials.clientId,
+      streamKey: head(router.query.streamKey) || DefaultCredentials.streamKey,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
-  // On credentials changes, update URL and store in local storage.
+  // On credentials changes, update URL.
   React.useEffect(() => {
-    if (!credentials) return;
-
-    router.push(encodeCreds(credentials));
-    setStoredCreds(credentials);
+    if (credentials) router.push(encodeCreds(credentials));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
 
@@ -60,11 +48,10 @@ export default function Home({ files }: Props): JSX.Element {
     if (!dialogOpen && keys.o) setDialogOpen(true);
   }, [dialogOpen, keys]);
 
-  return (
+  return router.isReady && credentials ? (
     <Layout
       header={<Header onOpenSceneClick={() => setDialogOpen(true)} />}
       main={
-        credentials != null &&
         viewer.isReady && (
           <Viewer
             configEnv={Env}
@@ -79,13 +66,9 @@ export default function Home({ files }: Props): JSX.Element {
       }
       rightDrawer={<RightDrawer files={files} properties={properties} />}
     >
-      {credentials && dialogOpen && (
+      {dialogOpen && (
         <OpenDialog
           credentials={credentials}
-          defaultCredentials={{
-            clientId: DefaultClientId,
-            streamKey: DefaultStreamKey,
-          }}
           onClose={() => setDialogOpen(false)}
           onConfirm={(cs) => {
             setCredentials(cs);
@@ -95,6 +78,8 @@ export default function Home({ files }: Props): JSX.Element {
         />
       )}
     </Layout>
+  ) : (
+    <></>
   );
 }
 
