@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import theme from "../lib/theme";
+import "@vertexvis/viewer/dist/viewer/viewer.css";
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   React.useEffect(() => {

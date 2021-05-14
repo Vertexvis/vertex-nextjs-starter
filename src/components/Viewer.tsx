@@ -7,6 +7,7 @@ import { Vector3 } from "@vertexvis/geometry";
 import {
   VertexViewer,
   VertexViewerToolbar,
+  VertexViewerViewCube,
   JSX as ViewerJSX,
 } from "@vertexvis/viewer-react";
 import { Environment } from "@vertexvis/viewer/dist/types/config/environment";
@@ -40,13 +41,14 @@ function UnwrappedViewer({
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
-  const { root } = useStyles();
-  const RenderOptions = { animation: { milliseconds: 1500 } };
+  const AnimationDurationMs = 1500;
+  const RenderOptions = { animation: { milliseconds: AnimationDurationMs } };
   const Back = Vector3.back();
   const Origin = Vector3.origin();
   const Right = Vector3.right();
   const Up = Vector3.up();
   const Iso = Vector3.add(Back, Up, Right);
+  const { root } = useStyles();
 
   async function fitAll(): Promise<void> {
     (await viewer.current?.scene())?.camera().viewAll().render(RenderOptions);
@@ -54,18 +56,6 @@ function UnwrappedViewer({
 
   async function iso(): Promise<void> {
     standardView({ position: Iso, lookAt: Origin, up: Up });
-  }
-
-  async function right(): Promise<void> {
-    standardView({ position: Right, lookAt: Origin, up: Up });
-  }
-
-  async function top(): Promise<void> {
-    standardView({ position: Up, lookAt: Origin, up: Vector3.forward() });
-  }
-
-  async function front(): Promise<void> {
-    standardView({ position: Back, lookAt: Origin, up: Up });
   }
 
   async function standardView(
@@ -83,17 +73,20 @@ function UnwrappedViewer({
       src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
     >
-      <Box mb={2}>
-        <VertexViewerToolbar>
+      <VertexViewerToolbar placement="top-right">
+        <VertexViewerViewCube
+          animationDuration={AnimationDurationMs}
+          viewer={viewer.current ?? undefined}
+        />
+      </VertexViewerToolbar>
+      <VertexViewerToolbar placement="bottom-center">
+        <Box mb={2}>
           <ButtonGroup variant="contained">
             <Button onClick={() => iso()}>Iso</Button>
-            <Button onClick={() => right()}>+X</Button>
-            <Button onClick={() => top()}>+Y</Button>
-            <Button onClick={() => front()}>+Z</Button>
             <Button onClick={() => fitAll()}>Fit all</Button>
           </ButtonGroup>
-        </VertexViewerToolbar>
-      </Box>
+        </Box>
+      </VertexViewerToolbar>
     </VertexViewer>
   );
 }
