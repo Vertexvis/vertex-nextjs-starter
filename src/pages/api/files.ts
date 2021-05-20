@@ -2,7 +2,7 @@ import { Failure, FileList } from "@vertexvis/api-client-node";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { makeCall } from "../../lib/vertex-api";
 
-export default async function getFiles(
+export default function getFiles(
   _req: NextApiRequest,
   res: NextApiResponse<FileList | Failure>
 ): Promise<void> {

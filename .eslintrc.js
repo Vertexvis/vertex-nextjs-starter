@@ -14,8 +14,11 @@ module.exports = {
   },
   plugins: ["@typescript-eslint", "react"],
   rules: {
+    "no-await-in-loop": "warn",
+    "no-return-await": "warn",
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
+    "require-await": "warn",
   },
   settings: { react: { version: "detect" } },
 };

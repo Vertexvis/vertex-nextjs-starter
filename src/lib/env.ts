@@ -15,5 +15,5 @@ export const Env =
   (process.env.NEXT_PUBLIC_VERTEX_ENV as Environment) || "platprod";
 
 export function head<T>(items?: T | T[]): T | undefined {
-  return items ? (Array.isArray(items) ? items[0] : items) : undefined;
+  return Array.isArray(items) ? items[0] : items ?? undefined;
 }
