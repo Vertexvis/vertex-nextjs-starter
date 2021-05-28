@@ -1,8 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { experimentalStyled as styled } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Drawer from "@material-ui/core/Drawer";
+import MuiDrawer, { getDrawerUtilityClass } from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { FileData } from "../lib/files";
@@ -16,33 +16,35 @@ interface Props {
   readonly properties: Properties;
 }
 
-const useStyles = makeStyles(() => ({
-  paper: {
-    width: RightDrawerWidth,
-  },
-  title: {
-    textTransform: "uppercase",
-  },
-}));
+const Drawer = styled((props) => (
+  <MuiDrawer
+    anchor="right"
+    sx={{ display: { sm: "none", md: "block" } }}
+    variant="permanent"
+    {...props}
+  />
+))(() => {
+  return {
+    [`& .${getDrawerUtilityClass("paper")}`]: { width: RightDrawerWidth },
+  };
+});
+
+const Title = styled((props) => <Typography variant="body2" {...props} />)(
+  () => ({ textTransform: "uppercase" })
+);
 
 export function RightDrawer({ files, properties }: Props): JSX.Element {
-  const { paper, title } = useStyles();
-
   return (
-    <Drawer anchor="right" variant="permanent" classes={{ paper }}>
+    <Drawer>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={title} variant="body2">
-            Metadata Properties
-          </Typography>
+          <Title>Metadata Properties</Title>
         </AccordionSummary>
         <MetadataProperties properties={properties} />
       </Accordion>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={title} variant="body2">
-            Recent Files
-          </Typography>
+          <Title>Recent Files</Title>
         </AccordionSummary>
         <RecentFiles files={files} />
       </Accordion>

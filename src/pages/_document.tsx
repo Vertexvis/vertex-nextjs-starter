@@ -1,4 +1,7 @@
-import { ServerStyleSheets } from "@material-ui/core/styles";
+import createCache, { EmotionCache } from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
+import createEmotionServer from "@emotion/server/create-instance";
+import { ServerStyleSheets } from "@material-ui/styles";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
 import theme from "../lib/theme";
@@ -27,17 +30,43 @@ MyDocument.getInitialProps = async (ctx) => {
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
+  const cache = getCache();
+  const { extractCriticalToChunks } = createEmotionServer(cache);
+
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+      // eslint-disable-next-line react/display-name
+      enhanceComponent: (Component) => (props) =>
+        (
+          <CacheProvider value={cache}>
+            <Component {...props} />
+          </CacheProvider>
+        ),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
+  const emotionStyles = extractCriticalToChunks(initialProps.html);
+  const emotionStyleTags = emotionStyles.styles.map((style) => (
+    <style
+      data-emotion={`${style.key} ${style.ids.join(" ")}`}
+      key={style.key}
+      dangerouslySetInnerHTML={{ __html: style.css }}
+    />
+  ));
   return {
     ...initialProps,
     styles: [
       ...React.Children.toArray(initialProps.styles),
       sheets.getStyleElement(),
+      ...emotionStyleTags,
     ],
   };
 };
+
+function getCache(): EmotionCache {
+  const cache = createCache({ key: "css", prepend: true });
+  cache.compat = true;
+
+  return cache;
+}

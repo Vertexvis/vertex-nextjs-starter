@@ -1,3 +1,5 @@
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { AppProps } from "next/app";
@@ -6,6 +8,8 @@ import React from "react";
 import theme from "../lib/theme";
 import "@vertexvis/viewer/dist/viewer/viewer.css";
 
+export const cache = createCache({ key: "css", prepend: true });
+
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
@@ -13,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   }, []);
 
   return (
-    <>
+    <CacheProvider value={cache}>
       <Head>
         <title>Vertex Starter</title>
         <link rel="icon" href="/favicon-512x512.png" />
@@ -30,6 +34,6 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </CacheProvider>
   );
 }

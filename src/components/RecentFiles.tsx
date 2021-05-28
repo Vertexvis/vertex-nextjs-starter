@@ -1,13 +1,12 @@
-import Box from "@material-ui/core/Box";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { FileData } from "../lib/files";
+import { NoData } from "./NoData";
 
 interface Props {
   readonly files: FileData[];
@@ -34,8 +33,6 @@ export function RecentFiles({ files }: Props): JSX.Element {
       </Table>
     </TableContainer>
   ) : (
-    <Box mx={2} mb={2}>
-      <Typography variant="body2">No data</Typography>
-    </Box>
+    <NoData />
   );
 }
