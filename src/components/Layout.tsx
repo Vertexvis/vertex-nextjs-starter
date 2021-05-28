@@ -11,7 +11,6 @@ export const RightDrawerWidth = 320;
 interface Props {
   readonly children: React.ReactNode;
   readonly header: React.ReactNode;
-  readonly leftDrawer?: React.ReactNode;
   readonly main: React.ReactNode;
   readonly rightDrawer: React.ReactNode;
 }
@@ -23,7 +22,7 @@ const AppBar = styled((props) => (
   marginRight: RightDrawerWidth,
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
   zIndex: theme.zIndex.drawer + 1,
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     margin: 0,
     width: `100%`,
   },
@@ -32,7 +31,7 @@ const AppBar = styled((props) => (
 const Content = styled((props) => <main {...props} />)(({ theme }) => ({
   height: `calc(100% - ${DenseToolbarHeight}px)`,
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     width: `100%`,
   },
 }));
@@ -40,7 +39,6 @@ const Content = styled((props) => <main {...props} />)(({ theme }) => ({
 export function Layout({
   children,
   header,
-  leftDrawer,
   main,
   rightDrawer,
 }: Props): JSX.Element {
@@ -49,7 +47,6 @@ export function Layout({
       <AppBar>
         <Toolbar variant="dense">{header}</Toolbar>
       </AppBar>
-      {leftDrawer && { leftDrawer }}
       <Content>
         <Box minHeight={`${DenseToolbarHeight}px`} />
         {main}
