@@ -10,11 +10,7 @@ interface Props {
 export function Header({ onOpenSceneClick }: Props): JSX.Element {
   return (
     <Box display="flex" justifyContent="space-between" width="100%">
-      <Button
-        color="primary"
-        onClick={() => onOpenSceneClick()}
-        variant="contained"
-      >
+      <Button onClick={() => onOpenSceneClick()} variant="contained">
         Open Scene
       </Button>
       <Link

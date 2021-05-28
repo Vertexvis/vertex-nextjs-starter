@@ -1,5 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
+/* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
@@ -25,13 +24,6 @@ type ViewerComponentType = React.ComponentType<
 
 type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
 
-const useStyles = makeStyles(() => ({
-  root: {
-    height: "100%",
-    width: "100%",
-  },
-}));
-
 export const Viewer = onTap(UnwrappedViewer);
 
 function UnwrappedViewer({
@@ -40,7 +32,6 @@ function UnwrappedViewer({
   ...props
 }: ViewerProps): JSX.Element {
   const AnimationDurationMs = 1500;
-  const { root } = useStyles();
 
   async function fitAll(): Promise<void> {
     (await viewer.current?.scene())
@@ -51,7 +42,7 @@ function UnwrappedViewer({
 
   return (
     <VertexViewer
-      className={root}
+      css={{ height: "100%", width: "100%" }}
       clientId={credentials.clientId}
       ref={viewer}
       src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
@@ -64,11 +55,11 @@ function UnwrappedViewer({
         />
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="bottom-center">
-        <Box mb={2}>
-          <ButtonGroup variant="contained">
-            <Button onClick={() => fitAll()}>Fit all</Button>
-          </ButtonGroup>
-        </Box>
+        <ButtonGroup sx={{ mb: 2 }} variant="contained">
+          <Button color="inherit" onClick={() => fitAll()}>
+            Fit all
+          </Button>
+        </ButtonGroup>
       </VertexViewerToolbar>
     </VertexViewer>
   );

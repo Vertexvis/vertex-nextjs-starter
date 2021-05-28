@@ -73,12 +73,16 @@ export function OpenDialog({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setInputCreds(DefaultCredentials)}>
+        <Button
+          color="inherit"
+          onClick={() => setInputCreds(DefaultCredentials)}
+        >
           Restore Defaults
         </Button>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button color="inherit" onClick={onClose}>
+          Cancel
+        </Button>
         <Button
-          color="primary"
           onClick={() => {
             if (inputCreds.clientId && inputCreds.streamKey) {
               onConfirm(inputCreds);
