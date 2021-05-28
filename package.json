@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11",
     "@material-ui/icons": "^4.11",
-    "@vertexvis/api-client-node": "^0.12",
+    "@vertexvis/api-client-node": "^0.13",
     "@vertexvis/viewer-react": "^0.9.27",
     "next": "^10.2",
     "react": "^17.0",
@@ -29,7 +29,7 @@
     "clean": "rm -rf .next/ node_modules/",
     "dev": "next",
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
-    "lint": "eslint --ext .ts,.tsx,.js,.jsx --ignore-path ./.gitignore .",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "start": "next start"
   }
 }
