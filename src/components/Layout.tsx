@@ -5,14 +5,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 
 const DenseToolbarHeight = 48;
-export const LeftDrawerWidth = 0;
-export const RightDrawerWidth = 320;
+export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
+export const RightDrawerWidth = 320; // If not provided, set to 0
 
 interface Props {
   readonly children: React.ReactNode;
   readonly header: React.ReactNode;
+  readonly leftDrawer?: React.ReactNode;
   readonly main: React.ReactNode;
-  readonly rightDrawer: React.ReactNode;
+  readonly rightDrawer?: React.ReactNode;
 }
 
 const AppBar = styled((props) => (
@@ -39,6 +40,7 @@ const Content = styled((props) => <main {...props} />)(({ theme }) => ({
 export function Layout({
   children,
   header,
+  leftDrawer,
   main,
   rightDrawer,
 }: Props): JSX.Element {
@@ -47,11 +49,12 @@ export function Layout({
       <AppBar>
         <Toolbar variant="dense">{header}</Toolbar>
       </AppBar>
+      {leftDrawer ?? <></>}
       <Content>
         <Box minHeight={`${DenseToolbarHeight}px`} />
         {main}
       </Content>
-      {rightDrawer}
+      {rightDrawer ?? <></>}
       {children}
     </Box>
   );
