@@ -19,13 +19,17 @@ interface Props {
 const Drawer = styled((props) => (
   <MuiDrawer
     anchor="right"
-    sx={{ display: { sm: "none", md: "block" } }}
+    sx={{ display: { xl: "none", xs: "block" } }}
     variant="permanent"
     {...props}
   />
-))(() => {
+))(({ theme }) => {
   return {
     [`& .${getDrawerUtilityClass("paper")}`]: { width: RightDrawerWidth },
+    display: "block",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   };
 });
 
