@@ -7,8 +7,8 @@
     "@emotion/react": "^11.4",
     "@emotion/server": "^11.4",
     "@emotion/styled": "^11.3",
-    "@material-ui/core": "next",
-    "@material-ui/icons": "next",
+    "@material-ui/core": "^5.0.0-alpha.36",
+    "@material-ui/icons": "^5.0.0-alpha.36",
     "@vertexvis/api-client-node": "^0.13",
     "@vertexvis/viewer-react": "^0.9",
     "next": "^10.2",
@@ -26,6 +26,7 @@
     "eslint-config-prettier": "^8",
     "eslint-plugin-react": "^7",
     "eslint-plugin-react-hooks": "^4",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.3",
     "tslib": "^2.2",
     "typescript": "^4"

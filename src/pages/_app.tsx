@@ -1,12 +1,14 @@
+import "@vertexvis/viewer/dist/viewer/viewer.css";
+
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/core/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
+
 import theme from "../lib/theme";
-import "@vertexvis/viewer/dist/viewer/viewer.css";
 
 export const cache = createCache({ key: "css", prepend: true });
 

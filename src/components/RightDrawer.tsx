@@ -1,10 +1,11 @@
-import { experimentalStyled as styled } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MuiDrawer, { getDrawerUtilityClass } from "@material-ui/core/Drawer";
+import { experimentalStyled as styled } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
+
 import { FileData } from "../lib/files";
 import { Properties } from "../lib/metadata";
 import { RightDrawerWidth } from "./Layout";

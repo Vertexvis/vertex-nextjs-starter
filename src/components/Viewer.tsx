@@ -3,12 +3,13 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import {
+  JSX as ViewerJSX,
   VertexViewer,
   VertexViewerToolbar,
   VertexViewerViewCube,
-  JSX as ViewerJSX,
 } from "@vertexvis/viewer-react";
 import React from "react";
+
 import { StreamCredentials } from "../lib/env";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
