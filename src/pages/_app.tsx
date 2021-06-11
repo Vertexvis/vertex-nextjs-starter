@@ -10,14 +10,10 @@ import React from "react";
 
 import theme from "../lib/theme";
 
-export const cache = createCache({ key: "css", prepend: true });
+const cache = createCache({ key: "css", prepend: true });
+cache.compat = true;
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
-  React.useEffect(() => {
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles);
-  }, []);
-
   return (
     <CacheProvider value={cache}>
       <Head>

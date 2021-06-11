@@ -21,8 +21,9 @@ interface Props {
 export default function Home({ files }: Props): JSX.Element {
   const router = useRouter();
   const viewer = useViewer();
-  const [credentials, setCredentials] =
-    React.useState<StreamCredentials | undefined>();
+  const [credentials, setCredentials] = React.useState<
+    StreamCredentials | undefined
+  >();
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [properties, setProperties] = React.useState<Properties>({});
 

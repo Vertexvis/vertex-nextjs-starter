@@ -1,7 +1,6 @@
 import createCache, { EmotionCache } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
-import { ServerStyleSheets } from "@material-ui/styles";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
@@ -28,7 +27,6 @@ export default class MyDocument extends Document {
 }
 
 MyDocument.getInitialProps = async (ctx) => {
-  const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
   const cache = getCache();
@@ -36,7 +34,6 @@ MyDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
       // eslint-disable-next-line react/display-name
       enhanceComponent: (Component) => (props) =>
         (
@@ -59,7 +56,6 @@ MyDocument.getInitialProps = async (ctx) => {
     ...initialProps,
     styles: [
       ...React.Children.toArray(initialProps.styles),
-      sheets.getStyleElement(),
       ...emotionStyleTags,
     ],
   };

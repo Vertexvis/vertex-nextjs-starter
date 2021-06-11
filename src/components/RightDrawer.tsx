@@ -1,9 +1,9 @@
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import MuiDrawer, { getDrawerUtilityClass } from "@material-ui/core/Drawer";
-import { experimentalStyled as styled } from "@material-ui/core/styles";
+import { styled } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import dynamic from "next/dynamic";
 import React from "react";
 
 import { FileData } from "../lib/files";
@@ -16,6 +16,11 @@ interface Props {
   readonly files: FileData[];
   readonly properties: Properties;
 }
+
+// Temporary until this revert is published, https://github.com/mui-org/material-ui/pull/26310
+const ExpandMoreIcon = dynamic(() => import("@material-ui/icons/ExpandMore"), {
+  ssr: false,
+});
 
 const Drawer = styled((props) => (
   <MuiDrawer

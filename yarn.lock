@@ -751,9 +751,9 @@
     eslint-visitor-keys "^2.0.0"
 
 "@vertexvis/api-client-node@^0.13":
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/@vertexvis/api-client-node/-/api-client-node-0.13.1.tgz#3ab1a1d8c1660ef535bb35f4682420d16ea13d55"
-  integrity sha512-vdjmbKu6IIYTG7MTnV+c00R+9PAt+V6OFkLTDXsxoe3HCXxC9vjt8OuXoMc971cN3cnWzyIiAOMtZUgCfv155A==
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@vertexvis/api-client-node/-/api-client-node-0.13.2.tgz#6aafd63820f3ce92c47f6f0915e8349cb1434295"
+  integrity sha512-UsGFyMqxxgoyzXgT1L3o7xvqLeWqobRTTbwtdvbsXEQy205SsV+PzWWBBY9b3Umd6+Tc+wdmIMoDUv+pB5GDeQ==
   dependencies:
     axios "^0.21"
     p-limit "^3.1"
