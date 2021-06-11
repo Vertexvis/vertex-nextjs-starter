@@ -1,7 +1,5 @@
-import MuiAppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
+import { AppBar as MuiAppBar, Box, Toolbar } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 
 const DenseToolbarHeight = 48;

@@ -1,6 +1,5 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { Button, ButtonGroup } from "@material-ui/core";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import {
   JSX as ViewerJSX,
