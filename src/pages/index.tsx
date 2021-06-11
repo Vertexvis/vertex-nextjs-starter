@@ -10,7 +10,7 @@ import { Viewer } from "../components/Viewer";
 import { DefaultCredentials, Env, head, StreamCredentials } from "../lib/env";
 import { FileData, toFileData } from "../lib/files";
 import { useKeyListener } from "../lib/key-listener";
-import { Properties, toProperties } from "../lib/metadata";
+import { Metadata, toMetadata } from "../lib/metadata";
 import { selectByHit } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 
@@ -25,7 +25,7 @@ export default function Home({ files }: Props): JSX.Element {
     StreamCredentials | undefined
   >();
   const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [properties, setProperties] = React.useState<Properties>({});
+  const [metadata, setMetadata] = React.useState<Metadata | undefined>();
 
   // Prefer credentials in URL to enable easy scene sharing. If empty, use defaults.
   React.useEffect(() => {
@@ -59,14 +59,14 @@ export default function Home({ files }: Props): JSX.Element {
             configEnv={Env}
             credentials={credentials}
             onSelect={async (hit) => {
-              setProperties(toProperties({ hit }));
+              setMetadata(toMetadata({ hit }));
               await selectByHit({ hit, viewer: viewer.ref.current });
             }}
             viewer={viewer.ref}
           />
         )
       }
-      rightDrawer={<RightDrawer files={files} properties={properties} />}
+      rightDrawer={<RightDrawer files={files} metadata={metadata} />}
     >
       {dialogOpen && (
         <OpenDialog

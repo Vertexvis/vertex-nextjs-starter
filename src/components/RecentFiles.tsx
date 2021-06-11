@@ -16,7 +16,7 @@ interface Props {
 export function RecentFiles({ files }: Props): JSX.Element {
   return files.length > 0 ? (
     <TableContainer>
-      <Table padding="checkbox" size="small" style={{ whiteSpace: "nowrap" }}>
+      <Table size="small" style={{ whiteSpace: "nowrap" }}>
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>

@@ -7,14 +7,14 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 import { FileData } from "../lib/files";
-import { Properties } from "../lib/metadata";
+import { Metadata } from "../lib/metadata";
 import { RightDrawerWidth } from "./Layout";
 import { MetadataProperties } from "./MetadataProperties";
 import { RecentFiles } from "./RecentFiles";
 
 interface Props {
   readonly files: FileData[];
-  readonly properties: Properties;
+  readonly metadata?: Metadata;
 }
 
 // Temporary until this revert is published, https://github.com/mui-org/material-ui/pull/26310
@@ -43,14 +43,14 @@ const Title = styled((props) => <Typography variant="body2" {...props} />)(
   () => ({ textTransform: "uppercase" })
 );
 
-export function RightDrawer({ files, properties }: Props): JSX.Element {
+export function RightDrawer({ files, metadata }: Props): JSX.Element {
   return (
     <Drawer>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Title>Metadata Properties</Title>
         </AccordionSummary>
-        <MetadataProperties properties={properties} />
+        <MetadataProperties metadata={metadata} />
       </Accordion>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>

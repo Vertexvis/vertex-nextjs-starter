@@ -4,38 +4,45 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 
-import { Properties } from "../lib/metadata";
+import { Metadata } from "../lib/metadata";
 import { NoData } from "./NoData";
 
 interface Props {
-  readonly properties: Properties;
+  readonly metadata?: Metadata;
 }
 
-export function MetadataProperties({ properties }: Props): JSX.Element {
-  const propKeys = Object.keys(properties);
+export function MetadataProperties({ metadata }: Props): JSX.Element {
+  if (metadata == null) return <NoData />;
 
-  return propKeys.length > 0 ? (
+  const propKeys = Object.keys(metadata.properties);
+  if (propKeys.length === 0) return <NoData />;
+
+  return (
     <TableContainer>
-      <Table padding="checkbox" size="small" style={{ whiteSpace: "nowrap" }}>
+      <Table size="small" style={{ whiteSpace: "nowrap" }}>
         <TableHead>
           <TableRow>
-            <TableCell>Key</TableCell>
-            <TableCell>Value</TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">{metadata.partName}</Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {propKeys.map((k) => (
             <TableRow key={k}>
-              <TableCell>{k}</TableCell>
-              <TableCell>{properties[k]}</TableCell>
+              <TableCell>
+                <Typography variant="subtitle2">{k}</Typography>
+                <Typography variant="body2">
+                  {metadata.properties[k]}
+                </Typography>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  ) : (
-    <NoData />
   );
 }
