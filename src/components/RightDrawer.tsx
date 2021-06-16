@@ -4,9 +4,9 @@ import {
   Drawer as MuiDrawer,
   Typography,
 } from "@material-ui/core";
-import { getDrawerUtilityClass } from "@material-ui/core/Drawer";
+import { drawerClasses } from "@material-ui/core/Drawer";
 import { styled } from "@material-ui/core/styles";
-import dynamic from "next/dynamic";
+import { ExpandMore } from "@material-ui/icons";
 import React from "react";
 
 import { FileData } from "../lib/files";
@@ -20,27 +20,14 @@ interface Props {
   readonly metadata?: Metadata;
 }
 
-// Temporary until this revert is published, https://github.com/mui-org/material-ui/pull/26310
-const ExpandMoreIcon = dynamic(() => import("@material-ui/icons/ExpandMore"), {
-  ssr: false,
-});
-
-const Drawer = styled((props) => (
-  <MuiDrawer
-    anchor="right"
-    sx={{ display: { xl: "none", xs: "block" } }}
-    variant="permanent"
-    {...props}
-  />
-))(({ theme }) => {
-  return {
-    [`& .${getDrawerUtilityClass("paper")}`]: { width: RightDrawerWidth },
-    display: "block",
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  };
-});
+const Drawer = styled(MuiDrawer)(({ theme }) => ({
+  display: "block",
+  width: RightDrawerWidth,
+  [`& .${drawerClasses.paper}`]: { width: RightDrawerWidth },
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
 
 const Title = styled((props) => <Typography variant="body2" {...props} />)(
   () => ({ textTransform: "uppercase" })
@@ -48,15 +35,19 @@ const Title = styled((props) => <Typography variant="body2" {...props} />)(
 
 export function RightDrawer({ files, metadata }: Props): JSX.Element {
   return (
-    <Drawer>
+    <Drawer
+      anchor="right"
+      sx={{ display: { xl: "none", xs: "block" } }}
+      variant="permanent"
+    >
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary expandIcon={<ExpandMore />}>
           <Title>Metadata Properties</Title>
         </AccordionSummary>
         <MetadataProperties metadata={metadata} />
       </Accordion>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary expandIcon={<ExpandMore />}>
           <Title>Recent Files</Title>
         </AccordionSummary>
         <RecentFiles files={files} />

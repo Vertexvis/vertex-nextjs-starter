@@ -1,5 +1,6 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
-import { Button, ButtonGroup } from "@material-ui/core";
+import { SpeedDial, SpeedDialAction } from "@material-ui/core";
+import { ZoomOutMap } from "@material-ui/icons";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import {
   JSX as ViewerJSX,
@@ -16,6 +17,12 @@ interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
+interface Action {
+  icon: React.ReactNode;
+  name: string;
+  onClick: () => void;
+}
+
 type ViewerComponentType = React.ComponentType<
   ViewerProps & React.RefAttributes<HTMLVertexViewerElement>
 >;
@@ -30,6 +37,14 @@ function UnwrappedViewer({
   ...props
 }: ViewerProps): JSX.Element {
   const AnimationDurationMs = 1500;
+
+  const viewActions: Action[] = [
+    {
+      icon: <ZoomOutMap />,
+      name: "Fit all",
+      onClick: () => fitAll(),
+    },
+  ];
 
   async function fitAll(): Promise<void> {
     (await viewer.current?.scene())
@@ -52,12 +67,22 @@ function UnwrappedViewer({
           viewer={viewer.current ?? undefined}
         />
       </VertexViewerToolbar>
-      <VertexViewerToolbar placement="bottom-center">
-        <ButtonGroup sx={{ mb: 2 }} variant="contained">
-          <Button color="inherit" onClick={() => fitAll()}>
-            Fit all
-          </Button>
-        </ButtonGroup>
+      <VertexViewerToolbar placement="bottom-right">
+        <SpeedDial
+          ariaLabel="Viewer toolbar"
+          hidden={true}
+          open={true}
+          sx={{ mr: 3, mb: 2 }}
+        >
+          {viewActions.map((action) => (
+            <SpeedDialAction
+              icon={action.icon}
+              key={action.name}
+              onClick={() => action.onClick()}
+              tooltipTitle={action.name}
+            />
+          ))}
+        </SpeedDial>
       </VertexViewerToolbar>
     </VertexViewer>
   );

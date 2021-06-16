@@ -11,7 +11,7 @@ import { DefaultCredentials, Env, head, StreamCredentials } from "../lib/env";
 import { FileData, toFileData } from "../lib/files";
 import { useKeyListener } from "../lib/key-listener";
 import { Metadata, toMetadata } from "../lib/metadata";
-import { selectByHit } from "../lib/scene-items";
+import { selectByHit as onSelect } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 
 interface Props {
@@ -60,13 +60,14 @@ export default function Home({ files }: Props): JSX.Element {
             credentials={credentials}
             onSelect={async (hit) => {
               setMetadata(toMetadata({ hit }));
-              await selectByHit({ hit, viewer: viewer.ref.current });
+              await onSelect({ hit, viewer: viewer.ref.current });
             }}
             viewer={viewer.ref}
           />
         )
       }
       rightDrawer={<RightDrawer files={files} metadata={metadata} />}
+      rightDrawerOpen={true}
     >
       {dialogOpen && (
         <OpenDialog

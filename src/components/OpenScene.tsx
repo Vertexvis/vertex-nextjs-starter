@@ -31,13 +31,7 @@ export function OpenDialog({
   const invalidStreamKey = inputCreds.streamKey.length > 36;
 
   return (
-    <Dialog
-      aria-labelledby="open-scene-title"
-      fullWidth
-      maxWidth="md"
-      onClose={onClose}
-      open={open}
-    >
+    <Dialog fullWidth maxWidth="md" onClose={onClose} open={open}>
       <DialogTitle id="open-scene-title">Open Scene</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -50,13 +44,13 @@ export function OpenDialog({
           helperText={invalidClientId ? "Client ID too long." : undefined}
           label="Client ID"
           margin="dense"
-          value={inputCreds.clientId}
           onChange={(e) =>
             setInputCreds({
               ...inputCreds,
               clientId: e.target.value,
             })
           }
+          value={inputCreds.clientId}
         />
         <TextField
           autoFocus={!emptyClientId}
@@ -65,7 +59,6 @@ export function OpenDialog({
           helperText={invalidStreamKey ? "Stream key too long." : undefined}
           label="Stream Key"
           margin="dense"
-          value={inputCreds.streamKey}
           onFocus={(e) => e.target.select()}
           onChange={(e) =>
             setInputCreds({
@@ -73,6 +66,7 @@ export function OpenDialog({
               streamKey: e.target.value,
             })
           }
+          value={inputCreds.streamKey}
         />
       </DialogContent>
       <DialogActions>

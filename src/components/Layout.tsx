@@ -2,58 +2,77 @@ import { AppBar as MuiAppBar, Box, Toolbar } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import React from "react";
 
-const DenseToolbarHeight = 48;
+export const BottomDrawerHeight = 0; // If provided, set to 270
+export const DenseToolbarHeight = 48;
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
 export const RightDrawerWidth = 320; // If not provided, set to 0
 
 interface Props {
-  readonly children: React.ReactNode;
-  readonly header: React.ReactNode;
+  readonly bottomDrawer?: React.ReactNode;
+  readonly children?: React.ReactNode;
+  readonly header?: React.ReactNode;
   readonly leftDrawer?: React.ReactNode;
   readonly main: React.ReactNode;
   readonly rightDrawer?: React.ReactNode;
+  readonly rightDrawerOpen?: boolean;
 }
 
-const AppBar = styled((props) => (
-  <MuiAppBar position="fixed" elevation={1} color="default" {...props} />
-))(({ theme }) => ({
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "rightDrawerOpen",
+})<{ rightDrawerOpen?: boolean }>(({ theme, rightDrawerOpen }) => ({
   marginLeft: LeftDrawerWidth,
-  marginRight: RightDrawerWidth,
-  width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
-  zIndex: theme.zIndex.drawer + 1,
+  width: `100%`,
   [theme.breakpoints.down("md")]: {
     margin: 0,
     width: `100%`,
   },
+  ...(rightDrawerOpen && {
+    width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
+    marginRight: RightDrawerWidth,
+  }),
 }));
 
-const Content = styled((props) => <main {...props} />)(({ theme }) => ({
-  height: `calc(100% - ${DenseToolbarHeight}px)`,
+const Main = styled("main", {
+  shouldForwardProp: (prop) => prop !== "rightDrawerOpen",
+})<{
+  rightDrawerOpen?: boolean;
+}>(({ theme, rightDrawerOpen }) => ({
+  flexGrow: 1,
+  height: `calc(100% - ${BottomDrawerHeight + DenseToolbarHeight}px)`,
+  marginTop: `${DenseToolbarHeight}px`,
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
-  [theme.breakpoints.down("md")]: {
-    width: `100%`,
-  },
+  [theme.breakpoints.down("md")]: { width: `100%` },
+  ...(rightDrawerOpen && {
+    width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
+  }),
 }));
 
 export function Layout({
+  bottomDrawer,
   children,
   header,
   leftDrawer,
   main,
   rightDrawer,
+  rightDrawerOpen,
 }: Props): JSX.Element {
   return (
     <Box height="100vh" display="flex">
-      <AppBar>
-        <Toolbar variant="dense">{header}</Toolbar>
-      </AppBar>
+      {header && (
+        <AppBar
+          color="default"
+          elevation={1}
+          position="fixed"
+          rightDrawerOpen={rightDrawerOpen}
+        >
+          <Toolbar variant="dense">{header}</Toolbar>
+        </AppBar>
+      )}
       {leftDrawer ?? <></>}
-      <Content>
-        <Box minHeight={`${DenseToolbarHeight}px`} />
-        {main}
-      </Content>
+      <Main rightDrawerOpen={rightDrawerOpen}>{main}</Main>
       {rightDrawer ?? <></>}
-      {children}
+      {children ?? <></>}
+      {bottomDrawer ?? <></>}
     </Box>
   );
 }
