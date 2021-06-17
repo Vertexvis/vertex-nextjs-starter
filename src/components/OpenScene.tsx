@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 
-import { DefaultCredentials, StreamCredentials } from "../lib/env";
+import { DefaultCredentials, StreamCredentials } from "../lib/config";
 
 interface Props {
   readonly credentials: StreamCredentials;
@@ -43,13 +43,14 @@ export function OpenDialog({
           fullWidth
           helperText={invalidClientId ? "Client ID too long." : undefined}
           label="Client ID"
-          margin="dense"
+          margin="normal"
           onChange={(e) =>
             setInputCreds({
               ...inputCreds,
               clientId: e.target.value,
             })
           }
+          size="small"
           value={inputCreds.clientId}
         />
         <TextField
@@ -58,7 +59,7 @@ export function OpenDialog({
           fullWidth
           helperText={invalidStreamKey ? "Stream key too long." : undefined}
           label="Stream Key"
-          margin="dense"
+          margin="normal"
           onFocus={(e) => e.target.select()}
           onChange={(e) =>
             setInputCreds({
@@ -66,6 +67,7 @@ export function OpenDialog({
               streamKey: e.target.value,
             })
           }
+          size="small"
           value={inputCreds.streamKey}
         />
       </DialogContent>

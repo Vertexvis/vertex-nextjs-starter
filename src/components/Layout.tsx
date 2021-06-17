@@ -2,7 +2,7 @@ import { AppBar as MuiAppBar, Box, Toolbar } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import React from "react";
 
-export const BottomDrawerHeight = 0; // If provided, set to 270
+export const BottomDrawerHeight = 0; // If provided, set desired value
 export const DenseToolbarHeight = 48;
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
 export const RightDrawerWidth = 320; // If not provided, set to 0
@@ -17,9 +17,13 @@ interface Props {
   readonly rightDrawerOpen?: boolean;
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "rightDrawerOpen",
-})<{ rightDrawerOpen?: boolean }>(({ theme, rightDrawerOpen }) => ({
+function shouldForwardProp(prop: PropertyKey): boolean {
+  return prop !== "rightDrawerOpen" && prop !== "toolbarHeight";
+}
+
+const AppBar = styled(MuiAppBar, { shouldForwardProp })<{
+  rightDrawerOpen?: boolean;
+}>(({ theme, rightDrawerOpen }) => ({
   marginLeft: LeftDrawerWidth,
   width: `100%`,
   [theme.breakpoints.down("md")]: {
@@ -32,14 +36,13 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Main = styled("main", {
-  shouldForwardProp: (prop) => prop !== "rightDrawerOpen",
-})<{
+const Main = styled("main", { shouldForwardProp })<{
   rightDrawerOpen?: boolean;
-}>(({ theme, rightDrawerOpen }) => ({
+  toolbarHeight: number;
+}>(({ theme, rightDrawerOpen, toolbarHeight }) => ({
   flexGrow: 1,
-  height: `calc(100% - ${BottomDrawerHeight + DenseToolbarHeight}px)`,
-  marginTop: `${DenseToolbarHeight}px`,
+  height: `calc(100% - ${BottomDrawerHeight + toolbarHeight}px)`,
+  marginTop: `${toolbarHeight}px`,
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
   [theme.breakpoints.down("md")]: { width: `100%` },
   ...(rightDrawerOpen && {
@@ -69,7 +72,12 @@ export function Layout({
         </AppBar>
       )}
       {leftDrawer ?? <></>}
-      <Main rightDrawerOpen={rightDrawerOpen}>{main}</Main>
+      <Main
+        rightDrawerOpen={rightDrawerOpen}
+        toolbarHeight={header ? DenseToolbarHeight : 0}
+      >
+        {main}
+      </Main>
       {rightDrawer ?? <></>}
       {children ?? <></>}
       {bottomDrawer ?? <></>}

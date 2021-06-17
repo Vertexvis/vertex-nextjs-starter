@@ -1,3 +1,4 @@
+import { Environment } from "@vertexvis/viewer";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
@@ -7,7 +8,12 @@ import { Layout } from "../components/Layout";
 import { encodeCreds, OpenDialog } from "../components/OpenScene";
 import { RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
-import { DefaultCredentials, Env, head, StreamCredentials } from "../lib/env";
+import {
+  Config,
+  DefaultCredentials,
+  head,
+  StreamCredentials,
+} from "../lib/config";
 import { FileData, toFileData } from "../lib/files";
 import { useKeyListener } from "../lib/key-listener";
 import { Metadata, toMetadata } from "../lib/metadata";
@@ -16,9 +22,10 @@ import { useViewer } from "../lib/viewer";
 
 interface Props {
   readonly files: FileData[];
+  readonly vertexEnv: Environment;
 }
 
-export default function Home({ files }: Props): JSX.Element {
+export default function Home({ files, vertexEnv }: Props): JSX.Element {
   const router = useRouter();
   const viewer = useViewer();
   const [credentials, setCredentials] = React.useState<
@@ -44,19 +51,13 @@ export default function Home({ files }: Props): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
 
-  // Open dialog if 'o' key pressed
-  const keys = useKeyListener();
-  React.useEffect(() => {
-    if (!dialogOpen && keys.o) setDialogOpen(true);
-  }, [dialogOpen, keys]);
-
   return router.isReady && credentials ? (
     <Layout
       header={<Header onOpenSceneClick={() => setDialogOpen(true)} />}
       main={
         viewer.isReady && (
           <Viewer
-            configEnv={Env}
+            configEnv={vertexEnv}
             credentials={credentials}
             onSelect={async (hit) => {
               setMetadata(toMetadata({ hit }));
@@ -87,7 +88,7 @@ export default function Home({ files }: Props): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const noFiles = { props: { files: [] } };
+  const noFiles = { props: { files: [], vertexEnv: Config.vertexEnv } };
   const host = context.req.headers.host;
   if (!host) return noFiles;
 

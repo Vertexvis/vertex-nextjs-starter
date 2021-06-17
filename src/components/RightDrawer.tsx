@@ -20,13 +20,9 @@ interface Props {
   readonly metadata?: Metadata;
 }
 
-const Drawer = styled(MuiDrawer)(({ theme }) => ({
-  display: "block",
+const Drawer = styled(MuiDrawer)(() => ({
   width: RightDrawerWidth,
   [`& .${drawerClasses.paper}`]: { width: RightDrawerWidth },
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
 }));
 
 const Title = styled((props) => <Typography variant="body2" {...props} />)(
