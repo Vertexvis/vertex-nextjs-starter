@@ -15,7 +15,6 @@ import {
   StreamCredentials,
 } from "../lib/config";
 import { FileData, toFileData } from "../lib/files";
-import { useKeyListener } from "../lib/key-listener";
 import { Metadata, toMetadata } from "../lib/metadata";
 import { selectByHit as onSelect } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
