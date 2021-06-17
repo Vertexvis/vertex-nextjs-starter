@@ -2,6 +2,7 @@ import { Environment } from "@vertexvis/viewer";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 
 import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
@@ -49,6 +50,9 @@ export default function Home({ files, vertexEnv }: Props): JSX.Element {
     if (credentials) router.push(encodeCreds(credentials));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
+
+  // Open dialog if 'o' key pressed
+  useHotkeys("o", () => setDialogOpen(true), { keyup: true });
 
   return router.isReady && credentials ? (
     <Layout

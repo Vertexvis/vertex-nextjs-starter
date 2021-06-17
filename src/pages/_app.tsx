@@ -15,23 +15,25 @@ cache.compat = true;
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <CacheProvider value={cache}>
-      <Head>
-        <title>Vertex Starter</title>
-        <link rel="icon" href="/favicon-512x512.png" />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-        <meta
-          name="description"
-          content="Quickly and easily build your own digital twin prototype application using the Vertex platform."
-        />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </CacheProvider>
+    <React.StrictMode>
+      <CacheProvider value={cache}>
+        <Head>
+          <title>Vertex Starter</title>
+          <link rel="icon" href="/favicon-512x512.png" />
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width"
+          />
+          <meta
+            name="description"
+            content="Quickly and easily build your own digital twin prototype application using the Vertex platform."
+          />
+        </Head>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </CacheProvider>
+    </React.StrictMode>
   );
 }
