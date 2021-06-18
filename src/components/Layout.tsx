@@ -44,7 +44,7 @@ const Main = styled("main", { shouldForwardProp })<{
   height: `calc(100% - ${BottomDrawerHeight + toolbarHeight}px)`,
   marginTop: `${toolbarHeight}px`,
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
-  [theme.breakpoints.down("md")]: { width: `100%` },
+  [theme.breakpoints.down("sm")]: { width: `100%` },
   ...(rightDrawerOpen && {
     width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
   }),

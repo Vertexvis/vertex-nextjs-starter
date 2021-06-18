@@ -1,7 +1,7 @@
 import {
   Accordion,
   AccordionSummary,
-  Drawer as MuiDrawer,
+  Drawer,
   Typography,
 } from "@material-ui/core";
 import { drawerClasses } from "@material-ui/core/Drawer";
@@ -20,11 +20,6 @@ interface Props {
   readonly metadata?: Metadata;
 }
 
-const Drawer = styled(MuiDrawer)(() => ({
-  width: RightDrawerWidth,
-  [`& .${drawerClasses.paper}`]: { width: RightDrawerWidth },
-}));
-
 const Title = styled((props) => <Typography variant="body2" {...props} />)(
   () => ({ textTransform: "uppercase" })
 );
@@ -33,7 +28,11 @@ export function RightDrawer({ files, metadata }: Props): JSX.Element {
   return (
     <Drawer
       anchor="right"
-      sx={{ display: { xl: "none", xs: "block" } }}
+      sx={{
+        display: { sm: "block", xs: "none" },
+        width: RightDrawerWidth,
+        [`& .${drawerClasses.paper}`]: { width: RightDrawerWidth },
+      }}
       variant="permanent"
     >
       <Accordion>
