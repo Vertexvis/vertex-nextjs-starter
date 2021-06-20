@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { makeCallAndReturn } from "../../lib/vertex-api";
 
-export default function getFiles(
+export default function handle(
   _req: NextApiRequest,
   res: NextApiResponse<FileList | Failure>
 ): Promise<void> {

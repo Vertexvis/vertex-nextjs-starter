@@ -18,6 +18,10 @@ interface Props {
   readonly onConfirm: (credentials: StreamCredentials) => void;
 }
 
+interface Value {
+  value: string;
+}
+
 export function OpenDialog({
   credentials,
   open,
@@ -29,6 +33,24 @@ export function OpenDialog({
   const emptyClientId = inputCreds.clientId === "";
   const invalidClientId = inputCreds.clientId.length > 64;
   const invalidStreamKey = inputCreds.streamKey.length > 36;
+
+  function handleClientIdChange(e: React.ChangeEvent<Value>): void {
+    setInputCreds({ ...inputCreds, clientId: e.target.value });
+  }
+
+  function handleStreamKeyChange(e: React.ChangeEvent<Value>): void {
+    setInputCreds({ ...inputCreds, streamKey: e.target.value });
+  }
+
+  function handleOpenSceneClick(): void {
+    if (inputCreds.clientId && inputCreds.streamKey) {
+      onConfirm(inputCreds);
+    }
+  }
+
+  function handleRestoreDefaultsClick(): void {
+    setInputCreds(DefaultCredentials);
+  }
 
   return (
     <Dialog fullWidth maxWidth="md" onClose={onClose} open={open}>
@@ -44,12 +66,7 @@ export function OpenDialog({
           helperText={invalidClientId ? "Client ID too long." : undefined}
           label="Client ID"
           margin="normal"
-          onChange={(e) =>
-            setInputCreds({
-              ...inputCreds,
-              clientId: e.target.value,
-            })
-          }
+          onChange={handleClientIdChange}
           size="small"
           value={inputCreds.clientId}
         />
@@ -61,35 +78,19 @@ export function OpenDialog({
           label="Stream Key"
           margin="normal"
           onFocus={(e) => e.target.select()}
-          onChange={(e) =>
-            setInputCreds({
-              ...inputCreds,
-              streamKey: e.target.value,
-            })
-          }
+          onChange={handleStreamKeyChange}
           size="small"
           value={inputCreds.streamKey}
         />
       </DialogContent>
       <DialogActions>
-        <Button
-          color="inherit"
-          onClick={() => setInputCreds(DefaultCredentials)}
-        >
+        <Button color="inherit" onClick={handleRestoreDefaultsClick}>
           Restore Defaults
         </Button>
         <Button color="inherit" onClick={onClose}>
           Cancel
         </Button>
-        <Button
-          onClick={() => {
-            if (inputCreds.clientId && inputCreds.streamKey) {
-              onConfirm(inputCreds);
-            }
-          }}
-        >
-          Open Scene
-        </Button>
+        <Button onClick={handleOpenSceneClick}>Open Scene</Button>
       </DialogActions>
     </Dialog>
   );

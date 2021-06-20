@@ -1,3 +1,5 @@
+import { Switch } from "@material-ui/core";
+import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { Environment } from "@vertexvis/viewer";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
@@ -17,7 +19,7 @@ import {
 } from "../lib/config";
 import { FileData, toFileData } from "../lib/files";
 import { Metadata, toMetadata } from "../lib/metadata";
-import { selectByHit as onSelect } from "../lib/scene-items";
+import { selectByHit } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 
 interface Props {
@@ -54,6 +56,20 @@ export default function Home({ files, vertexEnv }: Props): JSX.Element {
   // Open dialog if 'o' key pressed
   useHotkeys("o", () => setDialogOpen(true), { keyup: true });
 
+  async function handleSelect(hit?: vertexvis.protobuf.stream.IHit) {
+    setMetadata(toMetadata({ hit }));
+    await selectByHit({ hit, viewer: viewer.ref.current });
+  }
+
+  function handleConfirm(cs: StreamCredentials): void {
+    setCredentials(cs);
+    handleClose();
+  }
+
+  function handleClose(): void {
+    setDialogOpen(false);
+  }
+
   return router.isReady && credentials ? (
     <Layout
       header={<Header onOpenSceneClick={() => setDialogOpen(true)} />}
@@ -62,10 +78,7 @@ export default function Home({ files, vertexEnv }: Props): JSX.Element {
           <Viewer
             configEnv={vertexEnv}
             credentials={credentials}
-            onSelect={async (hit) => {
-              setMetadata(toMetadata({ hit }));
-              await onSelect({ hit, viewer: viewer.ref.current });
-            }}
+            onSelect={handleSelect}
             viewer={viewer.ref}
           />
         )
@@ -76,11 +89,8 @@ export default function Home({ files, vertexEnv }: Props): JSX.Element {
       {dialogOpen && (
         <OpenDialog
           credentials={credentials}
-          onClose={() => setDialogOpen(false)}
-          onConfirm={(cs) => {
-            setCredentials(cs);
-            setDialogOpen(false);
-          }}
+          onClose={handleClose}
+          onConfirm={handleConfirm}
           open={dialogOpen}
         />
       )}
@@ -91,13 +101,13 @@ export default function Home({ files, vertexEnv }: Props): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const noFiles = { props: { files: [], vertexEnv: Config.vertexEnv } };
+  const empty = { props: { files: [], vertexEnv: Config.vertexEnv } };
   const host = context.req.headers.host;
-  if (!host) return noFiles;
+  if (!host) return empty;
 
   const baseUrl = `http${host.startsWith("localhost") ? "" : "s"}://${host}`;
   const res = await (await fetch(`${baseUrl}/api/files`)).json();
   return res == null || res.errors
-    ? noFiles
-    : { props: { files: toFileData(res) } };
+    ? empty
+    : { props: { ...empty.props, files: toFileData(res) } };
 };
