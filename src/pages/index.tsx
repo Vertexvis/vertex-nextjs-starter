@@ -1,4 +1,3 @@
-import { Switch } from "@material-ui/core";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { Environment } from "@vertexvis/viewer";
 import { GetServerSideProps } from "next";
