@@ -90,7 +90,7 @@ export function Layout({
   const tbh = header ? DenseToolbarHeight : 0;
 
   return (
-    <Box height="100vh" display="flex">
+    <Box sx={{ display: "flex", height: "100vh" }}>
       {header && (
         <AppBar
           color="default"
