@@ -35,13 +35,13 @@ export function RightDrawer({ files, metadata }: Props): JSX.Element {
       }}
       variant="permanent"
     >
-      <Accordion>
+      <Accordion expanded>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Title>Metadata Properties</Title>
         </AccordionSummary>
         <MetadataProperties metadata={metadata} />
       </Accordion>
-      <Accordion>
+      <Accordion expanded>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Title>Recent Files</Title>
         </AccordionSummary>
