@@ -56,6 +56,13 @@ export default function Home({ files, vertexEnv }: Props): JSX.Element {
   useHotkeys("o", () => setDialogOpen(true), { keyup: true });
 
   async function handleSelect(hit?: vertexvis.protobuf.stream.IHit) {
+    console.debug({
+      hitNormal: hit?.hitNormal,
+      hitPoint: hit?.hitPoint,
+      partName: hit?.metadata?.partName,
+      sceneItemId: hit?.itemId?.hex,
+      sceneItemSuppliedId: hit?.itemSuppliedId?.value,
+    });
     setMetadata(toMetadata({ hit }));
     await selectByHit({ hit, viewer: viewer.ref.current });
   }
