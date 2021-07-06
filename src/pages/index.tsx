@@ -1,5 +1,5 @@
 import { Environment } from "@vertexvis/viewer";
-import { GetServerSideProps } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -17,7 +17,9 @@ export default function Index(props: Props): JSX.Element {
   return <Home {...props} />;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export async function getServerSideProps(
+  context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<Props>> {
   const empty = { props: { files: [], vertexEnv: Config.vertexEnv } };
   const host = context.req.headers.host;
   if (!host) return empty;
@@ -27,4 +29,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return res == null || res.errors
     ? empty
     : { props: { ...empty.props, files: toFileData(res) } };
-};
+}

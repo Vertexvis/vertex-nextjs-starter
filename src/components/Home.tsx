@@ -73,7 +73,7 @@ export default function Home({ files, vertexEnv }: Props): JSX.Element {
         )
       }
       rightDrawer={<RightDrawer files={files} metadata={metadata} />}
-      rightDrawerOpen={true}
+      rightDrawerOpen
     >
       {dialogOpen && (
         <OpenDialog
