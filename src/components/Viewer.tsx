@@ -1,6 +1,6 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import { TapEventDetails } from "@vertexvis/viewer/dist/types/interactions/tapEventDetails";
+import { TapEventDetails } from "@vertexvis/viewer/dist/types/lib/interactions/tapEventDetails";
 import {
   JSX as ViewerJSX,
   VertexViewer,
@@ -44,7 +44,6 @@ function UnwrappedViewer({
   return (
     <VertexViewer
       css={{ height: "100%", width: "100%" }}
-      clientId={credentials.clientId}
       ref={viewer}
       src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
