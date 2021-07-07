@@ -1,12 +1,10 @@
 import { Environment } from "@vertexvis/viewer";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import dynamic from "next/dynamic";
 import React from "react";
 
+import { Home } from "../components/Home";
 import { Config } from "../lib/config";
 import { FileData, toFileData } from "../lib/files";
-
-const Home = dynamic(() => import("../components/Home"), { ssr: false });
 
 export interface Props {
   readonly files: FileData[];

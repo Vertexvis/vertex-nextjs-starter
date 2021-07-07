@@ -20,7 +20,7 @@ export interface Props {
   readonly vertexEnv: Environment;
 }
 
-export default function Home({ files, vertexEnv }: Props): JSX.Element {
+export function Home({ files, vertexEnv }: Props): JSX.Element {
   const router = useRouter();
   const viewer = useViewer();
   const [credentials, setCredentials] = React.useState<
