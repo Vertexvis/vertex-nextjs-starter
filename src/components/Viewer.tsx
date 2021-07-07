@@ -1,6 +1,6 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import { TapEventDetails } from "@vertexvis/viewer/dist/types/lib/interactions/tapEventDetails";
+import { TapEventDetails } from "@vertexvis/viewer";
 import {
   JSX as ViewerJSX,
   VertexViewer,

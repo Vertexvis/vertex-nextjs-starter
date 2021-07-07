@@ -5,8 +5,6 @@ module.exports = {
     "next",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -18,8 +16,6 @@ module.exports = {
   rules: {
     "no-await-in-loop": "warn",
     "no-return-await": "warn",
-    "react/react-in-jsx-scope": "off",
-    "react-hooks/rules-of-hooks": "error",
     "require-await": "warn",
     "simple-import-sort/imports": "warn",
   },
