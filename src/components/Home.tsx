@@ -1,4 +1,3 @@
-import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { Environment } from "@vertexvis/viewer";
 import { useRouter } from "next/router";
 import React from "react";
@@ -57,7 +56,7 @@ export function Home({ files, vertexEnv }: Props): JSX.Element {
           <Viewer
             configEnv={vertexEnv}
             credentials={credentials}
-            onSelect={async (hit?: vertexvis.protobuf.stream.IHit) => {
+            onSelect={async (hit) => {
               console.debug({
                 hitNormal: hit?.hitNormal,
                 hitPoint: hit?.hitPoint,
