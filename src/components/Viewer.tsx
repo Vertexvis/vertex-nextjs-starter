@@ -43,6 +43,7 @@ function UnwrappedViewer({
 }: ViewerProps): JSX.Element {
   return (
     <VertexViewer
+      clientId={credentials.clientId}
       css={{ height: "100%", width: "100%" }}
       ref={viewer}
       src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
