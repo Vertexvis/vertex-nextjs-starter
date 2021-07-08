@@ -10,12 +10,13 @@ export function useViewer(): Viewer {
   const [isReady, setIsReady] = React.useState(false);
 
   React.useEffect(() => {
-    async function init() {
-      await Promise.all([applyPolyfills(), defineCustomElements()]);
+    async function loadComponents() {
+      await applyPolyfills();
+      await defineCustomElements();
       setIsReady(true);
     }
 
-    init();
+    loadComponents();
   }, []);
 
   return { ref: React.useRef<HTMLVertexViewerElement>(null), isReady };
