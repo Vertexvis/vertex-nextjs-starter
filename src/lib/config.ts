@@ -1,4 +1,4 @@
-import { Environment } from "@vertexvis/viewer";
+import type { Environment } from "@vertexvis/viewer";
 
 export interface Configuration {
   readonly vertexEnv: Environment;

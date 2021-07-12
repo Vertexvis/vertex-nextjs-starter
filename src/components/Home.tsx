@@ -1,4 +1,4 @@
-import { Environment } from "@vertexvis/viewer";
+import type { Environment } from "@vertexvis/viewer";
 import { useRouter } from "next/router";
 import React from "react";
 import { useHotkeys } from "react-hotkeys-hook";

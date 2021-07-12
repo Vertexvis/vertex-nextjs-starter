@@ -1,4 +1,4 @@
-import { Environment } from "@vertexvis/viewer";
+import type { Environment } from "@vertexvis/viewer";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import React from "react";
 
