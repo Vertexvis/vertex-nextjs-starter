@@ -18,22 +18,25 @@ import { RecentFiles } from "./RecentFiles";
 interface Props {
   readonly files: FileData[];
   readonly metadata?: Metadata;
+  readonly open: boolean;
 }
 
 const Title = styled((props) => <Typography variant="body2" {...props} />)(
   () => ({ textTransform: "uppercase" })
 );
 
-export function RightDrawer({ files, metadata }: Props): JSX.Element {
+export function RightDrawer({ files, metadata, open }: Props): JSX.Element {
   return (
     <Drawer
       anchor="right"
+      open={open}
       sx={{
+        flexShrink: 0,
         display: { sm: "block", xs: "none" },
         width: RightDrawerWidth,
         [`& .${drawerClasses.paper}`]: { width: RightDrawerWidth },
       }}
-      variant="permanent"
+      variant="persistent"
     >
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>

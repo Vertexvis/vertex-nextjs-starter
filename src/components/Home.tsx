@@ -9,7 +9,7 @@ import { Metadata, toMetadata } from "../lib/metadata";
 import { selectByHit } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 import { Header } from "./Header";
-import { Layout } from "./Layout";
+import { Layout, RightDrawerWidth } from "./Layout";
 import { encodeCreds, OpenDialog } from "./OpenScene";
 import { RightDrawer } from "./RightDrawer";
 import { Viewer } from "./Viewer";
@@ -71,8 +71,8 @@ export function Home({ files, vertexEnv }: Props): JSX.Element {
           />
         )
       }
-      rightDrawer={<RightDrawer files={files} metadata={metadata} />}
-      rightDrawerOpen
+      rightDrawer={<RightDrawer files={files} metadata={metadata} open />}
+      rightDrawerWidth={RightDrawerWidth}
     >
       {dialogOpen && (
         <OpenDialog

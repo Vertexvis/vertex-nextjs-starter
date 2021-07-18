@@ -2,6 +2,8 @@ import { AppBar as MuiAppBar, Box, Toolbar } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import React from "react";
 
+import { easeOutEntering, sharpLeaving } from "../lib/transitions";
+
 export const BottomDrawerHeight = 240;
 export const DenseToolbarHeight = 48;
 export const LeftDrawerWidth = 240;
@@ -9,14 +11,14 @@ export const RightDrawerWidth = 320;
 
 interface Props {
   readonly bottomDrawer?: React.ReactNode;
-  readonly bottomDrawerOpen?: boolean;
+  readonly bottomDrawerHeight?: number;
   readonly children?: React.ReactNode;
   readonly header?: React.ReactNode;
   readonly leftDrawer?: React.ReactNode;
-  readonly leftDrawerOpen?: boolean;
+  readonly leftDrawerWidth?: number;
   readonly main: React.ReactNode;
   readonly rightDrawer?: React.ReactNode;
-  readonly rightDrawerOpen?: boolean;
+  readonly rightDrawerWidth?: number;
 }
 
 interface DrawerProps {
@@ -35,11 +37,14 @@ function shouldForwardProp(prop: PropertyKey): boolean {
 
 const AppBar = styled(MuiAppBar, { shouldForwardProp })<DrawerProps>(
   ({ leftDrawerWidth, rightDrawerWidth, theme }) => {
+    const { create } = theme.transitions;
     return {
       marginLeft: leftDrawerWidth,
-      width: `100%`,
+      transition: create(["margin", "width"], sharpLeaving(theme)),
+      zIndex: theme.zIndex.drawer + 1,
       ...(rightDrawerWidth > 0 && {
         marginRight: rightDrawerWidth,
+        transition: create(["margin", "width"], easeOutEntering(theme)),
         width: `calc(100% - ${leftDrawerWidth + rightDrawerWidth}px)`,
       }),
       [theme.breakpoints.down("sm")]: {
@@ -60,11 +65,19 @@ const Main = styled("main", { shouldForwardProp })<
     theme,
     toolbarHeight,
   }) => {
+    const { create } = theme.transitions;
     return {
       flexGrow: 1,
       height: `calc(100% - ${bottomDrawerHeight + toolbarHeight}px)`,
+      marginRight: -RightDrawerWidth,
       marginTop: `${toolbarHeight}px`,
+      maxWidth: `calc(100% - ${leftDrawerWidth}px)`,
+      transition: create("margin", sharpLeaving(theme)),
       width: `calc(100% - ${leftDrawerWidth}px)`,
+      ...(rightDrawerWidth > 0 && {
+        marginRight: 0,
+        transition: create("margin", easeOutEntering(theme)),
+      }),
       [theme.breakpoints.down("sm")]: { width: `100%` },
       ...(rightDrawerWidth > 0 && {
         width: `calc(100% - ${leftDrawerWidth + rightDrawerWidth}px)`,
@@ -75,45 +88,46 @@ const Main = styled("main", { shouldForwardProp })<
 
 export function Layout({
   bottomDrawer,
-  bottomDrawerOpen = false,
+  bottomDrawerHeight = 0,
   children,
   header,
   leftDrawer,
-  leftDrawerOpen = false,
+  leftDrawerWidth = 0,
   main,
   rightDrawer,
-  rightDrawerOpen = false,
+  rightDrawerWidth = 0,
 }: Props): JSX.Element {
-  const bdh = bottomDrawerOpen ? BottomDrawerHeight : 0;
-  const ldw = leftDrawerOpen ? LeftDrawerWidth : 0;
-  const rdw = rightDrawerOpen ? RightDrawerWidth : 0;
-  const tbh = header ? DenseToolbarHeight : 0;
-
+  console.log(
+    "leftDrawerWidth",
+    leftDrawerWidth,
+    "rightDrawerWidth",
+    rightDrawerWidth
+  );
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
       {header && (
         <AppBar
           color="default"
           elevation={1}
-          leftDrawerWidth={ldw}
+          leftDrawerWidth={leftDrawerWidth}
           position="fixed"
-          rightDrawerWidth={rdw}
+          rightDrawerWidth={rightDrawerWidth}
         >
           <Toolbar variant="dense">{header}</Toolbar>
         </AppBar>
       )}
-      {leftDrawerOpen && leftDrawer ? leftDrawer : <></>}
+      {leftDrawer ? leftDrawer : <></>}
       <Main
-        bottomDrawerHeight={bdh}
-        leftDrawerWidth={ldw}
-        rightDrawerWidth={rdw}
-        toolbarHeight={tbh}
+        bottomDrawerHeight={bottomDrawerHeight}
+        leftDrawerWidth={leftDrawerWidth}
+        rightDrawerWidth={rightDrawerWidth}
+        toolbarHeight={header ? DenseToolbarHeight : 0}
       >
         {main}
       </Main>
-      {rightDrawerOpen && rightDrawer ? rightDrawer : <></>}
+      {rightDrawer ? rightDrawer : <></>}
       {children ?? <></>}
-      {bottomDrawerOpen && bottomDrawer ? bottomDrawer : <></>}
+      {bottomDrawer ? bottomDrawer : <></>}
     </Box>
   );
 }

@@ -1,6 +1,5 @@
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import type { Components } from "@vertexvis/viewer";
-import type { ColorMaterial } from "@vertexvis/viewer/dist/types/lib/scenes/colorMaterial";
+import { ColorMaterial, Components } from "@vertexvis/viewer";
 
 interface Req {
   readonly viewer: Components.VertexViewer | null;
@@ -10,13 +9,10 @@ interface SelectByHitReq extends Req {
   readonly hit?: vertexvis.protobuf.stream.IHit;
 }
 
-const SelectColor: ColorMaterial = {
-  opacity: 100,
+const SelectColor = {
+  ...ColorMaterial.create(255, 255, 0),
   glossiness: 4,
-  diffuse: { r: 255, g: 255, b: 0, a: 0 },
-  ambient: { r: 0, g: 0, b: 0, a: 0 },
   specular: { r: 255, g: 255, b: 255, a: 0 },
-  emissive: { r: 0, g: 0, b: 0, a: 0 },
 };
 
 export async function selectByHit({
