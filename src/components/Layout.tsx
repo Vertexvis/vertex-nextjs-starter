@@ -97,12 +97,6 @@ export function Layout({
   rightDrawer,
   rightDrawerWidth = 0,
 }: Props): JSX.Element {
-  console.log(
-    "leftDrawerWidth",
-    leftDrawerWidth,
-    "rightDrawerWidth",
-    rightDrawerWidth
-  );
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
       {header && (
