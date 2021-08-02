@@ -7,14 +7,14 @@
     "@emotion/react": "^11.4",
     "@emotion/server": "^11.4",
     "@emotion/styled": "^11.3",
-    "@material-ui/core": "^5.0.0-beta.1",
+    "@material-ui/core": "^5.0.0-beta.2",
     "@material-ui/icons": "^5.0.0-beta.1",
-    "@vertexvis/api-client-node": "^0.13",
-    "@vertexvis/viewer-react": "^0.10.0-canary.21",
+    "@vertexvis/api-client-node": "^0.14",
+    "@vertexvis/viewer-react": "^0.10.0-canary.27",
     "next": "^11.0",
     "react": "^17.0",
     "react-dom": "^17.0",
-    "react-hotkeys-hook": "^3.3"
+    "react-hotkeys-hook": "^3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.14",

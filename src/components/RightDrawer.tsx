@@ -31,8 +31,8 @@ export function RightDrawer({ files, metadata, open }: Props): JSX.Element {
       anchor="right"
       open={open}
       sx={{
-        flexShrink: 0,
         display: { sm: "block", xs: "none" },
+        flexShrink: 0,
         width: RightDrawerWidth,
         [`& .${drawerClasses.paper}`]: { width: RightDrawerWidth },
       }}

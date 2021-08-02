@@ -73,7 +73,6 @@ const Main = styled("main", { shouldForwardProp })<
       marginTop: `${toolbarHeight}px`,
       maxWidth: `calc(100% - ${leftDrawerWidth}px)`,
       transition: create("margin", sharpLeaving(theme)),
-      width: `calc(100% - ${leftDrawerWidth}px)`,
       ...(rightDrawerWidth > 0 && {
         marginRight: 0,
         transition: create("margin", easeOutEntering(theme)),
