@@ -1,4 +1,5 @@
 module.exports = {
+  experimental: { esmExternals: true },
   webpack: (config) => {
     config.output.assetModuleFilename = `static/[hash][ext]`;
     config.output.publicPath = `/_next/`;
