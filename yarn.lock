@@ -414,7 +414,7 @@
   resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.3.1.tgz#b50a781709c81e10701004214340f25475a171a0"
   integrity sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==
 
-"@material-ui/core@^5.0.0-beta.4":
+"@material-ui/core@^5.0.0-beta.5":
   version "5.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-5.0.0-beta.5.tgz#6ee717d4ec02b28d737fb4be42dbc3b345dccc7c"
   integrity sha512-ubRMdWJ+Maqvo0P13M+AThaHp5rBBIaURxoQ+Dx4/2Llrm1mepjINDL5PsABabqUbbNc6K+cmqgX4gwEFe7exw==
@@ -433,7 +433,7 @@
     react-is "^17.0.2"
     react-transition-group "^4.4.0"
 
-"@material-ui/icons@^5.0.0-beta.4":
+"@material-ui/icons@^5.0.0-beta.5":
   version "5.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-5.0.0-beta.5.tgz#54295b9aa120910c88900e3d08082b7acbeb73c0"
   integrity sha512-C2KHSf8mvDn22rzsV0UfsJyBYI3Nt/LItcKPJBAG9kgqdBHAuLMH2lfKmdMuX55qd8O+NO5rM7aIHdYQRjfcMQ==
@@ -821,14 +821,14 @@
     lodash.isequal "^4.5.0"
     uuid "^8.3.2"
 
-"@vertexvis/viewer-react@^0.10.0":
+"@vertexvis/viewer-react@^0.10":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@vertexvis/viewer-react/-/viewer-react-0.10.0.tgz#51e7d534f7870b3b12a61d0bad6d627b9dc2c739"
   integrity sha512-OhQYFcyHgGDYjo1IjO+RrPm9BXbiM3tx1+3c4y1cIedpUdPNjdP2WjQ/N4gCP8n56Xtq17Z+mppxU1QWhcHxnA==
   dependencies:
     "@vertexvis/viewer" "0.10.0"
 
-"@vertexvis/viewer@0.10.0", "@vertexvis/viewer@^0.10.0":
+"@vertexvis/viewer@0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@vertexvis/viewer/-/viewer-0.10.0.tgz#5abc32527a305f39e2dc7a8a19f8d529743358bf"
   integrity sha512-Mk9e+p26qt7+1JIezHlcPyR1JU8YvWBA5BPVR39jWpQc7YzC7/3Wbu4rtK3HEbqsfn/6bYajw4gTdHZsWTNrcA==
@@ -866,11 +866,6 @@ acorn@^7.4.0:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
-
-add@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
-  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
 
 ajv@^6.10.0, ajv@^6.12.4:
   version "6.12.6"
