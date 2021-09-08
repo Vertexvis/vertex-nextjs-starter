@@ -1,4 +1,9 @@
-import { Failure, isFailure, VertexClient } from "@vertexvis/api-client-node";
+import {
+  Failure,
+  isFailure,
+  VertexClient,
+  VertexError,
+} from "@vertexvis/api-client-node";
 import { AxiosResponse } from "axios";
 import type { NextApiResponse } from "next";
 
@@ -21,10 +26,13 @@ export async function makeCall<T>(
     const c = await getClient();
     return (await apiCall(c)).data;
   } catch (error) {
-    console.error("Error calling Vertex API", error.data);
+    const ve = error as VertexError;
+    console.error("Error calling Vertex API", ve);
     return (
-      error.vertexError?.res ?? {
-        errors: [{ status: "500", title: "Unknown error from Vertex API." }],
+      ve.vertexError?.res ?? {
+        errors: new Set([
+          { status: "500", title: "Unknown error from Vertex API." },
+        ]),
       }
     );
   }
