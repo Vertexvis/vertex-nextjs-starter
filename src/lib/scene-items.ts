@@ -6,6 +6,7 @@ interface Req {
 }
 
 interface SelectByHitReq extends Req {
+  readonly deselectItemId?: string;
   readonly hit?: vertexvis.protobuf.stream.IHit;
 }
 
@@ -16,6 +17,7 @@ const SelectColor = {
 };
 
 export async function selectByHit({
+  deselectItemId,
   hit,
   viewer,
 }: SelectByHitReq): Promise<void> {
@@ -24,15 +26,21 @@ export async function selectByHit({
   const scene = await viewer.scene();
   if (scene == null) return;
 
-  const id = hit?.itemId?.hex;
-  if (id) {
+  const itemId = hit?.itemId?.hex;
+  if (itemId) {
     await scene
-      .items((op) => [
-        op.where((q) => q.all()).deselect(),
-        op.where((q) => q.withItemId(id)).select(SelectColor),
-      ])
+      .items((op) => {
+        return [
+          ...(deselectItemId
+            ? [op.where((q) => q.withItemId(deselectItemId)).deselect()]
+            : []),
+          op.where((q) => q.withItemId(itemId)).select(SelectColor),
+        ];
+      })
       .execute();
-  } else {
-    await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
+  } else if (deselectItemId) {
+    await scene
+      .items((op) => [op.where((q) => q.withItemId(deselectItemId)).deselect()])
+      .execute();
   }
 }

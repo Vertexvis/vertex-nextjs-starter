@@ -64,8 +64,12 @@ export function Home({ files, vertexEnv }: Props): JSX.Element {
                 sceneItemId: hit?.itemId?.hex,
                 sceneItemSuppliedId: hit?.itemSuppliedId?.value,
               });
+              await selectByHit({
+                deselectItemId: metadata?.itemId,
+                hit,
+                viewer: viewer.ref.current,
+              });
               setMetadata(toMetadata({ hit }));
-              await selectByHit({ hit, viewer: viewer.ref.current });
             }}
             viewer={viewer.ref}
           />

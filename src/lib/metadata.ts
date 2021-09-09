@@ -1,15 +1,16 @@
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 
 export interface Metadata {
-  partName?: string;
-  properties: Properties;
+  readonly itemId?: string;
+  readonly partName?: string;
+  readonly properties: Properties;
 }
 
 interface Properties {
   [key: string]: string | undefined;
 }
 
-const ItemIdKey = "VERTEX_SCENE_ITEM_ID";
+export const ItemIdKey = "VERTEX_SCENE_ITEM_ID";
 const ItemSuppliedIdKey = "VERTEX_SCENE_ITEM_SUPPLIED_ID";
 const PartIdKey = "VERTEX_PART_ID";
 const PartRevIdKey = "VERTEX_PART_REVISION_ID";
@@ -18,7 +19,7 @@ const PartRevSuppliedId = "VERTEX_PART_REVISION_SUPPLIED_ID";
 export function toMetadata({
   hit,
 }: {
-  hit?: vertexvis.protobuf.stream.IHit | null;
+  readonly hit?: vertexvis.protobuf.stream.IHit | null;
 }): Metadata | undefined {
   if (hit == null) return;
 
@@ -42,7 +43,11 @@ export function toMetadata({
     md.filter((p) => p.key).forEach((p) => (ps[p.key as string] = toValue(p)));
   }
 
-  return { partName: ps.Name, properties: alphabetize(ps) };
+  return {
+    itemId: itemId?.hex ?? undefined,
+    partName: ps.Name,
+    properties: alphabetize(ps),
+  };
 }
 
 function alphabetize<T extends Record<string, unknown>>(obj: T): T {
