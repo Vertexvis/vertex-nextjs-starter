@@ -1,4 +1,4 @@
-import { Box, Button, Link } from "@material-ui/core";
+import { Box, Button, Link } from "@mui/material";
 import React from "react";
 
 interface Props {

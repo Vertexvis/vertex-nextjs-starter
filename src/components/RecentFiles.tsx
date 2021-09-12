@@ -5,7 +5,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 
 import { FileData } from "../lib/files";

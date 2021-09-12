@@ -6,7 +6,7 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 
 import { DefaultCredentials, StreamCredentials } from "../lib/config";
