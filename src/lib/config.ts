@@ -19,19 +19,12 @@ const DefaultHosts = {
   sceneTree: "https://scene-trees.platprod.vertexvis.io",
 };
 
+const { api, rendering, sceneTree } = DefaultHosts;
 export const Config: Configuration = {
   network: {
-    apiHost: envVarUrl("VERTEX_API_HOST", DefaultHosts.api, "https:"),
-    renderingHost: envVarUrl(
-      "VERTEX_RENDERING_HOST",
-      DefaultHosts.rendering,
-      "wss:"
-    ),
-    sceneTreeHost: envVarUrl(
-      "VERTEX_SCENE_TREE_HOST",
-      DefaultHosts.sceneTree,
-      "https:"
-    ),
+    apiHost: envVarUrl("VERTEX_API_HOST", api, "https:"),
+    renderingHost: envVarUrl("VERTEX_RENDERING_HOST", rendering, "wss:"),
+    sceneTreeHost: envVarUrl("VERTEX_SCENE_TREE_HOST", sceneTree, "https:"),
   },
 };
 
