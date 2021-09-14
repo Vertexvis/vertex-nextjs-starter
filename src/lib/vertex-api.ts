@@ -43,10 +43,7 @@ async function getClient(): Promise<VertexClient> {
   if (Client != null) return Client;
 
   Client = await VertexClient.build({
-    basePath:
-      Config.vertexEnv === "platprod"
-        ? "https://platform.vertexvis.com"
-        : `https://platform.${Config.vertexEnv}.vertexvis.io`,
+    basePath: Config.network.apiHost.toString(),
     client: {
       id: process.env.VERTEX_CLIENT_ID ?? "",
       secret: process.env.VERTEX_CLIENT_SECRET ?? "",
