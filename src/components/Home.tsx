@@ -1,9 +1,13 @@
-import type { Environment } from "@vertexvis/viewer";
 import { useRouter } from "next/router";
 import React from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
-import { DefaultCredentials, head, StreamCredentials } from "../lib/config";
+import {
+  Configuration,
+  DefaultCredentials,
+  head,
+  StreamCredentials,
+} from "../lib/config";
 import { FileData } from "../lib/files";
 import { Metadata, toMetadata } from "../lib/metadata";
 import { selectByHit } from "../lib/scene-items";
@@ -15,11 +19,11 @@ import { RightDrawer } from "./RightDrawer";
 import { Viewer } from "./Viewer";
 
 export interface Props {
+  readonly config: Configuration;
   readonly files: FileData[];
-  readonly vertexEnv: Environment;
 }
 
-export function Home({ files, vertexEnv }: Props): JSX.Element {
+export function Home({ files, config: { network } }: Props): JSX.Element {
   const router = useRouter();
   const viewer = useViewer();
   const [credentials, setCredentials] = React.useState<
@@ -54,7 +58,7 @@ export function Home({ files, vertexEnv }: Props): JSX.Element {
       main={
         viewer.isReady && (
           <Viewer
-            configEnv={vertexEnv}
+            config={JSON.stringify({ network })}
             credentials={credentials}
             onSelect={async (hit) => {
               console.debug({
@@ -82,7 +86,7 @@ export function Home({ files, vertexEnv }: Props): JSX.Element {
         <OpenDialog
           credentials={credentials}
           onClose={() => setDialogOpen(false)}
-          onConfirm={(cs: StreamCredentials) => {
+          onConfirm={(cs) => {
             setCredentials(cs);
             setDialogOpen(false);
           }}
