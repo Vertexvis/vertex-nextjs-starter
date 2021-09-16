@@ -24,7 +24,7 @@ export function MetadataProperties({ metadata }: Props): JSX.Element {
 
   return (
     <TableContainer>
-      <Table size="small" style={{ whiteSpace: "nowrap" }}>
+      <Table size="small" sx={{ whiteSpace: "nowrap" }}>
         <TableHead>
           <TableRow>
             <TableCell>

@@ -18,7 +18,7 @@ interface Props {
 export function RecentFiles({ files }: Props): JSX.Element {
   return files.length > 0 ? (
     <TableContainer>
-      <Table size="small" style={{ whiteSpace: "nowrap" }}>
+      <Table size="small" sx={{ whiteSpace: "nowrap" }}>
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>

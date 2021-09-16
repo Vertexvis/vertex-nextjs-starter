@@ -2,7 +2,7 @@ import { Box, Button, Link } from "@mui/material";
 import React from "react";
 
 interface Props {
-  onOpenSceneClick: () => void;
+  readonly onOpenSceneClick: () => void;
 }
 
 export function Header({ onOpenSceneClick }: Props): JSX.Element {
@@ -16,7 +16,7 @@ export function Header({ onOpenSceneClick }: Props): JSX.Element {
       <Link
         href="https://github.com/Vertexvis/vertex-nextjs-starter"
         rel="noreferrer"
-        style={{ alignSelf: "center" }}
+        sx={{ alignSelf: "center" }}
         target="_blank"
       >
         View on GitHub
