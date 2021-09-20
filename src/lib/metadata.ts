@@ -10,7 +10,7 @@ interface Properties {
   [key: string]: string | undefined;
 }
 
-export const ItemIdKey = "VERTEX_SCENE_ITEM_ID";
+const ItemIdKey = "VERTEX_SCENE_ITEM_ID";
 const ItemSuppliedIdKey = "VERTEX_SCENE_ITEM_SUPPLIED_ID";
 const PartIdKey = "VERTEX_PART_ID";
 const PartRevIdKey = "VERTEX_PART_REVISION_ID";
