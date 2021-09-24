@@ -64,7 +64,6 @@ export function Home({ files, config: { network } }: Props): JSX.Element {
               console.debug({
                 hitNormal: hit?.hitNormal,
                 hitPoint: hit?.hitPoint,
-                partName: hit?.metadata?.partName,
                 sceneItemId: hit?.itemId?.hex,
                 sceneItemSuppliedId: hit?.itemSuppliedId?.value,
               });
