@@ -17,7 +17,7 @@ interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
-export interface Action {
+export interface ActionProps {
   icon: React.ReactNode;
   name: string;
   onClick: () => void;
