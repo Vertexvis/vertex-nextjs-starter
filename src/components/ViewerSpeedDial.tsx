@@ -1,5 +1,6 @@
-import { ZoomOutMap } from "@mui/icons-material";
-import { SpeedDial, SpeedDialAction } from "@mui/material";
+import ZoomOutMapOutlined from "@mui/icons-material/ZoomOutMapOutlined";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
 
 import { ActionProps, AnimationDurationMs } from "./Viewer";
 
@@ -10,7 +11,7 @@ interface Props {
 export function ViewerSpeedDial({ viewer }: Props): JSX.Element {
   const actions: ActionProps[] = [
     {
-      icon: <ZoomOutMap />,
+      icon: <ZoomOutMapOutlined />,
       name: "Fit all",
       onClick: () => fitAll(),
     },

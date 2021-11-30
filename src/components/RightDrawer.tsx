@@ -1,7 +1,9 @@
 import { ExpandMore } from "@mui/icons-material";
-import { Accordion, AccordionSummary, Drawer, Typography } from "@mui/material";
-import { drawerClasses } from "@mui/material/Drawer";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import React from "react";
 
 import { FileData } from "../lib/files";
