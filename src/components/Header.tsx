@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import React from "react";
 
 interface Props {
-  readonly onOpenSceneClick: () => void;
+  readonly onOpenSceneClick: VoidFunction;
 }
 
 export function Header({ onOpenSceneClick }: Props): JSX.Element {
