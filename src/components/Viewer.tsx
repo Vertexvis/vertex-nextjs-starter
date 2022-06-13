@@ -1,15 +1,15 @@
-/* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
-import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import type { JSX as ViewerJSX, TapEventDetails } from "@vertexvis/viewer";
+/* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from '@emotion/react';
+import { vertexvis } from '@vertexvis/frame-streaming-protos';
+import type { JSX as ViewerJSX, TapEventDetails } from '@vertexvis/viewer';
 import {
   VertexViewer,
   VertexViewerToolbar,
   VertexViewerViewCube,
-} from "@vertexvis/viewer-react";
-import React from "react";
+} from '@vertexvis/viewer-react';
+import React from 'react';
 
-import { StreamCredentials } from "../lib/config";
-import { ViewerSpeedDial } from "./ViewerSpeedDial";
+import { StreamCredentials } from '../lib/config';
+import { ViewerSpeedDial } from './ViewerSpeedDial';
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
@@ -33,7 +33,7 @@ interface OnSelectProps extends HOCViewerProps {
 }
 
 export const AnimationDurationMs = 1500;
-export const Viewer = onTap(UnwrappedViewer);
+export default onTap(UnwrappedViewer);
 
 function UnwrappedViewer({
   credentials,
@@ -43,14 +43,14 @@ function UnwrappedViewer({
   return (
     <VertexViewer
       clientId={credentials.clientId}
-      css={{ height: "100%", width: "100%" }}
+      css={{ height: '100%', width: '100%' }}
       ref={viewer}
       src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
     >
       <VertexViewerToolbar placement="top-right">
         <VertexViewerViewCube
-          css={{ marginRight: "32px" }}
+          css={{ marginRight: '32px' }}
           animationDuration={AnimationDurationMs}
           viewer={viewer.current ?? undefined}
         />

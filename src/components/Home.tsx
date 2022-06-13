@@ -1,22 +1,24 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { useHotkeys } from "react-hotkeys-hook";
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 import {
   Configuration,
   DefaultCredentials,
   head,
   StreamCredentials,
-} from "../lib/config";
-import { FileData } from "../lib/files";
-import { Metadata, toMetadata } from "../lib/metadata";
-import { selectByHit } from "../lib/scene-items";
-import { useViewer } from "../lib/viewer";
-import { Header } from "./Header";
-import { Layout, RightDrawerWidth } from "./Layout";
-import { encodeCreds, OpenDialog } from "./OpenScene";
-import { RightDrawer } from "./RightDrawer";
-import { Viewer } from "./Viewer";
+} from '../lib/config';
+import { FileData } from '../lib/files';
+import { Metadata, toMetadata } from '../lib/metadata';
+import { selectByHit } from '../lib/scene-items';
+import { useViewer } from '../lib/viewer';
+import { Header } from './Header';
+import { Layout, RightDrawerWidth } from './Layout';
+import { encodeCreds, OpenDialog } from './OpenScene';
+import { RightDrawer } from './RightDrawer';
+
+const Viewer = dynamic(() => import('./Viewer'), { ssr: false });
 
 export interface Props {
   readonly config: Configuration;
@@ -50,7 +52,7 @@ export function Home({ files, config: { network } }: Props): JSX.Element {
   }, [credentials]);
 
   // Open dialog if 'o' key pressed
-  useHotkeys("o", () => setDialogOpen(true), { keyup: true });
+  useHotkeys('o', () => setDialogOpen(true), { keyup: true });
 
   return router.isReady && credentials ? (
     <Layout
