@@ -888,24 +888,24 @@
     axios "^0.27.2"
     p-limit "^3"
 
-"@vertexvis/frame-streaming-protos@^0.6.22":
+"@vertexvis/frame-streaming-protos@^0.6.19":
   version "0.6.22"
   resolved "https://registry.yarnpkg.com/@vertexvis/frame-streaming-protos/-/frame-streaming-protos-0.6.22.tgz#a2a3b773cc9350ec67f86a91469fea01dd6814f0"
   integrity sha512-rkr9MbySNBcb2BONd4uVTwD2bnq7U8F7Toh/O5T+iBUCrIGV0F9LOrgc27dG9Jw8X8D3iSzNQSPq6Nl2xT0Mrg==
 
-"@vertexvis/geometry@0.13.2-canary.52":
-  version "0.13.2-canary.52"
-  resolved "https://registry.yarnpkg.com/@vertexvis/geometry/-/geometry-0.13.2-canary.52.tgz#e52cc06e9fb399b4e1711d5f3da056a2ae328123"
-  integrity sha512-eZEJc78a2LY5qindjKQdZyqdzFyVHU+SdeBLkQ8CODy70VmkPUsoqNb53Qekk4JwancqP9LgDVnNxsmWvQTSMQ==
+"@vertexvis/geometry@0.13.2-canary.39":
+  version "0.13.2-canary.39"
+  resolved "https://registry.yarnpkg.com/@vertexvis/geometry/-/geometry-0.13.2-canary.39.tgz#1e5d392cbb27190138664879f99d02ecf546823e"
+  integrity sha512-c0olD3dwkAekFdDnIYmTqKWrMaKLD1wB99JeMxEmRTJmgJsEB8zzQgRCnXq5oYaOfaYMTM84T2/7+S0fLDB0BA==
 
-"@vertexvis/html-templates@0.13.2-canary.52":
-  version "0.13.2-canary.52"
-  resolved "https://registry.yarnpkg.com/@vertexvis/html-templates/-/html-templates-0.13.2-canary.52.tgz#b84441be4a603af75e6f06aef1dded4f4c9ecc96"
-  integrity sha512-wBOSzuVep2j/PKoaNndjgMMqdyt/L/Qv2U1ViMXQ/2y5b3jDvnOyDs6QT8PY0eMClQHobplQuQckYo8f2oZdSA==
+"@vertexvis/html-templates@0.13.2-canary.39":
+  version "0.13.2-canary.39"
+  resolved "https://registry.yarnpkg.com/@vertexvis/html-templates/-/html-templates-0.13.2-canary.39.tgz#fddd5240f1810461f3d5c541e79980ebc7126b78"
+  integrity sha512-OzyKejKcLfzbSNY0CFYfHjdM9FcGJ/KVcPV/w1gbav7oBj0qP8ggS/vWOPuBVqq6kFkg+NTQnMj4OJyUaFaHgg==
   dependencies:
-    "@vertexvis/utils" "0.13.2-canary.52"
+    "@vertexvis/utils" "0.13.2-canary.39"
 
-"@vertexvis/scene-tree-protos@^0.1.14":
+"@vertexvis/scene-tree-protos@^0.1.13":
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/@vertexvis/scene-tree-protos/-/scene-tree-protos-0.1.14.tgz#78f02708cf4ab46c4a08c3022143598dcfdba2bb"
   integrity sha512-/VeS2PaM2EgbwTBV0fS1ILuEB684uUPEaHlRcuTw3fRKZaJ8SM0DFgpQ3QD+QqYT6TqQ9OM6C5rHItbtQggIDQ==
@@ -915,44 +915,44 @@
   resolved "https://registry.yarnpkg.com/@vertexvis/scene-view-protos/-/scene-view-protos-0.1.8.tgz#eb676022c3323b8bbb1198a27cc7ad6849d1ac28"
   integrity sha512-R3HOVRYWTthiwxrndrbSlvqfmqobSvTsmMvohjihqv9toXWAdjRw/uFcL6ei2zQAq18NPenKqxU3hI1sa0MrjQ==
 
-"@vertexvis/stream-api@0.13.2-canary.52":
-  version "0.13.2-canary.52"
-  resolved "https://registry.yarnpkg.com/@vertexvis/stream-api/-/stream-api-0.13.2-canary.52.tgz#b2f13bb22b1db10932117b8e46cc7cae56ed4017"
-  integrity sha512-p7viMH3LlpbJmazvT9P+8m//McQxbzvAYJq/TThKpNq1DAJC+y44LzaRHwoc1+1DTJQs9gOtXeG3zMK24QxeVQ==
+"@vertexvis/stream-api@0.13.2-canary.39":
+  version "0.13.2-canary.39"
+  resolved "https://registry.yarnpkg.com/@vertexvis/stream-api/-/stream-api-0.13.2-canary.39.tgz#6549107887b877ab68d67914b9c3cc668e35f7d4"
+  integrity sha512-QBOGBpQZaupUi3GsoWuJB/eOi45ta6Bz50szcOpmBM9brg9BLVp/n+asrPQUcXYpAyuvLrA/iHYwbwlelyqZTg==
   dependencies:
-    "@vertexvis/frame-streaming-protos" "^0.6.22"
+    "@vertexvis/frame-streaming-protos" "^0.6.19"
 
-"@vertexvis/utils@0.13.2-canary.52":
-  version "0.13.2-canary.52"
-  resolved "https://registry.yarnpkg.com/@vertexvis/utils/-/utils-0.13.2-canary.52.tgz#285c977ec1946d83c032e4593d8aaa1452e9ae55"
-  integrity sha512-FbvsceX0IYHC9rUlZPMP2eun6ZDVUmT/ko5Y8IFIowq6qQucRPJ9eM/b6x1KWG4TEQvoWzHfxiO+am0uvnXQiA==
+"@vertexvis/utils@0.13.2-canary.39":
+  version "0.13.2-canary.39"
+  resolved "https://registry.yarnpkg.com/@vertexvis/utils/-/utils-0.13.2-canary.39.tgz#3774c37ecbf9d76bee33cf82f14cd13968fe601f"
+  integrity sha512-eZ2jMyuo52uSVgBAex5fBLS3zwdtcvm7VXlLOHwNidqoT5wpriyeycXNEpRxttSRWJw7vjcLZs4wh21rrplZZA==
   dependencies:
     is-plain-object "^3.0.0"
     lodash.isequal "^4.5.0"
     uuid "^8.3.2"
 
-"@vertexvis/viewer-react@0.13.2-canary.52":
-  version "0.13.2-canary.52"
-  resolved "https://registry.yarnpkg.com/@vertexvis/viewer-react/-/viewer-react-0.13.2-canary.52.tgz#c352bb32e57215e86356e8a781f6fb2730bcb1ed"
-  integrity sha512-Xf9PLI+mCUZw3OWPIfPmSFGpNaimexoZ149WB8knbRW807paTFKUSKAR14od1rRJ+D9Cael8fOjSXc6eTGF4AQ==
+"@vertexvis/viewer-react@0.13.2-canary.39":
+  version "0.13.2-canary.39"
+  resolved "https://registry.yarnpkg.com/@vertexvis/viewer-react/-/viewer-react-0.13.2-canary.39.tgz#443c3b882af830694c943d9677d5d12adbdb3855"
+  integrity sha512-KXUio/jmSjvLF7KWdzasIfjsIC0ZMYF92ma73ucqNpGM5mLHv8+LeDBLlnh97Ro/i44HaT5U6F8/gemK1ihRkg==
   dependencies:
-    "@vertexvis/viewer" "0.13.2-canary.52"
+    "@vertexvis/viewer" "0.13.2-canary.39"
 
-"@vertexvis/viewer@0.13.2-canary.52":
-  version "0.13.2-canary.52"
-  resolved "https://registry.yarnpkg.com/@vertexvis/viewer/-/viewer-0.13.2-canary.52.tgz#ec55d5e9fd34a3f88980f6818d1e2ae7ad3b7ffd"
-  integrity sha512-0Ipq7ULI/Q2wbuB/X7pYzOqnzpJ+fj6ubB2BcpJmdO2evCYavseIutdZsfy6qwepbH6Dfhxk5UV1bO1F0bD0aw==
+"@vertexvis/viewer@0.13.2-canary.39":
+  version "0.13.2-canary.39"
+  resolved "https://registry.yarnpkg.com/@vertexvis/viewer/-/viewer-0.13.2-canary.39.tgz#da52cc62aee7ec4e17cef878075ba799559f07ed"
+  integrity sha512-z+HFE3BFXAPlQFMZqOn2eocxzUQ5/CR/wGF6mCLshm1imxIWAjO9WxWgjPqM3gYzvQE6TvYE46CFXuSToyNH6Q==
   dependencies:
     "@improbable-eng/grpc-web" "^0.15.0"
     "@stencil/core" "^2.12.1"
     "@types/classnames" "^2.3.1"
-    "@vertexvis/frame-streaming-protos" "^0.6.22"
-    "@vertexvis/geometry" "0.13.2-canary.52"
-    "@vertexvis/html-templates" "0.13.2-canary.52"
-    "@vertexvis/scene-tree-protos" "^0.1.14"
+    "@vertexvis/frame-streaming-protos" "^0.6.19"
+    "@vertexvis/geometry" "0.13.2-canary.39"
+    "@vertexvis/html-templates" "0.13.2-canary.39"
+    "@vertexvis/scene-tree-protos" "^0.1.13"
     "@vertexvis/scene-view-protos" "^0.1.8"
-    "@vertexvis/stream-api" "0.13.2-canary.52"
-    "@vertexvis/utils" "0.13.2-canary.52"
+    "@vertexvis/stream-api" "0.13.2-canary.39"
+    "@vertexvis/utils" "0.13.2-canary.39"
     "@vertexvis/web-workers" "^0.1.0"
     camel-case "^4.1.2"
     classnames "^2.3.1"
@@ -961,9 +961,7 @@
     google-protobuf "^3.19.2"
     jwt-decode "^3.1.2"
     param-case "^3.0.4"
-    protobufjs "^6.11.3"
-    regl "^2.1.0"
-    regl-shape "^1.1.0"
+    protobufjs "^6.9.0"
     requestidlecallback-polyfill "^1.0.2"
     resize-observer "^1.0.4"
     threads "^1.7.0"
@@ -1026,11 +1024,6 @@ aria-query@^4.2.2:
     "@babel/runtime" "^7.10.2"
     "@babel/runtime-corejs3" "^7.10.2"
 
-array-bounds@^1.0.0, array-bounds@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/array-bounds/-/array-bounds-1.0.1.tgz#da11356b4e18e075a4f0c86e1f179a67b7d7ea31"
-  integrity sha512-8wdW3ZGk6UjMPJx/glyEt0sLzzwAE1bhToPsO1W2pbpR2gULyxe3BjSiuJFheP50T/GgODVPz2fuMUmIywt8cQ==
-
 array-includes@^3.1.3, array-includes@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/array-includes/-/array-includes-3.1.4.tgz#f5b493162c760f3539631f005ba2bb46acb45ba9"
@@ -1052,13 +1045,6 @@ array-includes@^3.1.5:
     es-abstract "^1.19.5"
     get-intrinsic "^1.1.1"
     is-string "^1.0.7"
-
-array-normalize@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/array-normalize/-/array-normalize-1.1.4.tgz#d75cec57383358af38efdf6a78071aa36ae4174c"
-  integrity sha512-fCp0wKFLjvSPmCn4F5Tiw4M3lpMZoHlCjfcs7nNzuj3vqQQ1/a8cgB9DXcpDSn18c+coLnaW7rqfcYCvKbyJXg==
-  dependencies:
-    array-bounds "^1.0.0"
 
 array-union@^2.1.0:
   version "2.1.0"
@@ -1246,38 +1232,10 @@ color-name@1.1.3:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
   integrity sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
 
-color-name@^1.0.0, color-name@~1.1.4:
+color-name@~1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
-
-color-normalize@^1.5.0:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/color-normalize/-/color-normalize-1.5.2.tgz#d6c8beb02966849548f91a6ac0274c6f19924509"
-  integrity sha512-yYMIoyFJmUoKbCK6sBShljBWfkt8DXVfaZJn9/zvRJkF9eQJDbZhcYC6LdOVy40p4tfVwYYb9cXl8oqpu7pzBw==
-  dependencies:
-    color-rgba "^2.2.0"
-    dtype "^2.0.0"
-
-color-parse@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/color-parse/-/color-parse-1.4.2.tgz#78651f5d34df1a57f997643d86f7f87268ad4eb5"
-  integrity sha512-RI7s49/8yqDj3fECFZjUI1Yi0z/Gq1py43oNJivAIIDSyJiOZLfYCRQEgn8HEVAj++PcRe8AnL2XF0fRJ3BTnA==
-  dependencies:
-    color-name "^1.0.0"
-
-color-rgba@^2.2.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/color-rgba/-/color-rgba-2.4.0.tgz#ae85819c530262c29fc2da129fc7c8f9efc57015"
-  integrity sha512-Nti4qbzr/z2LbUWySr7H9dk3Rl7gZt7ihHAxlgT4Ho90EXWkjtkL1avTleu9yeGuqrt/chxTB6GKK8nZZ6V0+Q==
-  dependencies:
-    color-parse "^1.4.2"
-    color-space "^2.0.0"
-
-color-space@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/color-space/-/color-space-2.0.0.tgz#ae7813abcbe3dabda9e3e2266b0675f688b24977"
-  integrity sha512-Bu8P/usGNuVWushjxcuaGSkhT+L2KX0cvgMGMTF0KJ7lFeqonhsntT68d6Yu3uwZzCmbF7KTB9EV67AGcUXhJw==
 
 combined-stream@^1.0.8:
   version "1.0.8"
@@ -1438,22 +1396,12 @@ dot-case@^3.0.4:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
-dtype@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/dtype/-/dtype-2.0.0.tgz#cd052323ce061444ecd2e8f5748f69a29be28434"
-  integrity sha512-s2YVcLKdFGS0hpFqJaTwscsyt0E8nNFdmo73Ocd81xNPj4URI4rj6D60A+vFMIw7BXWlb4yRkEwfBqcZzPGiZg==
-
 duplexer2@^0.1.2:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
   integrity sha1-ixLauHjA1p4+eJEFFmKjL8a93ME=
   dependencies:
     readable-stream "^2.0.2"
-
-earcut@^2.2.2:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/earcut/-/earcut-2.2.3.tgz#d44ced2ff5a18859568e327dd9c7d46b16f55cf4"
-  integrity sha512-iRDI1QeCQIhMCZk48DRDMVgQSSBDmbzzNhnxIo+pwx3swkfjMh6vh0nWLq1NdvGHLKH6wIrAM3vQWeTj6qeoug==
 
 electron-to-chromium@^1.4.147:
   version "1.4.151"
@@ -2766,7 +2714,7 @@ prop-types@^15.8.1:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
-protobufjs@^6.11.3:
+protobufjs@^6.9.0:
   version "6.11.3"
   resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-6.11.3.tgz#637a527205a35caa4f3e2a9a4a13ddffe0e7af74"
   integrity sha512-xL96WDdCZYdU7Slin569tFX712BxsxslWwAfAhCYjQKGTq7dAU91Lomy6nLLhh/dyGhk/YH4TwTSRxTzhuHyZg==
@@ -2878,21 +2826,6 @@ regexpp@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-3.2.0.tgz#0425a2768d8f23bad70ca4b90461fa2f1213e1b2"
   integrity sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==
-
-regl-shape@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/regl-shape/-/regl-shape-1.1.0.tgz#35281d71200d02fe39b9d760ea48ec10ebcb0608"
-  integrity sha512-UHh86oYjY93+bPAV+Cix7qx84gXv9XET1Rzgvj1c4eC5Bo8RxhSksHocAa+qyq8yPjo1ycjVfnf7I1NP9Dy8jA==
-  dependencies:
-    array-bounds "^1.0.1"
-    array-normalize "^1.1.4"
-    color-normalize "^1.5.0"
-    earcut "^2.2.2"
-
-regl@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/regl/-/regl-2.1.0.tgz#7dae71e9ff20f29c4f42f510c70cd92ebb6b657c"
-  integrity sha512-oWUce/aVoEvW5l2V0LK7O5KJMzUSKeiOwFuJehzpSFd43dO5spP9r+sSUfhKtsky4u6MCqWJaRL+abzExynfTg==
 
 requestidlecallback-polyfill@^1.0.2:
   version "1.0.2"
