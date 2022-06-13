@@ -18,9 +18,13 @@ interface Props {
   readonly open: boolean;
 }
 
-const Title = styled((props) => <Typography variant="body2" {...props} />)(
-  () => ({ textTransform: "uppercase" })
-);
+interface TitleProps {
+  readonly children: React.ReactNode | React.ReactNode[];
+}
+
+const Title = styled((props: TitleProps) => (
+  <Typography variant="body2" {...props} />
+))(() => ({ textTransform: "uppercase" }));
 
 export function RightDrawer({ files, metadata, open }: Props): JSX.Element {
   return (
