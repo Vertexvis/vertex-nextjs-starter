@@ -8,7 +8,7 @@
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.0",
+    "@mui/material": "^5.10.0",
     "@vertexvis/api-client-node": "^0.20.0",
     "@vertexvis/viewer-react": "^0.14.0",
     "next": "^12.2.3",
