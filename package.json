@@ -11,7 +11,7 @@
     "@mui/material": "^5.14.14",
     "@vertexvis/api-client-node": "^0.22.0",
     "@vertexvis/viewer-react": "^0.19.2",
-    "next": "^13.5.4",
+    "next": "^13.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hotkeys-hook": "^3.4.7"
