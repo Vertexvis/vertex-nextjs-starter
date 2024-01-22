@@ -49,6 +49,7 @@ function UnwrappedViewer({
       clientId={credentials.clientId}
       css={{ height: '100%', width: '100%' }}
       ref={viewer}
+      enableTemporalRefinement={false}
       src={`urn:vertex:stream-key:${credentials.streamKey}`}
       {...props}
     >
