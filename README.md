@@ -7,8 +7,8 @@ View a scene, apply camera states, and see a scene item's metadata. We built thi
 ## Local development
 
 1. Copy `.env.local.template` to `.env.local` and edit values
-  1. Ensure that you have provided valid credentials for `VERTEX_CLIENT_ID` and `VERTEX_CLIENT_SECRET`
-  1. Determine a scene that you would like to have loaded into the viewer by default upon load and provide the Scene's Supplied ID for `DEFAULT_SUPPLIED_ID`
+    1. Ensure that you have provided valid credentials for `VERTEX_CLIENT_ID` and `VERTEX_CLIENT_SECRET`
+    1. Determine a scene that you would like to have loaded into the viewer by default upon load and provide the Scene's Supplied ID for `DEFAULT_SUPPLIED_ID`
 1. Install dependencies, `yarn install` or `npm install`
 1. Run `yarn dev` or `npm run dev` to start the local development server
 1. Browse to http://localhost:3000
