@@ -5,7 +5,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import {
   Configuration,
   DefaultCredentials,
-  head,
   StreamCredentials,
 } from "../lib/config";
 import { FileData } from "../lib/files";
@@ -19,16 +18,18 @@ import { RightDrawer } from "./RightDrawer";
 import { Viewer } from "./Viewer";
 
 export interface Props {
+  readonly baseUrl: string;
   readonly config: Configuration;
   readonly files: FileData[];
+  readonly streamCredentials: StreamCredentials;
 }
 
-export function Home({ files, config: { network } }: Props): JSX.Element {
+export function Home({ baseUrl, files, streamCredentials, config: { network } }: Props): JSX.Element {
   const router = useRouter();
   const viewer = useViewer();
   const [credentials, setCredentials] = React.useState<
     StreamCredentials | undefined
-  >();
+  >(streamCredentials);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [metadata, setMetadata] = React.useState<Metadata | undefined>();
 
@@ -37,8 +38,9 @@ export function Home({ files, config: { network } }: Props): JSX.Element {
     if (!router.isReady) return;
 
     setCredentials({
-      clientId: head(router.query.clientId) || DefaultCredentials.clientId,
-      streamKey: head(router.query.streamKey) || DefaultCredentials.streamKey,
+      clientId: streamCredentials.clientId || DefaultCredentials.clientId,
+      streamKey: streamCredentials.streamKey || DefaultCredentials.streamKey,
+      suppliedId: streamCredentials.suppliedId || DefaultCredentials.suppliedId,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
@@ -59,7 +61,7 @@ export function Home({ files, config: { network } }: Props): JSX.Element {
         viewer.isReady && (
           <Viewer
             config={JSON.stringify({ network })}
-            credentials={credentials}
+            credentials={{ clientId: credentials.clientId, streamKey: credentials.streamKey}}
             onSelect={async (hit) => {
               console.debug({
                 hitNormal: hit?.hitNormal,
@@ -86,7 +88,7 @@ export function Home({ files, config: { network } }: Props): JSX.Element {
           credentials={credentials}
           onClose={() => setDialogOpen(false)}
           onConfirm={(cs) => {
-            setCredentials(cs);
+            window.location.assign(`${baseUrl}/?suppliedId=${cs.suppliedId}`);
             setDialogOpen(false);
           }}
           open={dialogOpen}

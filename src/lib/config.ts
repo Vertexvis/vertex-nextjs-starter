@@ -10,7 +10,8 @@ export interface Configuration {
 
 export interface StreamCredentials {
   readonly clientId: string;
-  readonly streamKey: string;
+  readonly streamKey?: string;
+  readonly suppliedId?: string;
 }
 
 const DefaultHosts = {
@@ -30,12 +31,21 @@ export const Config: Configuration = {
 
 // Vertex Valve
 export const DefaultCredentials: StreamCredentials = {
-  clientId: "08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA",
-  streamKey: "AH7v0jg5aN5_thkhU-XTzB_29aqW89EjyOH8",
+  clientId: envVar("VERTEX_CLIENT_ID"),
+  suppliedId: envVar("DEFAULT_SUPPLIED_ID"),
+  streamKey: envVar("DEFAULT_STREAM_KEY"),
 };
 
 export function head<T>(items?: T | T[]): T | undefined {
   return Array.isArray(items) ? items[0] : items ?? undefined;
+}
+
+function envVar(
+  name: string,
+  fallback?: string
+): string {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return process.env[name] ?? fallback!;
 }
 
 function envVarUrl(

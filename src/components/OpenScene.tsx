@@ -28,20 +28,15 @@ export function OpenDialog({
 }: Props): JSX.Element {
   const [inputCreds, setInputCreds] =
     React.useState<StreamCredentials>(credentials);
-  const emptyClientId = inputCreds.clientId === "";
-  const invalidClientId = inputCreds.clientId.length > 64;
-  const invalidStreamKey = inputCreds.streamKey.length > 36;
+  const emptySuppliedId = inputCreds.suppliedId === "";
+  const invalidSuppliedId = inputCreds.suppliedId != null && inputCreds.suppliedId.length > 64;
 
-  function handleClientIdChange(e: React.ChangeEvent<Value>): void {
-    setInputCreds({ ...inputCreds, clientId: e.target.value });
-  }
-
-  function handleStreamKeyChange(e: React.ChangeEvent<Value>): void {
-    setInputCreds({ ...inputCreds, streamKey: e.target.value });
+  function handleSuppliedIdChange(e: React.ChangeEvent<Value>): void {
+    setInputCreds({ ...inputCreds, suppliedId: e.target.value });
   }
 
   function handleOpenSceneClick(): void {
-    if (inputCreds.clientId && inputCreds.streamKey) {
+    if (inputCreds.suppliedId && inputCreds.streamKey) {
       onConfirm(inputCreds);
     }
   }
@@ -55,30 +50,18 @@ export function OpenDialog({
       <DialogTitle id="open-scene-title">Open Scene</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Enter the client ID and stream key of your scene.
+          Enter the Supplied ID of your scene.
         </DialogContentText>
         <TextField
-          autoFocus={emptyClientId}
-          error={invalidClientId}
+          autoFocus={emptySuppliedId}
+          error={invalidSuppliedId}
           fullWidth
-          helperText={invalidClientId ? "Client ID too long." : undefined}
-          label="Client ID"
+          helperText={invalidSuppliedId ? "Supplied ID too long." : undefined}
+          label="Scene Supplied ID"
           margin="normal"
-          onChange={handleClientIdChange}
+          onChange={handleSuppliedIdChange}
           size="small"
-          value={inputCreds.clientId}
-        />
-        <TextField
-          autoFocus={!emptyClientId}
-          error={invalidStreamKey}
-          fullWidth
-          helperText={invalidStreamKey ? "Stream key too long." : undefined}
-          label="Stream Key"
-          margin="normal"
-          onFocus={(e) => e.target.select()}
-          onChange={handleStreamKeyChange}
-          size="small"
-          value={inputCreds.streamKey}
+          value={inputCreds.suppliedId}
         />
       </DialogContent>
       <DialogActions>
@@ -95,7 +78,7 @@ export function OpenDialog({
 }
 
 export function encodeCreds(cs: StreamCredentials): string {
-  return `/?clientId=${encodeURIComponent(
-    cs.clientId
-  )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
+  return cs.suppliedId ? `/?suppliedId=${encodeURIComponent(
+    cs.suppliedId
+  )}` : `/`;
 }
