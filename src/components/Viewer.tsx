@@ -50,6 +50,17 @@ function UnwrappedViewer({
       css={{ height: '100%', width: '100%' }}
       ref={viewer}
       src={`urn:vertex:stream-key:${credentials.streamKey}`}
+      resizeDebounce={250}
+      featureLines={{
+        width: 0.5,
+        color: "#111111",
+      }}
+      selectionHighlighting={{
+        lineWidth: 3,
+        color: '#facc15',
+        opacity: 0.25,
+      }}
+      rotateAroundTapPoint={true}
       {...props}
     >
       <VertexViewerToolbar placement="top-right">
