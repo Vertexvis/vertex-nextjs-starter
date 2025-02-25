@@ -31,7 +31,7 @@ export const Config: Configuration = {
 // Vertex Valve
 export const DefaultCredentials: StreamCredentials = {
   clientId: "08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA",
-  streamKey: "f2080a69-3e1a-4a39-94b0-aab3650adaac",
+  streamKey: "YraITJgnUvsfu0o5OThgDCLn60RsS409poBR",
 };
 
 export function head<T>(items?: T | T[]): T | undefined {
