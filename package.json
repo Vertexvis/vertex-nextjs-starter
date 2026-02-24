@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/server": "^11.11.0",
-    "@emotion/styled": "^11.14.1",
+    "@emotion/cache": "11.11.0",
+    "@emotion/react": "11.11.4",
+    "@emotion/server": "11.11.0",
+    "@emotion/styled": "11.11.5",
     "@mui/icons-material": "^7.3.3",
     "@mui/material": "^7.3.3",
     "@vertexvis/api-client-node": "^0.37.0",
@@ -39,5 +39,8 @@
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
     "lint": "next lint",
     "start": "next start"
+  },
+  "resolutions": {
+    "@emotion/utils": "1.4.2"
   }
 }
