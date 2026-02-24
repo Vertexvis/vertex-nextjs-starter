@@ -39,8 +39,5 @@
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
     "lint": "next lint",
     "start": "next start"
-  },
-  "resolutions": {
-    "@emotion/utils": "1.4.2"
   }
 }
