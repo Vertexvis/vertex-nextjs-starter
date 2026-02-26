@@ -39,5 +39,10 @@
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
     "lint": "next lint",
     "start": "next start"
+  },
+  "resolutions": {
+    "ajv": "^8.18.0",
+    "minimist": "^1.2.6",
+    "protobufjs": "^7.2.5"
   }
 }
