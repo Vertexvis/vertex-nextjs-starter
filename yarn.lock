@@ -1909,7 +1909,7 @@ __metadata:
   peerDependencies:
     react: ">=16.3.0 <20.0.0"
     react-dom: ">=16.3.0 <20.0.0"
-    tslib: ">=2.1.0"
+    tslib: ">=2.4.0"
   languageName: node
   linkType: soft
 
@@ -1942,7 +1942,7 @@ __metadata:
     requestidlecallback-polyfill: "npm:^1.0.2"
     resize-observer: "npm:^1.0.4"
     threads: "npm:^1.7.0"
-    tslib: "npm:^2.8.0"
+    tslib: "npm:^2.4.0"
   languageName: node
   linkType: soft
 
@@ -6334,7 +6334,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.8.0, tslib@npm:^2.8.1":
+"tslib@npm:^2.8.0":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
@@ -6597,7 +6597,7 @@ __metadata:
     react: "npm:^18.3.0"
     react-dom: "npm:^18.3.0"
     react-hotkeys-hook: "npm:^3.4.7"
-    tslib: "npm:^2.8.1"
+    tslib: "npm:^2.4.0"
     typescript: "npm:^5.2.0"
   languageName: unknown
   linkType: soft
