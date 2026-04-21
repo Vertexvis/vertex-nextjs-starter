@@ -1158,6 +1158,62 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-darwin-arm64@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-darwin-arm64@npm:4.44.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-darwin-x64@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-darwin-x64@npm:4.44.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-arm64-gnu@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-arm64-gnu@npm:4.44.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-arm64-musl@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-arm64-musl@npm:4.44.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-x64-gnu@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-x64-gnu@npm:4.44.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-x64-musl@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-x64-musl@npm:4.44.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-win32-arm64-msvc@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-win32-arm64-msvc@npm:4.44.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-win32-x64-msvc@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-win32-x64-msvc@npm:4.44.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@rtsao/scc@npm:^1.1.0":
   version: 1.1.0
   resolution: "@rtsao/scc@npm:1.1.0"
@@ -1172,12 +1228,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stencil/core@npm:^2.16.1":
-  version: 2.22.3
-  resolution: "@stencil/core@npm:2.22.3"
+"@stencil/core@npm:^4.0.0":
+  version: 4.43.4
+  resolution: "@stencil/core@npm:4.43.4"
+  dependencies:
+    "@rollup/rollup-darwin-arm64": "npm:4.44.0"
+    "@rollup/rollup-darwin-x64": "npm:4.44.0"
+    "@rollup/rollup-linux-arm64-gnu": "npm:4.44.0"
+    "@rollup/rollup-linux-arm64-musl": "npm:4.44.0"
+    "@rollup/rollup-linux-x64-gnu": "npm:4.44.0"
+    "@rollup/rollup-linux-x64-musl": "npm:4.44.0"
+    "@rollup/rollup-win32-arm64-msvc": "npm:4.44.0"
+    "@rollup/rollup-win32-x64-msvc": "npm:4.44.0"
+  dependenciesMeta:
+    "@rollup/rollup-darwin-arm64":
+      optional: true
+    "@rollup/rollup-darwin-x64":
+      optional: true
+    "@rollup/rollup-linux-arm64-gnu":
+      optional: true
+    "@rollup/rollup-linux-arm64-musl":
+      optional: true
+    "@rollup/rollup-linux-x64-gnu":
+      optional: true
+    "@rollup/rollup-linux-x64-musl":
+      optional: true
+    "@rollup/rollup-win32-arm64-msvc":
+      optional: true
+    "@rollup/rollup-win32-x64-msvc":
+      optional: true
   bin:
     stencil: bin/stencil
-  checksum: 10c0/6df88e165ec0cf132b1dbdb71d61399359974c7533a20b5e2bcee5f9ab4495a63dff5cbb4b2687639ee711c91ef36ac55af45e613464e4f904ce346f490b04dc
+  checksum: 10c0/02a4ae50986a83110dcf4c5bdfca6013e6952df2678cbc905a9c0eef915a98f6c3e8f2295c3bb72ee2e1bd167ad8f599405296665b15a59516b44b310138c474
   languageName: node
   linkType: hard
 
@@ -1774,25 +1856,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertexvis/viewer-react@npm:^0.24.3":
-  version: 0.24.3
-  resolution: "@vertexvis/viewer-react@npm:0.24.3"
+"@vertexvis/viewer-react@portal:../vertex-web-sdk/packages/viewer-react::locator=vertex-nextjs-starter%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@vertexvis/viewer-react@portal:../vertex-web-sdk/packages/viewer-react::locator=vertex-nextjs-starter%40workspace%3A."
   dependencies:
     "@vertexvis/viewer": "npm:0.24.3"
   peerDependencies:
-    react: ">=16.3.0 <19.0.0"
-    react-dom: ">=16.3.0 <19.0.0"
-    tslib: ">=2.1.0"
-  checksum: 10c0/aa2ec3876996767f054d6404b36e616de09c94edfd6c963a2843f67c0964c27f533bfee84b3ebb0220ae3b28cf67d8b5406b9b3fe12b85b763c9091187bb5e09
+    react: ">=17.0.1 <20.0.0"
+    react-dom: ">=17.0.1 <20.0.0"
+    tslib: ">=2.4.0"
   languageName: node
-  linkType: hard
+  linkType: soft
 
-"@vertexvis/viewer@npm:0.24.3":
-  version: 0.24.3
-  resolution: "@vertexvis/viewer@npm:0.24.3"
+"@vertexvis/viewer@portal:../vertex-web-sdk/packages/viewer::locator=vertex-nextjs-starter%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@vertexvis/viewer@portal:../vertex-web-sdk/packages/viewer::locator=vertex-nextjs-starter%40workspace%3A."
   dependencies:
     "@improbable-eng/grpc-web": "npm:^0.15.0"
-    "@stencil/core": "npm:^2.16.1"
+    "@stencil/core": "npm:^4.0.0"
     "@vertexvis/frame-streaming-protos": "npm:^0.17.0"
     "@vertexvis/geometry": "npm:0.24.3"
     "@vertexvis/html-templates": "npm:0.24.3"
@@ -1816,10 +1897,9 @@ __metadata:
     requestidlecallback-polyfill: "npm:^1.0.2"
     resize-observer: "npm:^1.0.4"
     threads: "npm:^1.7.0"
-    tslib: "npm:^2.1.0"
-  checksum: 10c0/300a2adb0666cc46120466c82c11e1cfc5be6056aa829b17f18cd6f3872c30cf0196798ecb7c5a69af56fd4d23a5ad176afe5ae4d6c5e117866e64e5e87a1ef7
+    tslib: "npm:^2.4.0"
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@vertexvis/web-workers@npm:^0.1.0":
   version: 0.1.0
@@ -5988,17 +6068,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.1.0, tslib@npm:^2.8.0":
-  version: 2.8.1
-  resolution: "tslib@npm:2.8.1"
-  checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^2.4.0":
   version: 2.4.0
   resolution: "tslib@npm:2.4.0"
   checksum: 10c0/eb19bda3ae545b03caea6a244b34593468e23d53b26bf8649fbc20fce43e9b21a71127fd6d2b9662c0fe48ee6ff668ead48fd00d3b88b2b716b1c12edae25b5d
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.8.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
   languageName: node
   linkType: hard
 

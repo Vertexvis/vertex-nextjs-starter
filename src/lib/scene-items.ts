@@ -1,5 +1,5 @@
 import { vertexvis } from '@vertexvis/frame-streaming-protos';
-import { Components } from '@vertexvis/viewer';
+import type { Components } from '@vertexvis/viewer';
 
 interface Req {
   readonly viewer: Components.VertexViewer | null;
