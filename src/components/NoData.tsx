@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import React from "react";
+import { JSX } from "react";
 
 export function NoData(): JSX.Element {
   return (

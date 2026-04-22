@@ -2,7 +2,7 @@ import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import React from "react";
+import React, { JSX } from "react";
 
 import theme from "../lib/theme";
 
