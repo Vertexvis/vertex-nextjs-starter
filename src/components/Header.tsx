@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import React from "react";
+import { JSX } from "react";
 
 interface Props {
   readonly onOpenSceneClick: VoidFunction;
