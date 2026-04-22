@@ -1,4 +1,4 @@
-import "@vertexvis/viewer/dist/viewer/viewer.css";
+import "@vertexvis/viewer/viewer.css";
 
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
@@ -7,7 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { JSX } from "react";
 
 import theme from "../lib/theme";
 
