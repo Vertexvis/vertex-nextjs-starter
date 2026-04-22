@@ -36,16 +36,14 @@
     "build": "next build --webpack",
     "build:turbopack": "next build",
     "clean": "rm -rf .next/ node_modules/",
-    "dev": "NODE_OPTIONS=--preserve-symlinks next dev --webpack",
-    "dev:turbopack": "NODE_OPTIONS=--preserve-symlinks next dev",
+    "dev": "next dev --webpack",
+    "dev:turbopack": "next dev",
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
     "lint": "next lint",
     "start": "next start",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "resolutions": {
-    "@vertexvis/viewer": "portal:../vertex-web-sdk/packages/viewer",
-    "@vertexvis/viewer-react": "portal:../vertex-web-sdk/packages/viewer-react",
     "ajv": "^8.18.0",
     "minimist": "^1.2.6",
     "protobufjs": "^7.2.5"

@@ -1,4 +1,4 @@
-import "@vertexvis/viewer/viewer.css";
+import "@vertexvis/viewer/dist/viewer/viewer.css";
 
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";

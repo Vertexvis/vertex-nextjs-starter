@@ -10,7 +10,7 @@
     "isolatedModules": true,
     "lib": [
       "DOM",
-      "ES2020"
+      "ES2023"
     ],
     "module": "ESNext",
     "moduleResolution": "bundler",
