@@ -38,6 +38,10 @@ const nextConfig: NextConfig = {
         process.cwd(),
         "node_modules/react/jsx-dev-runtime"
       ),
+      "@vertexvis/viewer-react": path.join(
+        process.cwd(),
+        "node_modules/@vertexvis/viewer-react/dist/bundle.esm.js"
+      ),
     };
 
     // Note: Next.js automatically handles:
