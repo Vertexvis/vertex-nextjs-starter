@@ -3,6 +3,8 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  bundlePagesRouterDependencies: true,
+  transpilePackages: ["@vertexvis/viewer", "@vertexvis/viewer-react"],
   turbopack: {
     // Linked workspace packages live outside this app directory.
     // Turbopack needs its root raised to resolve those symlink targets.
