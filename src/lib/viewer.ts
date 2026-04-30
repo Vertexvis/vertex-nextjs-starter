@@ -1,3 +1,4 @@
+import { defineCustomElements } from "@vertexvis/viewer/loader";
 import React from "react";
 
 interface Viewer {
@@ -10,7 +11,6 @@ export function useViewer(): Viewer {
 
   React.useEffect(() => {
     async function loadComponents() {
-      const { defineCustomElements } = await import("@vertexvis/viewer/loader");
       await defineCustomElements();
       setIsReady(true);
     }

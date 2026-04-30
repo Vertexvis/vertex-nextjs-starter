@@ -18,10 +18,7 @@ import { Layout, RightDrawerWidth } from "./Layout";
 import { encodeCreds, OpenDialog } from "./OpenScene";
 import { RightDrawer } from "./RightDrawer";
 
-const Viewer = dynamic(
-  () => import("./Viewer").then((module) => module.Viewer),
-  { ssr: false }
-);
+import { Viewer } from "./Viewer";
 
 export interface Props {
   readonly config: Configuration;
