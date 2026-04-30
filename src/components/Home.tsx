@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { JSX } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -52,7 +51,7 @@ export function Home({ files, config: { network } }: Props): JSX.Element {
     const nextUrl = encodeCreds(credentials);
     if (router.asPath === nextUrl) return;
 
-    void router.replace(nextUrl, undefined, { shallow: true });
+    router.replace(nextUrl, undefined, { shallow: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
 
