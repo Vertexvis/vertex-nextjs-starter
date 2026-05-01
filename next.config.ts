@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   bundlePagesRouterDependencies: true,
-  transpilePackages: ["@vertexvis/viewer", "@vertexvis/viewer-react"],
+  // transpilePackages: ["@vertexvis/viewer", "@vertexvis/viewer-react"],
   turbopack: {
     // Linked workspace packages live outside this app directory.
     // Turbopack needs its root raised to resolve those symlink targets.
@@ -37,10 +37,6 @@ const nextConfig: NextConfig = {
       "react/jsx-dev-runtime": path.join(
         process.cwd(),
         "node_modules/react/jsx-dev-runtime"
-      ),
-      "@vertexvis/viewer-react": path.join(
-        process.cwd(),
-        "node_modules/@vertexvis/viewer-react/dist/bundle.esm.js"
       ),
     };
 
