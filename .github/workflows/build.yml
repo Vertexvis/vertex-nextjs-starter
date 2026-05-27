@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22.x
-          cache: false
+          cache: yarn
       - name: Enable Corepack
         run: corepack enable yarn
       - name: Build
