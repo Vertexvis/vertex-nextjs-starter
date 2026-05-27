@@ -8,9 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v5
-        with: { node-version: 22.x }
+        with:
+          node-version: 22.x
+          cache: false
       - name: Enable Corepack
-        run: corepack enable
+        run: corepack enable yarn
       - name: Build
         run: |
           yarn install --frozen-lockfile
