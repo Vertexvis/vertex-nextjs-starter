@@ -2140,7 +2140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertexvis/viewer-react@npm:^1.0.0-testing.8":
+"@vertexvis/viewer-react@npm:^1.0.0-canary.15":
   version: 1.0.0-testing.8
   resolution: "@vertexvis/viewer-react@npm:1.0.0-testing.8"
   dependencies:
@@ -6537,7 +6537,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.60.0"
     "@typescript-eslint/parser": "npm:^8.60.0"
     "@vertexvis/api-client-node": "npm:^0.42.1"
-    "@vertexvis/viewer-react": "npm:^1.0.0-testing.8"
+    "@vertexvis/viewer-react": "npm:^1.0.0-canary.15"
     babel-plugin-import: "npm:^1.13.8"
     eslint: "npm:^10.4.0"
     eslint-config-next: "npm:^16.2.6"
