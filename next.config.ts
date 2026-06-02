@@ -1,7 +1,12 @@
-import path from "node:path";
+// import path from "node:path";
 
 import type { NextConfig } from "next";
 
+const nextConfig: NextConfig = {};
+
+/* if developing vertexvis/viewer or web-sdk pacakages locally, and using linked packages via yarn the below configuration may be useful
+ * otherwise, you can remove this section and use the default next.config.ts
+ *
 const nextConfig: NextConfig = {
   bundlePagesRouterDependencies: true,
   // transpilePackages: ["@vertexvis/viewer", "@vertexvis/viewer-react"],
@@ -24,7 +29,7 @@ const nextConfig: NextConfig = {
       },
     },
   },
-  
+
   // Webpack config only needed for features not yet supported by Turbopack
   // Most webpack customization has been moved to turbopack config above
   webpack: (config) => {
@@ -39,13 +44,9 @@ const nextConfig: NextConfig = {
         "node_modules/react/jsx-dev-runtime"
       ),
     };
-
-    // Note: Next.js automatically handles:
-    // - publicPath (set to /_next/ by default)
-    // - assetModuleFilename (handled by Next.js internally)
-    
     return config;
   },
 };
+*/
 
 export default nextConfig;
