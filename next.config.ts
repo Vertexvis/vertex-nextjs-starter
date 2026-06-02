@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {};
 
-/* if developing vertexvis/viewer or web-sdk pacakages locally, and using linked packages via yarn the below configuration may be useful
+/* if developing vertexvis/viewer or web-sdk packages locally, and using linked packages via yarn the below configuration may be useful
  * otherwise, you can remove this section and use the default next.config.ts
  *
 const nextConfig: NextConfig = {
