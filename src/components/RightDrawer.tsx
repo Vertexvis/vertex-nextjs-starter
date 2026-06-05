@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { JSX } from "react";
 
 import { FileData } from "../lib/files";
 import { Metadata } from "../lib/metadata";

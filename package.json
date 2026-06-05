@@ -7,35 +7,37 @@
     "@emotion/react": "11.14.0",
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.14.1",
-    "@mui/icons-material": "^7.3.10",
-    "@mui/material": "^7.3.10",
-    "@vertexvis/api-client-node": "^0.42.0",
-    "@vertexvis/viewer-react": "^0.24.3",
-    "next": "^15.5.15",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "react-hotkeys-hook": "^3.4.7"
+    "@mui/icons-material": "^7.3.11",
+    "@mui/material": "^7.3.11",
+    "@vertexvis/api-client-node": "^0.42.1",
+    "@vertexvis/viewer-react": "^1.0.0",
+    "next": "^16.2.7",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hotkeys-hook": "^5.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@types/node": "^22.0.41",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.3.7",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
+    "@babel/core": "^7.29.7",
+    "@types/node": "^22.19.19",
+    "@types/react": "^19.2.16",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.60.1",
+    "@typescript-eslint/parser": "^8.60.1",
     "babel-plugin-import": "^1.13.8",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.5.0",
-    "eslint-config-prettier": "^8.10.2",
-    "eslint-plugin-simple-import-sort": "^7.0",
+    "eslint": "^10.4.1",
+    "eslint-config-next": "^16.2.7",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
     "prettier": "^2.8.8",
     "tslib": "^2.4.0",
     "typescript": "^5.2.0"
   },
   "scripts": {
-    "build": "next build",
+    "build": "next build --webpack",
+    "build:turbopack": "next build",
     "clean": "rm -rf .next/ node_modules/",
-    "dev": "next",
+    "dev": "next dev --webpack",
+    "dev:turbopack": "next dev",
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
     "lint": "next lint",
     "start": "next start",
@@ -47,7 +49,7 @@
     "protobufjs": "^7.2.5"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.22.2"
   },
   "packageManager": "yarn@4.14.1"
 }

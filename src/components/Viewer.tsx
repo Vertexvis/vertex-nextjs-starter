@@ -10,14 +10,14 @@ import {
   VertexViewerToolbar,
   VertexViewerViewCube,
 } from '@vertexvis/viewer-react';
-import React from 'react';
+import React, { JSX } from 'react';
 
 import { StreamCredentials } from '../lib/config';
 import { ViewerSpeedDial } from './ViewerSpeedDial';
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
-  readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
+  readonly viewer: React.RefObject<HTMLVertexViewerElement | null>;
 }
 
 export interface ActionProps {

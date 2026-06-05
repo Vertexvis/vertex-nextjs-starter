@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { JSX } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import {
@@ -16,6 +16,7 @@ import { Header } from "./Header";
 import { Layout, RightDrawerWidth } from "./Layout";
 import { encodeCreds, OpenDialog } from "./OpenScene";
 import { RightDrawer } from "./RightDrawer";
+
 import { Viewer } from "./Viewer";
 
 export interface Props {
@@ -45,7 +46,12 @@ export function Home({ files, config: { network } }: Props): JSX.Element {
 
   // On credentials changes, update URL.
   React.useEffect(() => {
-    if (credentials) router.push(encodeCreds(credentials));
+    if (!credentials) return;
+
+    const nextUrl = encodeCreds(credentials);
+    if (router.asPath === nextUrl) return;
+
+    router.replace(nextUrl, undefined, { shallow: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [credentials]);
 

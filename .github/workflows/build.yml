@@ -6,11 +6,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 22.x }
+      - uses: actions/checkout@v6
       - name: Enable Corepack
         run: corepack enable
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22.x
       - name: Build
         run: |
           yarn install --frozen-lockfile

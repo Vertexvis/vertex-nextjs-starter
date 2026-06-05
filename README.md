@@ -19,6 +19,25 @@ If you pull down changes, you'll need to run `docker-compose --file ./docker-com
 1. Run `yarn dev` to start the local development server
 1. Browse to http://localhost:3000
 
+### With Vertex-web-sdk
+
+1. `yarn build` in `vertex-web-sdk`
+1. `yarn link` from local `vertex-web-sdk`
+1. make these changes in package.json
+    ``` json
+    "scripts": {
+    "dev": "NODE_OPTIONS=--preserve-symlinks next dev --webpack",
+    ...
+  },
+  "resolutions": {
+    "@vertexvis/viewer": "portal:../vertex-web-sdk/packages/viewer",
+    "@vertexvis/viewer-react": "portal:../vertex-web-sdk/packages/viewer-react",
+    ...
+  }
+  ```
+1. `yarn install` to pull local packages
+
+
 ### Project organization
 
 ```text
@@ -36,4 +55,4 @@ A few options for deployment,
 
 - [Vercel](https://nextjs.org/docs/deployment)
 - [Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
-- [AWS CDK](https://github.com/serverless-nextjs/serverless-next.js#readme)
+- [AWS via OpenNext](https://opennext.js.org)

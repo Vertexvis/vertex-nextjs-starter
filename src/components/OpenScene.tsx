@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import React from "react";
+import React, { JSX } from "react";
 
 import { DefaultCredentials, StreamCredentials } from "../lib/config";
 

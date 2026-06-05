@@ -7,7 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { JSX } from "react";
 
 import theme from "../lib/theme";
 
@@ -16,14 +16,17 @@ cache.compat = true;
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const { events } = useRouter();
+  const analyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
 
   React.useEffect(() => {
+    if (!analyticsId) return;
+
     function handleChange(url: string) {
       /* eslint-disable @typescript-eslint/ban-ts-comment */
       // @ts-ignore
       if (window.gtag) {
         // @ts-ignore
-        window.gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+        window.gtag("config", analyticsId, {
           cookie_flags: "SameSite=None;Secure",
           page_path: url,
         });
@@ -35,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     return () => {
       events.off("routeChangeComplete", handleChange);
     };
-  }, [events]);
+  }, [analyticsId, events]);
 
   return (
     <React.StrictMode>

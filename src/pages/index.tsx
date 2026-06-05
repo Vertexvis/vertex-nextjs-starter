@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import React from "react";
+import { JSX } from "react";
 
 import { Home } from "../components/Home";
 import { Config, Configuration } from "../lib/config";
