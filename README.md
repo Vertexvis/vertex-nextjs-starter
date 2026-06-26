@@ -24,8 +24,9 @@ If you pull down changes, you'll need to run `docker-compose --file ./docker-com
 1. `yarn build` in `vertex-web-sdk`
 1. `yarn link` from local `vertex-web-sdk`
 1. make these changes in package.json
-    ``` json
-    "scripts": {
+
+```json
+  "scripts": {
     "dev": "NODE_OPTIONS=--preserve-symlinks next dev --webpack",
     ...
   },
@@ -34,19 +35,19 @@ If you pull down changes, you'll need to run `docker-compose --file ./docker-com
     "@vertexvis/viewer-react": "portal:../vertex-web-sdk/packages/viewer-react",
     ...
   }
-  ```
-1. `yarn install` to pull local packages
+```
 
+1. `yarn install` to pull local packages
 
 ### Project organization
 
 ```text
 public/       // Static assets
 src/
-  components/ // Components used in pages
-  lib/        // Shared libraries and utilities
-  pages/      // Pages served by NextJS
-    api/      // API endpoints served by NextJS
+components/ // Components used in pages
+lib/        // Shared libraries and utilities
+pages/      // Pages served by NextJS
+  api/      // API endpoints served by NextJS
 ```
 
 ### Deployment

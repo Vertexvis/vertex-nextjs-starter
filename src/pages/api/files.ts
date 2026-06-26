@@ -5,9 +5,9 @@ import { makeCallAndReturn } from "../../lib/vertex-api";
 
 export default function handle(
   _req: NextApiRequest,
-  res: NextApiResponse<FileList | Failure>
+  res: NextApiResponse<FileList | Failure>,
 ): Promise<void> {
   return makeCallAndReturn(res, (client) =>
-    client.files.getFiles({ pageSize: 5 })
+    client.files.getFiles({ pageSize: 5 }),
   );
 }
