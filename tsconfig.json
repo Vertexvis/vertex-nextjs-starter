@@ -8,10 +8,7 @@
     "jsx": "react-jsx",
     "incremental": true,
     "isolatedModules": true,
-    "lib": [
-      "DOM",
-      "ES2023"
-    ],
+    "lib": ["DOM", "ES2023"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -25,12 +22,6 @@
     "strict": true,
     "target": "ES2022"
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

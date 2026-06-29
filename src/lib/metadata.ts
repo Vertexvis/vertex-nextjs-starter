@@ -60,7 +60,7 @@ function alphabetize<T extends Record<string, unknown>>(obj: T): T {
 }
 
 function toValue(
-  property: vertexvis.protobuf.stream.IMetadataProperty
+  property: vertexvis.protobuf.stream.IMetadataProperty,
 ): string | undefined {
   if (property.asString) return property.asString;
   if (property.asFloat) return property.asFloat.toString();

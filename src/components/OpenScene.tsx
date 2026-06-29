@@ -96,6 +96,6 @@ export function OpenDialog({
 
 export function encodeCreds(cs: StreamCredentials): string {
   return `/?clientId=${encodeURIComponent(
-    cs.clientId
+    cs.clientId,
   )}&streamKey=${encodeURIComponent(cs.streamKey)}`;
 }

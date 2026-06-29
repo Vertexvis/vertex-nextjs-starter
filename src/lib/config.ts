@@ -35,13 +35,13 @@ export const DefaultCredentials: StreamCredentials = {
 };
 
 export function head<T>(items?: T | T[]): T | undefined {
-  return Array.isArray(items) ? items[0] : items ?? undefined;
+  return Array.isArray(items) ? items[0] : (items ?? undefined);
 }
 
 function envVarUrl(
   name: string,
   fallback: string,
-  protocol: "https:" | "wss:"
+  protocol: "https:" | "wss:",
 ): string {
   const ev = process.env[name];
   try {
@@ -57,10 +57,10 @@ function envVarUrl(
 function logAndFallback(
   name: string,
   fallback: string,
-  envVar?: string
+  envVar?: string,
 ): string {
   console.error(
-    `Invalid URL provided for ${name}, ${envVar}. Falling back to ${fallback}`
+    `Invalid URL provided for ${name}, ${envVar}. Falling back to ${fallback}`,
   );
   return fallback;
 }

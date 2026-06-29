@@ -15,7 +15,7 @@ export default function Index(props: Props): JSX.Element {
 }
 
 export async function getServerSideProps(
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<Props>> {
   const empty = { props: { files: [], config: Config } };
   const host = context.req.headers.host;

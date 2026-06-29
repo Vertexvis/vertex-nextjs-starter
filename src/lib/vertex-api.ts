@@ -11,7 +11,7 @@ import { Config } from "./config";
 
 export async function makeCallAndReturn<T>(
   res: NextApiResponse<T | Failure>,
-  apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>
+  apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>,
 ): Promise<void> {
   const result = await makeCall(apiCall);
   return isFailure(result)
@@ -20,7 +20,7 @@ export async function makeCallAndReturn<T>(
 }
 
 export async function makeCall<T>(
-  apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>
+  apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>,
 ): Promise<T | Failure> {
   try {
     const c = await getClient();
