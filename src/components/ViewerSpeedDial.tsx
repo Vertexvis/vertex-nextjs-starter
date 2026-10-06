@@ -2,8 +2,8 @@ import ZoomOutMapOutlined from "@mui/icons-material/ZoomOutMapOutlined";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 
-import { ActionProps, AnimationDurationMs } from "./Viewer";
 import { JSX } from "react";
+import { ActionProps, AnimationDurationMs } from "./Viewer";
 
 interface Props {
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;

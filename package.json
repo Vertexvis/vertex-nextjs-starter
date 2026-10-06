@@ -9,26 +9,26 @@
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "^7.3.11",
     "@mui/material": "^7.3.11",
-    "@vertexvis/api-client-node": "^0.42.3",
-    "@vertexvis/viewer-react": "^1.0.1",
-    "next": "^16.2.9",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "@vertexvis/api-client-node": "^0.44.0",
+    "@vertexvis/viewer-react": "^1.1.2-canary.0",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-hotkeys-hook": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
-    "@types/node": "^22.20.0",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.62.0",
-    "@typescript-eslint/parser": "^8.62.0",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.71.1",
+    "@typescript-eslint/parser": "^8.71.1",
     "babel-plugin-import": "^1.13.8",
-    "eslint": "^10.5.0",
-    "eslint-config-next": "^16.2.9",
+    "eslint": "^10.12.0",
+    "eslint-config-next": "^16.4.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-simple-import-sort": "^13.0.0",
-    "prettier": "^3.8.5",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
+    "prettier": "^3.9.9",
     "tslib": "^2.8.1",
     "typescript": "^6.0.3"
   },
@@ -39,17 +39,16 @@
     "dev": "next dev --webpack",
     "dev:turbopack": "next dev",
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
-    "lint": "next lint",
+    "lint": "eslint .",
     "start": "next start",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "resolutions": {
-    "ajv": "^8.18.0",
     "minimist": "^1.2.6",
     "protobufjs": "^7.2.5"
   },
   "engines": {
     "node": ">=22.22.2"
   },
-  "packageManager": "yarn@4.17.0+sha512.c2957de2f9025ab14d63b24d0d8be1f1655810e22c341042c27f7ecd017b180ec12db73d69ac366d71b304ef9f069349ce462de96f04f8f1da317f4f762c95ae"
+  "packageManager": "yarn@4.18.1+sha512.b2e1e7524f654f2749d32b4ebcb4622473cb5bcbc485df2007e12a154e50162a4d795526768bc5f5b8f81717bfd79deb2472813d86fb5ae2eb551fa9c872b08f"
 }
